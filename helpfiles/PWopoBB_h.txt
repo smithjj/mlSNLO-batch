@@ -1,0 +1,64 @@
+PW-OPO-BB models broad-bandwidth, nanosecond, plane-wave (actually    
+the central ray of a spatial Gaussian) OPO's.  It is similar to       
+PW-cav-LP except it allows for differing group velocities for the     
+three waves and broad bandwidths.  The mathematical methods are       
+described in paper "Numerical models of broad bandwidth nanosecond    
+optical parametric oscillators" JOSA B vol. 16 p. 609 (1999),         
+available at http://www.as-photonics.com/Publications.html This      
+function permits studies of unseeded OPO's and the transition to      
+seeding. It also models double resonance effects and pumping by       
+multi-mode lasers. I suggest you narrow the range of input parameters 
+using the much faster function PW-cav-LP before you run this function 
+because it is demanding of computer resources and user patience. 
+For help in setting input values, right-click on
+the input edit box. Help text appears in the lower text box.     
+                                                                      
+A built in noise model automatically generates the startup quantum    
+vacuum noise. The starting noise spectrum has a width greater than    
+the crystal acceptance bandwidth which is proportional to             
+1/(gvi_1 - gvi_2). This is several times the actual OPO linewidth     
+in most cases. The red1 and red2 noise is automatically added to      
+whatever input light you specify. To make multiple runs with the same 
+startup noise, you must set the New noise input to 0 on each run.     
+Otherwise it defaults to 1 meaning a new noise input is used.         
+                                                                      
+Phase shifts are specified for each side of the crystal. These are    
+the phase shifts experienced by the carrier, or central frequency,    
+for each of the waves. If a wave is single mode, the input light is   
+assigned the frequency of the carrier. For example, if you wish to    
+model seeding with exactly resonant red1 light you would set the      
+red1 phases to zero, or more generally so the left and right phases   
+add to a multiple of 2 pi. If the red1 seed is detuned from cavity    
+resonance slightly, its round trip phase would differ slightly from   
+2 pi. This method of specifying phases allows you to model double     
+resonance effects, cavity detuning from the seed, and double passing  
+the blue (pump) wave with arbitrary reflective phase shifts, for      
+example. Phase shifts in these situations can dramatically affect     
+the OPO's output spectrum.                                            
+                                                                      
+This function does not include group velocity dispersion, nonlinear   
+refractive index, or two-photon absorption. These restrictions could  
+be removed if there is sufficient interest.                           
+                                                                      
+Output fields are written to the ascii files BBOPOL.DAT and           
+BBOPOR.DAT and may be viewed by clicking the 'View' button.  Output   
+spectra are stored in file BBSPECL.DAT and BBSPECR.DAT and start up   
+noise is in NOISE.DAT.                                                
+                                                                      
+The last used input set is saved in mix.mat so if you would like to    
+save those settings for later recall, copy (do not simply rename)     
+mix.mat to another file name to store, Copy the file back to mix.mat    
+to restore.                                                           
+
+If you are running mlSNLO under MATLAB (not the standalone compiled 
+version), this function can be called from a MATLAB script to automate
+parametric studies. See the 'SNLO' help tab for details.
+                                                                      
+PW-OPO-BB examples: 48, 70, 72. See file Examples with exercises and
+descriptions.pdf in mlSNLO folder, or on our website at 
+as-photonics.com/examples
+
+Detailed discussions of crystal nonlinear optics and
+SNLO examples are presented in the book "Crystal nonlinear optics:
+with SNLO examples," advertised on the SNLO download page or at
+as-photonics.com/book

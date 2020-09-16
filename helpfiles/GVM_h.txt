@@ -1,0 +1,85 @@
+GVM calculates group velocity (mis)match for noncollinear phase       
+matching. The paper "Group-velocity-matched three-wave mixing in      
+birefringent crystals" Optics Letters vol. 26, page 719 (2001)        
+describes the method of group velocity matching in birefringent       
+crystals implemented in this function. This paper is available        
+online at http://www.as-photonics.com/Publications.html. The
+calculations are based on the d-tensor and Sellmeier equations
+displayed in Qmix. The book "Crystal Nonlinear Optics: with SNLO 
+examples" (as-photonics.com/book) also describes the method.
+                                                                      
+For a given crystal and set of wavelengths, and a specified slant     
+of the pulse envelope, the propagation angles of the two redder       
+beams relative to the blue (pump) beam are varied and the crystal     
+phase matching angle Theta is located. For uniaxial crystals, all 
+angles are in the plane containing the optic axis (z axis) of the 
+crystal and the blue propagation vector. In biaxial crystals
+the propagation vectors lie in the selected principal plane and the
+phase matching angles are theta as measured relative to the Z axis
+for the XZ or YZ plane and are phi as measured from the X axis for
+the XY plane. The phase matching angles are plotted by the Angles 
+button.  The group velocity walkoffs (relative to the blue) measured 
+parallel to the blue wave's propagation vector are displayed by 
+the GVM button.  Spatial walkoff perpendicular to the blue wave's 
+propagation vector is displayed by the Walkoff button.  Group delay 
+dispersion (GDD) as measured along    
+the blue wave's propagation vector are displayed by the GDD button    
+in units of fs^2/mm (to convert to GVD in cm/sec-cm^-1 use            
+GDD=-5.89E-4 GVD gvi^2).
+                                                                      
+Slant angle is the tilt of the blue wave's pulse envelope relative    
+to the normal to its propagation angle (k-vector direction). A
+right click in the slant angle edit box displays a diagram of
+the propagation vectors. I assume that all three envelopes have the
+same alignment so they can overlap spatially. If the blue slant is 5
+degrees, the red1 slant relative to its k vector is (5 degrees + delta),
+and the red2 slant relative to its k vector is (5 degrees - gamma). 
+This means that if the group velocities are matched the envelopes stay
+overlapped in time (longitudinally), although they will walk off
+spatially (laterally).
+                                                                      
+In the plots, solid lines correspond to positive values of Delta      
+and Gamma, dashed lines correspond to negative values of Delta        
+and Gamma.  Perfect group velocity matching occurs when the solid     
+red, solid blue, and green curves coincide in the GVM plot or when    
+the dashed red, dashed blue, and green curves coincide. The curves   
+are adjusted by varying the slant angle input value.  Perfect         
+velocity matching, if it can be found, will occur at a certain        
+value of Theta.  The Angle button displays Delta and Gamma vs Theta   
+permitting you to find the corresponding values of Delta and Gamma    
+for each value of Theta. Likewise the spatial walkoff relative to     
+the blue at that Theta can be found from the curves displayed by      
+the Walkoff button.  Envelope slant also affects the group velocity   
+dispersion.  Net effective gdd is plotted by the GDD button.
+                                                                      
+When a set of wavelengths, a crystal, a temperature, and a plane (if  
+the crystal is biaxial) are selected, all polarization combinations   
+that can phase match with nonzero deff are enabled. Select the one    
+of interest by clicking its radio button.
+                                                                      
+Among other applications, this function is useful in predicting the   
+far-field ring angles for the red1 and red2 waves in femtosecond   
+OPG.  It is also useful in preconditioning input pulses to slant      
+their envelopes for optimum group velocity matching. For example,     
+if group velocity matching can be achieved, the crystal length is     
+not limited by group velocity walkoff. This permits the use of longer 
+crystals with the result that two photon absorption and nonlinear     
+refractive index effects can be lessened by using lower intensities.  
+Of course this requires beams large enough that spatial walkoff is    
+not dominant, which in turn requires sufficient pulse energy.
+                                                                      
+GVM data is written to the ascii file GVM.DAT with format     
+displayed in the View window when you click the 'View' button.
+                                                                      
+The last used input set is saved in the file mix.mat so if you would   
+like to save those settings for later recall, copy (do not simply     
+rename) mix.mat to another file name to store. Copy the file back to   
+mix.mat to restore.
+
+If you are running mlSNLO under MATLAB (not the standalone compiled 
+version), this function can be called from a MATLAB script to automate
+parametric studies. See the 'SNLO' help tab for details.
+					  
+GVM examples: 4, 5, 7.
+(see file Examples with exercises and descriptions.pdf in mlSNLO folder,
+or on our website at as-photonics.com/examples)

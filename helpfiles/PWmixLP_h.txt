@@ -1,0 +1,37 @@
+PW-mix-LP computes three-wave mixing process for long-pulse plane-     
+waves. The input irradiances are those of the central rays of spatial  
+lowest-order Gaussian beams with diameters and energies specified in   
+the input form.  This function ignores birefringent and group          
+velocity walkoff.  It is intended for very quick evaluation of a       
+proposed mixing process. For help in setting input values, right-
+click on the input edit box. Help text appears in the lower text box.                           
+                                                                       
+The model will handle pulses or cw light or a combination of the two.  
+To make a beam cw, set its pulse duration parameter to zero.  Because  
+group velocity is ignored, (it is included in PW-mix-SP and 2D-mix-SP) 
+this model is not accurate for very short pulses (less than 10's of    
+psec usually), or for broad-bandwidth mixing where the bandwidths      
+exceed the crystal's acceptance bandwidth (use PW-mix-BB).  Similarly, 
+if birefringent walk off is comparable to, or larger than the beam     
+diameters, this function will not be very accurate (use 2D-mix-xx).    
+                                                                       
+Results are written to the ascii file PWMIX_LP.DAT and may be viewed   
+by clicking the 'View' button.                                         
+                                                                       
+The last used input set is saved in mix.mat so if you would like to     
+save those settings for later recall, copy (do not simply rename)      
+mix.mat to another file name to store. Copy the file back to            
+mix.mat to restore.                                                     
+                                                                       
+If you are running mlSNLO under MATLAB (not the standalone compiled 
+version), this function can be called from a MATLAB script to automate
+parametric studies. See the 'SNLO' help tab for details.
+
+PW-mix-LP examples: 16, 18-23, 27, 39. See file Examples with 
+exercises and descriptions.pdf in mlSNLO folder, or on our website 
+at as-photonics.com/examples
+
+Detailed discussions of crystal nonlinear optics and
+SNLO examples are presented in the book "Crystal nonlinear optics:
+with SNLO examples," advertised on the SNLO download page or at
+as-photonics.com/book

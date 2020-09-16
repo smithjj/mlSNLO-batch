@@ -1,0 +1,99 @@
+Bmix calculates the properties of biaxial crystals for propagation       
+in any direction including out of the principal planes (in contrast      
+to Qmix where propagation in a principal plane is assumed).  The
+calculations are based on the d-tensor and Sellmeier listed in Qmix.
+Phase matching curves are computed along with the associated effective
+nonlinearity, walkoff, and acceptance angles.  The purple circle on      
+the phase matching plot indicates the location of the optic axes in      
+the x-z plane. Parallel propagation directions (k vectors) of the three  
+interacting waves red1, red2, and blue are assumed.                      
+                                                                         
+All angles are in the optical frame difined by nx<ny<nz. Phase           
+matching angles theta and phi are customarily measured from the z axis   
+toward the x-y plane for theta and from the x-z plane toward the y-z     
+plane for phi.  This is the case for Bmix if the Rotation Axis Z is      
+selected as the rotation axis.  Unfortunately, with this convention,     
+plots of the index matching loci are often double valued.  To avoid this,
+select the X or Y Rotation Axis. When X is selected, theta is measured   
+from the x axis and phi is measured y-toward-z.  When Y is selected,     
+theta is measured from the y axis and phi is measured z-toward-x.        
+The information is the same no matter which axis is chosen, but the      
+display is easier to interpret if the plots are single valued.           
+                                                                         
+The walkoff angles are specified for the two eigenpolarizations, lo      
+and hi.  Walkoff of each is in the direction of the eigenpolarization    
+of the optical E field so lo and hi walkoff directions are orthogonal.   
+The total walkoff is (lo^2 + hi^2)^.5. Walkoffs are not specified for    
+the three separate wavelengths because they are approximately            
+independent of wavelength.  Ref: F. Brehat and B. Wyncke J. Phys. B:     
+At. Mol. Opt. Phys. vol 22 p 1891 (1989).                                
+                                                                         
+The values of deff listed are wavelength scaled (usually from those      
+for 1064 nm SHG) using Miller's rule.  They also include the             
+correction due to birefringent walkoff.                                  
+                                                                         
+The group velocities are specified for the two eigenpolarizations,       
+lo and hi.                                                               
+                                                                         
+The eigenpolarization directions for the lo and hi refractive indices    
+are not specified here but could easily be added on request. They can    
+also be found from the delta output angle in Ref. Ind.                   
+                                                                         
+The range of phi is -180 to 180 degrees for deff plots rather than 0 - 90
+degrees as it is for the other plots because deff can be asymmetric in 
+phi whereas the linear optical properties such as phase matching loci, 
+acceptance angle, and walkoff are symmetric.            
+                                                                         
+The results from Bmix are saved in ascii file BMIX.DAT           
+in the format displayed by the view function.       
+
+The surface plotted by the 'Phasematched d_eff on d surface' button is 
+|d_eff (theta,phi)|, where theta and phi define the propagation direction
+for the three parallel beams. Theta and phi are specified relative to
+the chosen 'Rotation Axis' (x,y, or z). For z axis, theta is measured from
+the z-axis and phi is measured from the xz plane toward the yz plane. For
+x axis, theta is measured from the x-axis and phi is measured from the
+xy plane toward the xz plane. For y axis, theta is measured from y axis
+and phi is measured from zy plane toward xy plane. The d surface is 
+different for Type 1 (hi hi-lo) and Types 2 (hi lo-lo) or 3 (lo hi-lo), 
+which are similar. The surfaces vary with wavelength but slowly. We do
+not indicate the sign on d-effective because it gets too confusing. 
+Only the absolute value of d-effective is plotted. The d surface often
+has sharp spikes or dips that appear near the optic axes which lie in
+the xz plane. For example, the d surface for Type 1 mixing in KTP has 
+pronounced spikes 17 degrees from the z axis in the xz plane. The
+symmetry of the d surface reflects the symmetry of the crystal.
+
+The magenta line that is imposed upon the d surface is the loci of the
+phasematched points for the specified wavelengths and mixing type. Only
+1 of 2 mirror image phasematching curves (the one with theta<90 degrees).
+The phasematch loci computed with different 'Rotation Axis' contain the
+same information although the curves may have different discontinuities
+depending on the chosen axis.
+                                                             
+The surface can be rotated, expanded and panned through the buttons 
+on Matlab's figure toolbar, and the phasematch values can be traced 
+out by using Matlab's interactive Data Cursor to select the magenta 
+line and using the arrow keys. You can compare the values along the
+phasematched line with the values plotted through the 'Deff' button.
+
+If the d surface is plotted when the Bmix 'Print' button is pressed
+the d surface will be printed. Otherwise the 'Print' button will
+print a figure containing the phasematching, d-effective, temperature 
+range, group velocity and walkoff curves.
+															 
+Last used input set is saved in mix.mat so if you would like to save      
+those settings for later recall, copy mix.mat to another file name to     
+store. Copy the file back to mix.mat to restore.                          
+                                                                         
+Acceptance angles and acceptance bandwidths can be calculated from       
+the walkoff and group velocity data.  See Qmix help for details.
+
+Examples 25, 30. See file Examples with exercises and
+descriptions.pdf in mlSNLO folder, or on our website at 
+as-photonics.com/examples
+
+Detailed discussions of crystal nonlinear optics and
+SNLO examples are presented in the book "Crystal nonlinear optics:
+with SNLO examples," advertised on the SNLO download page or at
+as-photonics.com/book

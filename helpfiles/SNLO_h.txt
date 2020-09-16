@@ -1,0 +1,50 @@
+mlSNLO is written and maintained by Arlee and Jesse Smith at 
+AS-Photonics in Albuquerque, New Mexico.  It is a translation 
+and enhancement of the free version of SNLO available at: 
+http://www.as-photonics.com/SNLO  
+                                                                     
+For a quick introduction to SNLO read the file SNLO_Introduction.PDF 
+that is in your SNLO folder, and also available on our website at 
+http://as-photonics.com/snlo_files/SNLO_Introduction.pdf
+                                                                     
+Comments, questions, suggestions are welcome.  Send them to me at:   
+arlee.smith@as-photonics.com.                                        
+                                                                     
+Other crystal information is available in the 100+ page bibliography 
+crystals.pdf which can be downloaded from http://as-photonics.com/snlo_files/Crystals.pdf 
+and from the file http://as-photonics.com/snlo_files/beta_n2.pdf
+which includes tables of reported two-photon absorption cross sections
+and nonlinear refractive index coefficients. Detailed discussions of 
+crystal nonlinear optics and the SNLO examples are presented in 
+the book "Crystal Nonlinear Optics: with SNLO examples" advertised 
+on the SNLO download page.                                
+
+Most of the SNLO functions can be called from a MATLAB script
+which lets users automate parametric studies. Examples include
+cavity length tuning in the PW-OPO-SP model, or temperature
+tuning the phasematch curves in the QPM model. Example scripts
+are supplied for each of the functions that can be called from
+a script. These are files with the name "test_calling_*.m"
+and they are located in the mlSNLO directory. If mlSNLO has 
+been installed as a MATLAB App, this directory is 
+"%userprofile%\Documents\MATLAB\Add-Ons\Apps\mlSNLO\code"
+in recent versions of Windows. If the mlSNLO installation
+directory is in your MATLAB path, you can access the file from 
+the MATLAB commandline by typing in "test_calling_"
+pressing the tab key, which provides a list of the example 
+scripts. Highlighting the desired script using the arrow keys or 
+the mouse, and pressing enter to select it completes the command 
+necessary to run the script. Pressing enter again runs the 
+script. To edit the script, just add the prefix "edit " before 
+the name of the script and press enter. This opens the script 
+file in the MATLAB editor.
+
+Do-it-yourself crystals ZZ_U (uniaxial) and ZZ_B (biaxial) can
+be used by editing the files ZZ_U.TXT and ZZ_B.TXT to enter
+the Sellmeier equations and the d-tensor. These text files 
+contain further instruction. If you're running mlSNLO under 
+MATLAB (not the standalone compiled version), these files can
+be edited by typing "edit ZZ_U.TXT" or "edit ZZ_B.TXT" from the
+MATLAB commandline. In the standalone compiled version, 
+the files are located in the "%appdata%\MATLAB SNLO" directory
+in Windows, or "~/Library/MATLAB_SNLO" in Mac OSX.

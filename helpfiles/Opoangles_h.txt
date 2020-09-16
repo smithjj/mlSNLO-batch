@@ -1,0 +1,59 @@
+Opoangles computes OPO/OPA red1 and red2 wavelengths as a function     
+of propagation angle in birefringent crystals assuming the blue (pump) 
+wavelength is fixed.  For biaxial crystals, propagation is in one of   
+the principal planes of the crystal so the Plane radio buttons         
+are activated. Select the plane of interest. In biaxial crystals       
+the angle is theta, measured from the Z axis for propagation in the    
+XZ and YZ planes.  For propagation in the XY plane the angle is phi,   
+measured from the X axis toward the Y axis. Calculations are based
+on the d-tensor and Sellmeier listed in Qmix.             
+                                                                       
+Noncollinear mixing is permitted and the angles are as diagrammed in   
+the plot window that displays when you right click the mouse in the
+blue tilt input box. Noncollinear phasematching displays tuning vs. 
+red1 angle as is appropriate if the red1 wave is the red wave
+that is resonated in a cavity and thus has a fixed angle.  Blue
+tilt is measured relative to the red1 wave. Noncollinear
+phasematching is useful in tuning via blue angle and also to 
+control the bandwidth of the output. It is also of interest for 
+tangential phasematching. Note that the tilts are assumed to lie
+in the critical (walkoff) plane of the crystal. In some cases the
+bandwidth can be large (at points where the phase matching curves
+are tangent to a vertical line). At these points the red1 and
+red2 have equal group velocities along the red1 direction.  
+The blue does not usually have the same group velocity as the
+red1 and red2, though, so this is not equivalent to matching
+all three group velocities as is desired for femtosecond mixing.
+Use function GVM for group velocity matching all three
+waves.                                                       
+                                                                       
+The deff's calculated for noncollinear mixing are approximate because  
+they do not account for the tilts of the three waves, but instead      
+assume that all three waves propagate parallel to the red1 wave.     
+The deff's include Miller scaling for wavelength variation.            
+                                                                       
+The Deff and Gain buttons display d-effective and relative 
+parametric field gain, defined as sqrt(1/S0*L^2). To find actual 
+parametric gain in cm-1, multiply the gain by the square root of
+the blue intensity in W/sq. cm. 
+                                                                       
+The ascii file OPOANGLE.DAT contains the results and may be viewed     
+by clicking the 'View' button.                                         
+                                                                       
+The last used input set is saved in mix.mat so if you would like to     
+save those settings for later recall, copy (do not simply rename)      
+mix.mat to another file name to store. Copy the file back to            
+mix.mat to restore.                                                     
+                                               
+If you are running mlSNLO under MATLAB (not the standalone compiled 
+version), this function can be called from a MATLAB script to automate
+parametric studies. See the 'SNLO' help tab for details.		
+											   
+Opoangles examples: 3, 33. See file Examples with exercises and
+descriptions.pdf in mlSNLO folder, or on our website at 
+as-photonics.com/examples
+
+Detailed discussions of crystal nonlinear optics and
+SNLO examples are presented in the book "Crystal nonlinear optics:
+with SNLO examples," advertised on the SNLO download page or at
+as-photonics.com/book

@@ -1,0 +1,72 @@
+PW-cav-LP models plane-wave mixing in cavities.  Input irradiances  
+are those of the central rays of lowest order Gaussian beams with   
+diameters specified by the Beam diam. input values.  You can model  
+an OPO, cavity resonant SHG or any other cavity mixing process by   
+specifying the input beams and the reflectivity of the mirrors at   
+those wavelengths.  The crystal mixing is similar to PW-mix-LP.     
+The cavity configuration can be standing wave or ring.              
+                                                                    
+Each wave can be either cw or pulsed so both cw and pulsed devices, 
+or devices with both cw and pulsed beams can be modeled.  If the    
+Pulse duration input value is set to zero, that light beam is cw.   
+If it is nonzero, a temporal Gaussian pulse is assumed.             
+                                                                    
+For a ring cavity, the reflectivity of the third mirror is unity    
+for all three waves.  You can specify phase shifts in various parts 
+of the cavity for each wave.  This is useful in modeling OPO's that 
+resonate more than one wave or for modeling seeded OPO's when the   
+cavity is not exactly resonant with the seed.  Usually the phases   
+are set to zero to model optimum OPO performance.                   
+                                                                    
+To model an OPO, it is easiest to supply a red1 or red2 (not        
+both) seed to either end of the cavity.  If you seed both the       
+red waves you must be careful of phases. For approximate            
+modeling of an unseeded OPO, use a vacuum level field (one photon   
+per mode) to seed either the red wave.  This is approximately       
+1e-9 watts. The exact value is not critical because the OPO         
+behavior is usually not very sensitive to the seed power.           
+                                                                    
+For strongly driven OPO's you might see bistable or even chaotic    
+behavior of the output powers. This is normal and probably not due  
+to numerical problems. It may not be very physical though, because  
+real OPO's do not have plane waves, and spatial averaging over      
+irradiance profiles tends to hide this behavior.                    
+                                                                    
+The OPO output from both the left and right ends are written to     
+the ascii files PWOPO_R.DAT and PWOPO_L.DAT.  They can be viewed    
+by choosing the Right or Left selector and clicking the             
+'View' button.                                                      
+                                                                    
+If the number of starts is set to 1, the time increment is the round
+trip time of the cavity. For a time resolution of half the round    
+trip time, set the number of starts to 2. Higher numbers give       
+still higher time resolution.                                       
+                                                                    
+Batch mode is allowed on most inputs. Only one variable can be      
+batched on any run. A batch run is automatically performed if the   
+input box contains three numbers with space separating them. The    
+format is: [starting value] [space] [ending value] [space]          
+[increment]. If batch mode is used the output is written to         
+sequential files names PWOPOR#.DAT and PWOPOL#.DAT where # is 0     
+for first run, 1 for second run, ... The last run in the batch      
+also writes the files PWOPO_R.DAT and PWOPO_L.DAT as before.        
+The file PWOPOLP.TXT contains copies of the output text box for     
+all runs in the batched series. Open this file using Wordpad.       
+                                                                    
+The last used input set is saved in the file mix.mat, so if you would
+like to save those settings for later recall, copy (do not simply   
+rename) mix.mat to another file name to store. Copy the file back    
+to mix.mat to restore.                                
+
+If you are running mlSNLO under MATLAB (not the standalone compiled 
+version), this function can be called from a MATLAB script to automate
+parametric studies. See the 'SNLO' help tab for details.               
+                                                                    
+PW-cav-LP examples: 36, 40, 41, 46, 51-53, 55, 56, 69. See file 
+Examples with exercises and descriptions.pdf in mlSNLO folder, or 
+on our website at as-photonics.com/examples
+
+Detailed discussions of crystal nonlinear optics and
+SNLO examples are presented in the book "Crystal nonlinear optics:
+with SNLO examples," advertised on the SNLO download page or at
+as-photonics.com/book

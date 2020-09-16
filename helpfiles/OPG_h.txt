@@ -1,0 +1,151 @@
+OPG models single-pass mixing with diffraction, birefringent    
+walkoff, group velocity walk off, and group velocity dispersion with
+simulated quantum noise in both red waves. The quantum noise is
+automatically computed based on the inputs. Optional red seed light
+can be added to the noise by specifying red pulse energies and
+pulse durations.
+	
+This is a slow memory hog so try to select the best values for the    
+time and spatial grids using the faster function PW-mix-BB before 
+running OPG. The maximum sizes of the spatial and temporal grids depend 
+on the amount of memory available to SNLO and your patience. 
+                                                                      
+For help in setting an input value, right-click on the input edit box. 
+Contextual help text appears in the lower text box. 
+                                                                      
+The calculation is based on integrating Maxwell's equations using     
+split-step FFT methods to give accurate diffractive and dispersive    
+simulations. Methods are described in papers "Numerical models of    
+broad bandwidth nanosecond optical parametric oscillators"            
+JOSA B vol. 16 p. 609 (1999); "Phase distortions in sum- and          
+difference-frequency mixing in crystals" JOSA B vol. 12 p. 49 (1995); 
+and "Comparison of a numerical model with measured performance of a   
+seeded, nanosecond KTP optical parametric oscillator," JOSA B         
+vol. 12 p. 2253 (1995). These papers are available online at          
+http://www.as-photonics.com/Publications.html                        
+                                                                      
+The phase velocity mismatch (k_3-k_1-k_2) refers to the carrier waves,
+ie the central frequencies and forward k vectors. The group velocity  
+and group delay dispersion terms then account for phase mismatches    
+at all other frequencies, while the walk off angle accounts for the   
+phase mismatches for all other k-vector directions. This is automatic,
+you do not have to worry about how all the frequency and tilts are    
+phase matching among themselves.                                      
+                                                            
+To specify temporal profiles, specify two numbers in the pulse 
+duration input box (with the two arguments separated by a space). 
+The first is the full-width half-max duration, and the second 
+an optional supergaussian coefficient. The second argument should 
+be an integer 0-10, where 0 represents a hyperbolic secant temporal 
+shape, and 1-10 are super Gaussian temporal shapes of order 
+specified (1 for normal Gaussian temporal profile).
+	
+The beam size and radius of curvature can be computed with the help
+of the Focus function. In OPG, the pump is usually focused so its
+Rayleigh range is approximately equal to the crystal length. Seed 
+beams, if present, can be similarly focused.
+	
+Because OPG requires very high parametric gains, the number of z
+steps should be at least 200, and convergence should be verified by
+varying this number.
+	
+The grid sizes for time, and x&y are specified in the input form. 
+The time grid must be large enough that it contains the entire pulses.
+Similarly, the x&y grids must be large enough to contain the beams.
+The number of t, x, and y points must be great enough to resolve all
+the temporal and spatial structure. Suggested starting values are 
+256x64x64. After running, check the profiles to see that they are
+well resolved - meaning there aren't abrupt changes in the power 
+curve or fluence wire mesh plots.
+	
+Outputs include fluence profiles at the crystal output and in the 
+farfield, and movies of the output irradiance as a function of time.
+	
+In the Beam box, the Analyze button computes tilts in both 
+the walkoff and perpendicular directions, beam quality M-squared 
+values in both the walkoff and perpendicular directions (M-w and M-p 
+buttons), pulse-integrated M-squared values (written at top of 
+M-squared plots), and wavefront curvature at the crystal output
+(Focus-w and Focus-p). M-squared, tilt, and focus can be displayed 
+vs time or vs frequency. 
+	
+Other outputs include power, normalized power, full-beam spectra, and 
+full-beam chirps. These are all computed by summing over the transverse
+pixels. Click the Spectra button once to display the spectral shifts 
+displayed in terahertz and click it a second time to display the
+shifts in nanometers.
+	
+The OPG output can be filtered post-run. The filters affect 
+the time profiles and spectral profiles of the transmitted light.
+The three filters are described here.
+	
+Tilt filter:
+Other analysis tools include a tilt/tune function which displays
+false-color plots of the spectral centroid corresponding to
+transverse k-vectors (beam tilts). The k-perp filter allows
+you to specify a maximum transverse k vector. Only light with smaller 
+transverse k vectors is preserved. You can plot the filtered powers 
+vs time or vs frequency. 
+	 
+Radius filter:	
+The Radius filter is similar to the tilt filter except the filter
+preserves only near-field light within the filter radius.
+	 
+Spectral filter:
+The Spectral filter passes the light through a 
+Fabry-Perot filter of your design. You specify the free-spectral 
+range, the center frequency, and the filter linewidth. The beams 
+are assumed to be collimated so the Fabry-Perot is acting on a
+collimated beam. 
+	
+	
+Output files:
+The following files are saved by this function:
+OPG_BEAM_3TS.DAT: contains red1 beam analysis data. with columns
+time (in picoseconds), power (in watts) and (after pressing 
+Analyze) Mx^2, pulse avg. Mx^2, My^2, pulse avg. My^2, x 
+curvature, y curvature, x tilt, y tilt
+OPG_BEAM_3TI.DAT: contains red2 beam analysis data. with columns
+time (in picoseconds), power (in watts) and (after pressing 
+Analyze) Mx^2, pulse avg. Mx^2, My^2, pulse avg. My^2, x 
+curvature, y curvature, x tilt, y tilt
+OPG_BEAM_3TP.DAT: contains blue beam analysis data. with columns
+time (in picoseconds), power (in watts) and (after pressing 
+Analyze) Mx^2, pulse avg. Mx^2, My^2, pulse avg. My^2, x 
+curvature, y curvature, x tilt, y tilt
+OPG_BEAM_3WS.DAT: contains red1 beam analysis data. with columns
+frequency shift (in Hz), red1 power (in watts) and (after 
+pressing Analyze) Mx^2, pulse avg. Mx^2, My^2, pulse avg. My^2,
+x curvature, y curvature, x tilt, y tilt
+OPG_BEAM_3WP.DAT: contains red2 beam analysis data. with columns
+frequency shift (in Hz), red2 power (in watts) and (after 
+pressing Analyze) Mx^2, pulse avg. Mx^2, My^2, pulse avg. My^2,
+x curvature, y curvature, x tilt, y tilt
+OPG_BEAM_3WI.DAT: contains blue beam analysis data. with columns
+frequency shift (in Hz), blue power (in watts) and (after 
+pressing Analyze) Mx^2, pulse avg. Mx^2, My^2, pulse avg. My^2,
+x curvature, y curvature, x tilt, y tilt
+OPG_FLUENCE3.DAT: near-field fluence profiles. columns are x
+position, y position, red1 fluence, red2 fluence, blue fluence
+OPG_FLUENCE3F.DAT: far-field fluence profiles. columns are x
+spatial frequency, y spatial frequency, red1 fluence, red2 
+fluence, blue fluence
+OPG_BEAM_3C.DAT: chirps. with columns: time (in seconds),
+red1 chirp, red2 chirp, blue chirp.
+opg_2d_output.mat: contains some matlab readable variables
+opg_2d_beam_analysis.mat: contains some matlab readable variables
+low_tilt_spectra.mat: contains some matlab readable variables
+								
+The last used set of input parameters is saved in mix.mat so if 
+you would like to save those settings for later recall, copy (do 
+not simply rename) mix.mat to another file name to store. Copy 
+the file back to mix.mat to restore.                                                           
+								
+OPG examples: 78. See file Examples with exercises and
+descriptions.pdf in mlSNLO folder, or on our website at 
+as-photonics.com/examples
+
+Detailed discussions of crystal nonlinear optics and
+SNLO examples are presented in the book "Crystal nonlinear optics:
+with SNLO examples," advertised on the SNLO download page or at
+as-photonics.com/book

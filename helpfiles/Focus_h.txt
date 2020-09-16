@@ -1,0 +1,35 @@
+FOCUS helps calculate the curvature of a Gaussian beam at a                 
+specific location that will give a certain waist size at a certain          
+location.  This information is needed in 2D-mix-LP and 2D-mix-SP            
+if the beams are focusing (have curved wavefronts). To run this             
+function simply change any of the input values and the output               
+values are automatically updated.  For example, if you want the             
+beam to focus at the center of the crystal, use half the crystal            
+length in the Dist. to focus input.  Filling in the Waist input will        
+then give the radius of curvature in air at the crystal input face          
+and the beam diameter at the crystal input face that are necessary to       
+focus at the crystal center with the specified beam waist.                  
+                                                                            
+CAVITY helps design stable cavities in support of function 2D-cav-LP        
+which can model cavities with curved mirrors. In order to mode match an 
+input beam to a stable cavity, 2D-cav-LP needs as inputs the size and radius 
+of curvature of the input beams just inside the left or right curved mirror. 
+This information listed in the output boxes labeled "left in size" and "left 
+input rad of curv" and another pair for the right inputs. If an input beam in 
+2D-cav-LP is to resonant with the cavity, you must also specify the round trip 
+Gouy phase shift due to focusing within the cavity. For example, for a ring 
+cavity you can set the value of the input parameter 'Phase R-L' equal to the 
+negative of the value of Cavity function output 'Roundtrip phase shift'.  This          
+makes the wave resonant in the cavity, maximizing the cavity enhancement    
+of the field. When this is set correctly the spectrum of the resonated      
+wave will peak at a frequency shift of zero. Click the Spectrum button      
+after a run to check this. Note that the Leg1 length refers to the          
+distance between curved mirrors on the leg containing the crystal           
+while Leg2 refers to the distance between curved mirrors on the other       
+leg. Function executes when you change an input. It displays the 1/e^2 width
+through the length of the cavity with the crystal highlighted in blue. 
+
+Detailed discussions of crystal nonlinear optics and
+SNLO examples are presented in the book "Crystal nonlinear optics:
+with SNLO examples," advertised on the SNLO download page or at
+as-photonics.com/book

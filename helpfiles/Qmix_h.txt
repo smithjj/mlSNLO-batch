@@ -1,0 +1,114 @@
+QMIX helps you quickly select the best crystal for your application     
+from a list of over 60 crystals.  It calculates all the possible        
+phase-matching orientations for the chosen crystal at the wavelengths   
+specified, returning phase-matching angles, polarizations, refractive   
+indexes, group velocities, group delay dispersion, effective            
+nonlinearity, crystal tilt tolerance, acceptance angles, acceptance     
+bandwidths, and acceptance temperatures. The three beams are assumed    
+to have collinear propagation vectors. If the nonlinearity, deff,       
+is zero, the other properties are not calculated. (If you want to       
+find noncritical wavelengths, use function Ncpm.)                       
+                                                                        
+When a crystal is selected from the crystal list its transmission       
+data (if available) is displayed in the plot and also written to the    
+ascii file CRYST_TR.DAT. Other properties are listed in the output      
+window. They can be printed using the Print button.                     
+                                                                        
+The values of d_eff for type 1 or type 2 mixing in uniaxial crystals    
+are for crystals cut for the value of phi that maximizes d_eff.         
+The value of phi can be determined from the form of the expressions     
+for d_eff for (1 e wave) or (2 e waves) shown in the Qmix window        
+when you select a uniaxial crystal.                                     
+                                                                        
+For biaxial crystals, propagation is in one of the principal            
+planes.  When you choose a biaxial crystal the Principal Plane selector 
+is activated. Select the plane of interest. I use the axis system       
+in which the refractive indexes obey n_x<n_y<n_z. Be aware that         
+this is not a universal convention. To calculate phase matching etc.    
+for propagation that is not in a principal plane use the function BMIX. 
+                                                                        
+Acceptance bandwidths, angles, and temperatures are ranges over         
+which (L delta k) varies from -pi to pi.  This is 13% greater than      
+the full width at half maximum for the sinc^2(delta k L/2) function     
+that describes weak mixing conversion efficiency.                       
+                                                                        
+The OPO acceptance bandwidth (abbreviated 'OPO accpt bw' and activated   
+by selecting Type OPO) is that for the red1 and red2 waves, assuming    
+the blue (pump) wavelength is fixed. That is, I assume that the red     
+waves tune by equal amounts in opposite directions. The Mix acceptance  
+bandwidths (activated by selecting Type Mix) are those of the red1      
+and red2 waves.  The left number is associated with the first wavelength
+on the first line of the output, the right number is associated with    
+the second wavelength. I assume in calculating each bandwidth that      
+the other red wavelength is fixed, so the blue wave tunes by the same   
+amount as the specified wave.                                           
+                                                                        
+The OPO acceptance bandwidth in cm-1 for a one cm long crystal is       
+given by 1/(gvi_1 - gvi_2).  The Mix acceptance bandwidths are given    
+by 1/(gvi_3 - gvi_1) and 1/(gvi_3 - gvi_2) where gvi_x is the x wave    
+group velocity index, related to group velocity by:                     
+group velocity = c/gvi_x and x=1 is red1, x=2 is red2, x=3 is blue      
+wave.                                                                   
+                                                                        
+Group delay dispersion (GDD) is the change in group delay with          
+change in wavelength. I use units of fs^2/mm to conform with            
+common usage. To convert between GVD in cm/sec-cm^-1 and GDD in         
+fs^2/mm use GDD=-5.89E-4 GVD gvi^2                                      
+                                                                        
+The OPO acceptance angles (abbreviated 'OPO accpt ang' and activated     
+by selecting Type OPO) are those for the red1 and red2 waves            
+assuming the blue wave is a plane wave at a fixed propagation angle.    
+Thus the red waves must tilt in opposite directions so the transverse   
+components of their k-vectors are equal and opposite.  The Mix          
+acceptance angles (activated by selecting Type Mix) are those of the    
+red1 and red2 wavelengths.  Each is calculated assuming the other       
+is a plane wave of fixed angle so the specified wave and the blue       
+must tilt in the same direction such that their transverse k-vector     
+components are equal. The angles are internal to the crystal.           
+                                                                        
+The OPO red1 acceptance angle in mrad for a one cm long crystal         
+is given by (0.1)(lamda_1)/n_1(wo_1 - wo_2) where n_1 is the red1       
+refractive index, wo_1 is the red1 walk off in mrad, wo_2 is the        
+red2 walkoff angle in mrad, and lamda_1 is the red1 wavelength          
+in nm.  To find the red2 acceptance angle, exchange red1 and red2       
+in this expression.  The Mix acceptance angle in mrad for a      
+one cm long crystal is given by (0.1)(lamda_1)/n_1(wo_1 - wo_3).        
+To find the red2 acceptance angle exchange red1 and red2 in             
+this expression.  Higher order effects become important for angle       
+noncritical mixing, but they are not included in these acceptance       
+angles. The angles are internal to the crystal.                         
+                                                                        
+Crystal angular tolerance indicates the amount of crystal tilt          
+away from the phase-matching direction that makes (delta k L = 2 pi).   
+The individual beams are at fixed angles. The angle is internal to      
+the crystal. Other folks sometimes call this the acceptance angle.      
+                                                                        
+The S_o listed in the Qmix output is a reference irradiance defined     
+by S_o=(epsilon_o c lambda_1 lambda_2 n_1 n_2 n_3)/(8 pi^2 deff^2 L^2). 
+Divide the (S_o ’ L^2) value listed in Qmix by the square of your 
+crystal length in cm to find S_o in W/cm^2. The single-pass, phase
+matched, optical parametric field gain of the two red waves is
+(gamma L) = sqrt(S_3/S_o), where S_3 is the blue (pump) 
+irradiance in W/cm^2.                      
+                                                                        
+The values of deff listed are wavelength scaled (usually from those     
+for doubling 1064 nm light). The wavelength scaling is based on         
+Miller's rule, so it is only approximate.  According to Miller's rule   
+the value of deff is weakly wavelength dependent and is reduced at      
+redder wavelengths. The deff values also include the correction due     
+to the walk off angles. That is, the theta in expressions for d_eff     
+are replaced by (theta+rho) where rho is the walk off angle.            
+                                                                        
+The last-used QMIX input values are saved in the file mix.mat.           
+If you would like to save those settings for later recall,              
+copy (do not simply rename) mix.mat to another file name to store.       
+Copy the file back to mix.mat to restore the settings.                   
+                                                                        
+QMIX examples: 28, 31. See file Examples with exercises and
+descriptions.pdf in mlSNLO folder, or on our website at 
+as-photonics.com/examples
+
+Detailed discussions of crystal nonlinear optics and
+SNLO examples are presented in the book "Crystal nonlinear optics:
+with SNLO examples," advertised on the SNLO download page or at
+as-photonics.com/book
