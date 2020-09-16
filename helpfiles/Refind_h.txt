@@ -1,0 +1,40 @@
+Ref.Ind. computes the refractive indexes, group velocities, group     
+delay dispersions, and birefringent walkoff angles for uniaxial       
+or biaxial crystals with any specified propagation direction. This    
+function is useful if you wish to manually calculate phase matching   
+or group velocities for situations not covered by SNLO functions Qmix,
+Bmix, QPM, Opoangles, Ncpm, or GVM.                                   
+                                                                      
+You specify the crystal, the temperature, the wavelength, and the     
+propagation direction. The propagation direction is specified by      
+theta and phi where theta is the polar angle measured from the z-     
+axis and phi is the azimuthal angle measured from the x-axis toward   
+the y-axis.                                                           
+                                                                      
+The calculated angle delta for biaxial crystals is the polarization   
+angle for the eigen polarization with hi refractive index. The angle  
+is measured from the k-z plane in the clockwise direction as viewed   
+along the propagation vector.                                         
+                                                                      
+Walkoff is always toward the direction that would lower the           
+refractive index at the highest rate. For negative uniaxial crystals  
+the e wave walks toward theta = 90, while for positive uniaxial       
+crystals it walks toward theta = 0. The axis system I use for         
+biaxial crystals makes the refractive indexes satisfy n_x<n_y<n_z.    
+In biaxial crystals walkoff is along the same direction as the        
+polarization. For the eigenpolarization associated with the hi        
+refractive index, walkoff is in the plane defined by angle delta,     
+while for the low index eigenpolarization walkoff is in the           
+orthogonal direction.                                                 
+                                                                      
+For more information on the individual crystals you can run function  
+QMIX. In QMIX, selecting a crystal will display basic information     
+about that crystal.                                                   
+
+Example 15. See file Examples with exercises and descriptions.pdf 
+in mlSNLO folder, or on our website at as-photonics.com/examples
+
+Detailed discussions of crystal nonlinear optics and
+SNLO examples are presented in the book "Crystal nonlinear optics:
+with SNLO examples," advertised on the our web site download page
+or as-photonics.com/book
