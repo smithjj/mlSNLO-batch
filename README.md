@@ -36,9 +36,9 @@ The help text files here are the ones displayed after clicking the 'Help' button
 
 ## SNLO functions
 ### Qmix
-* <a href="/smithjj/mlSNLO-batch/helpfiles/Qmix_h.txt">Qmix_h.txt</a>
-* <a href="/smithjj/mlSNLO-batch/test_calling_snlo_qmix_func.m">test_calling_snlo_qmix_func.m</a>
-* <a href="/smithjj/mlSNLO-batch/test_calling_snlo_qmix_func2.m">test_calling_snlo_qmix_func2.m</a>
+* <a href="/helpfiles/Qmix_h.txt">Qmix_h.txt</a>
+* <a href="/test_calling_snlo_qmix_func.m">test_calling_snlo_qmix_func.m</a>
+* <a href="/test_calling_snlo_qmix_func2.m">test_calling_snlo_qmix_func2.m</a>
 
 ### Bmix
 * <a href="/smithjj/mlSNLO-batch/helpfiles/Bmix_h.txt">Bmix_h.txt</a>
