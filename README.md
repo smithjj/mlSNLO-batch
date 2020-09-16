@@ -2,7 +2,7 @@
 Example batch scripts for mlSNLO nonlinear optics numerical modeling software. These examples work for the MATLAB App version of mlSNLO which requires a MATLAB license. For more information see [as-photonics.com/products/matlab-snlo](http://www.as-photonics.com/products/matlab-snlo).
 
 ## Table of contents
-* [Introduction, conventions and syntax](#syntax)
+* [Introduction, conventions and syntax](#introduction,-conventions-and-syntax)
 * [SNLO functions](#funcs)
   * [Qmix](#qmix)
   * [Bmix](#bmix)
