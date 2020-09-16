@@ -41,64 +41,64 @@ The help text files here are the ones displayed after clicking the 'Help' button
 * <a href="/test_calling_snlo_qmix_func2.m">test_calling_snlo_qmix_func2.m</a>
 
 ### Bmix
-* <a href="/smithjj/mlSNLO-batch/helpfiles/Bmix_h.txt">Bmix_h.txt</a>
-* <a href="/smithjj/mlSNLO-batch/test_calling_snlo_bmix_func.m">test_calling_snlo_bmix_func.m</a>
+* <a href="/helpfiles/Bmix_h.txt">Bmix_h.txt</a>
+* <a href="/test_calling_snlo_bmix_func.m">test_calling_snlo_bmix_func.m</a>
 
 ### Focus
-* <a href="/smithjj/mlSNLO-batch/helpfiles/Focus_h.txt">Focus_h.txt</a>
-* <a href="/smithjj/mlSNLO-batch/test_calling_snlo_focus_func.m">test_calling_snlo_focus_func.m</a>
+* <a href="/helpfiles/Focus_h.txt">Focus_h.txt</a>
+* <a href="/test_calling_snlo_focus_func.m">test_calling_snlo_focus_func.m</a>
 
 ### GVM
-* <a href="/smithjj/mlSNLO-batch/helpfiles/GVM_h.txt">GVM_h.txt</a>
-* <a href="/smithjj/mlSNLO-batch/test_calling_snlo_gvm_func.m">test_calling_snlo_gvm_func.m</a>
+* <a href="/helpfiles/GVM_h.txt">GVM_h.txt</a>
+* <a href="/test_calling_snlo_gvm_func.m">test_calling_snlo_gvm_func.m</a>
 
 ### Opo angles
-* <a href="/smithjj/mlSNLO-batch/helpfiles/Opoangles_h.txt">Opoangles_h.txt</a>
-* <a href="/smithjj/mlSNLO-batch/test_calling_snlo_opoangles_func.m">test_calling_snlo_opoangles_func.m</a>
+* <a href="/helpfiles/Opoangles_h.txt">Opoangles_h.txt</a>
+* <a href="/test_calling_snlo_opoangles_func.m">test_calling_snlo_opoangles_func.m</a>
 
 ### QPM
-* <a href="/smithjj/mlSNLO-batch/helpfiles/QPM_h.txt">QPM_h.txt</a>
-* <a href="/smithjj/mlSNLO-batch/test_calling_snlo_qpm_func.m">test_calling_snlo_qpm_func.m</a>
+* <a href="/helpfiles/QPM_h.txt">QPM_h.txt</a>
+* <a href="/test_calling_snlo_qpm_func.m">test_calling_snlo_qpm_func.m</a>
 
 ### PW-mix-LP
-* <a href="/smithjj/mlSNLO-batch/helpfiles/PWmixLP_h.txt">PWmixLP_h.txt</a>
-* <a href="/smithjj/mlSNLO-batch/test_calling_snlo_pw_mix_lp_func.m">test_calling_snlo_pw_mix_lp_func.m</a>
+* <a href="/helpfiles/PWmixLP_h.txt">PWmixLP_h.txt</a>
+* <a href="/test_calling_snlo_pw_mix_lp_func.m">test_calling_snlo_pw_mix_lp_func.m</a>
 
 ### PW-mix-SP
-* <a href="/smithjj/mlSNLO-batch/helpfiles/PWmixSP_h.txt">PWmixSP_h.txt</a>
-* <a href="/smithjj/mlSNLO-batch/test_calling_snlo_pw_mix_sp_func.m">test_calling_snlo_pw_mix_sp_func.m</a>
+* <a href="/helpfiles/PWmixSP_h.txt">PWmixSP_h.txt</a>
+* <a href="/test_calling_snlo_pw_mix_sp_func.m">test_calling_snlo_pw_mix_sp_func.m</a>
 
 ### PW-cav-LP
-* <a href="/smithjj/mlSNLO-batch/helpfiles/PWcavLP_h.txt">PWcavLP_h.txt</a>
-* <a href="/smithjj/mlSNLO-batch/test_calling_snlo_pw_cav_lp_func.m">test_calling_snlo_pw_cav_lp_func.m</a>
+* <a href="/helpfiles/PWcavLP_h.txt">PWcavLP_h.txt</a>
+* <a href="/test_calling_snlo_pw_cav_lp_func.m">test_calling_snlo_pw_cav_lp_func.m</a>
 
 ### PW-mix-BB
-* <a href="/smithjj/mlSNLO-batch/helpfiles/PWmixBB_h.txt">PWmixBB_h.txt</a>
-* <a href="/smithjj/mlSNLO-batch/test_calling_snlo_pw_mix_bb_func.m">test_calling_snlo_pw_mix_bb_func.m</a>
+* <a href="/helpfiles/PWmixBB_h.txt">PWmixBB_h.txt</a>
+* <a href="/test_calling_snlo_pw_mix_bb_func.m">test_calling_snlo_pw_mix_bb_func.m</a>
 
 ### PW-OPO-BB
-* <a href="/smithjj/mlSNLO-batch/helpfiles/PWopoBB_h.txt">PWopoBB_h.txt</a>
-* <a href="/smithjj/mlSNLO-batch/test_calling_snlo_pw_opo_bb_func.m">test_calling_snlo_pw_opo_bb_func.m</a>
+* <a href="/helpfiles/PWopoBB_h.txt">PWopoBB_h.txt</a>
+* <a href="/test_calling_snlo_pw_opo_bb_func.m">test_calling_snlo_pw_opo_bb_func.m</a>
 
 ### PW-OPO-SP
-* <a href="/smithjj/mlSNLO-batch/helpfiles/PWopoSP_h.txt">PWopoSP_h.txt</a>
-* <a href="/smithjj/mlSNLO-batch/test_calling_snlo_pw_opo_sp_func.m">test_calling_snlo_pw_opo_sp_func.m</a>
+* <a href="/helpfiles/PWopoSP_h.txt">PWopoSP_h.txt</a>
+* <a href="/test_calling_snlo_pw_opo_sp_func.m">test_calling_snlo_pw_opo_sp_func.m</a>
 
 ### 2D-mix-LP
-* <a href="/smithjj/mlSNLO-batch/helpfiles/2DmixLP_h.txt">2DmixLP_h.txt</a>
-* <a href="/smithjj/mlSNLO-batch/test_calling_snlo_2d_mix_lp_func.m">test_calling_snlo_2d_mix_lp_func.m</a>
-* <a href="/smithjj/mlSNLO-batch/test_calling_snlo_2d_mix_lp_func_deltak.m">test_calling_snlo_2d_mix_lp_func_deltak.m</a>
+* <a href="/helpfiles/2DmixLP_h.txt">2DmixLP_h.txt</a>
+* <a href="/test_calling_snlo_2d_mix_lp_func.m">test_calling_snlo_2d_mix_lp_func.m</a>
+* <a href="/test_calling_snlo_2d_mix_lp_func_deltak.m">test_calling_snlo_2d_mix_lp_func_deltak.m</a>
 
 ### 2D-mix-SP
-* <a href="/smithjj/mlSNLO-batch/helpfiles/2DmixSP_h.txt">2DmixSP_h.txt</a>
-* <a href="/smithjj/mlSNLO-batch/test_calling_snlo_2d_mix_sp_func_deltak.m">test_calling_snlo_2d_mix_sp_func_deltak.m</a>
-* <a href="/smithjj/mlSNLO-batch/test_calling_snlo_2d_mix_sp_func_deltak2.m">test_calling_snlo_2d_mix_sp_func_deltak2.m</a>
+* <a href="/helpfiles/2DmixSP_h.txt">2DmixSP_h.txt</a>
+* <a href="/test_calling_snlo_2d_mix_sp_func_deltak.m">test_calling_snlo_2d_mix_sp_func_deltak.m</a>
+* <a href="/test_calling_snlo_2d_mix_sp_func_deltak2.m">test_calling_snlo_2d_mix_sp_func_deltak2.m</a>
 
 ### 2D-cav-LP
-* <a href="/smithjj/mlSNLO-batch/helpfiles/2DcavLP_h.txt">2DcavLP_h.txt</a>
-* <a href="/smithjj/mlSNLO-batch/test_calling_snlo_2d_cav_lp_func.m">test_calling_snlo_2d_cav_lp_func</a>
+* <a href="/helpfiles/2DcavLP_h.txt">2DcavLP_h.txt</a>
+* <a href="/test_calling_snlo_2d_cav_lp_func.m">test_calling_snlo_2d_cav_lp_func</a>
 
 ### OPG
-* <a href="/smithjj/mlSNLO-batch/helpfiles/OPG_h.txt">OPG_h.txt</a>
-* <a href="/smithjj/mlSNLO-batch/test_calling_snlo_opg_func_deltak.m">test_calling_snlo_opg_func_deltak.m</a>
-* <a href="/smithjj/mlSNLO-batch/test_calling_snlo_opg_func_pump_energy.m">test_calling_snlo_opg_func_pump_energy.m</a>
+* <a href="/helpfiles/OPG_h.txt">OPG_h.txt</a>
+* <a href="/test_calling_snlo_opg_func_deltak.m">test_calling_snlo_opg_func_deltak.m</a>
+* <a href="/test_calling_snlo_opg_func_pump_energy.m">test_calling_snlo_opg_func_pump_energy.m</a>
