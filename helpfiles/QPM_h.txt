@@ -15,10 +15,10 @@ z that allows the selected polarization set. For example if
 Pol(rrb)=ZZZ the propagation direction could be x or y; if              
 Pol(rrb)=xzx the propagation direction must be y.                       
                                                                         
-QPM output data is written to the ascii file C:\SNLO\QPM.DAT with       
+QPM output data is written to the ascii file QPM.DAT with       
 the format displayed in the View window when you click the 'View'       
 button. Temperature tuning and pump wavelength tuning data are          
-written to the ascii files C:\SNLO\QPMT.DAT and C:\SNLO\QPMP.DAT.       
+written to the ascii files QPMT.DAT and QPMP.DAT.       
                                                                         
 If the temperature dependence of the refractive index is unknown,       
 the temperature bandwidth and tuning curves are not computed but        
