@@ -5,6 +5,7 @@ Example batch scripts for mlSNLO nonlinear optics numerical modeling software. T
 * [Introduction, conventions and syntax](#introduction)
 * [SNLO functions](#snlo-functions)
   * [Qmix](#qmix)
+  * [Ncpm](#ncpm)
   * [Bmix](#bmix)
   * [Focus](#focus)
   * [GVM](#gvm)
@@ -38,7 +39,10 @@ The help text files here are the ones displayed after clicking the 'Help' button
 ### Qmix
 * <a href="/helpfiles/Qmix_h.txt">Qmix_h.txt</a>
 * <a href="/test_calling_snlo_qmix_func.m">test_calling_snlo_qmix_func.m</a>
-* <a href="/test_calling_snlo_qmix_func2.m">test_calling_snlo_qmix_func2.m</a>
+
+### Ncpm
+* <a href="/helpfiles/Ncpm_h.txt">Ncpm_h.txt</a>
+* <a href="/test_calling_snlo_ncpm_func.m">test_calling_snlo_ncpm_func.m</a>
 
 ### Bmix
 * <a href="/helpfiles/Bmix_h.txt">Bmix_h.txt</a>
