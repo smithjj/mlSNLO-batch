@@ -90,7 +90,7 @@ for K = 1:length(temperature_vec)
 
     % If no phasematches were found, so there's nothing to read and parse
     if num_phasematches==0 
-        return;
+        continue;
     end
 
     % stick some appropriately sized arrays of 0 in the output cell arrays
