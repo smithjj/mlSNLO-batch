@@ -37,72 +37,79 @@ The help text files here are the ones displayed after clicking the 'Help' button
 
 ## SNLO functions
 ### Qmix
-* <a href="/helpfiles/Qmix_h.txt">Qmix_h.txt</a>
-* <a href="/test_calling_snlo_qmix_func.m">test_calling_snlo_qmix_func.m</a>
+* [helpfiles/Qmix_h.txt](helpfiles/Qmix_h.txt)
+* [test_calling_snlo_qmix_func.m](test_calling_snlo_qmix_func.m)
 
 ### Ncpm
-* <a href="/helpfiles/Ncpm_h.txt">Ncpm_h.txt</a>
-* <a href="/test_calling_snlo_ncpm_func.m">test_calling_snlo_ncpm_func.m</a>
+* [Ncpm_h.txt](helpfiles/Ncpm_h.txt)
+* [test_calling_snlo_ncpm_func.m](test_calling_snlo_ncpm_func.m)
 
 ### Bmix
-* <a href="/helpfiles/Bmix_h.txt">Bmix_h.txt</a>
-* <a href="/test_calling_snlo_bmix_func.m">test_calling_snlo_bmix_func.m</a>
+* [helpfiles/Bmix_h.txt](Bmix_h.txt)
+* [test_calling_snlo_bmix_func.m](test_calling_snlo_bmix_func.m)
 
 ### Focus
-* <a href="/helpfiles/Focus_h.txt">Focus_h.txt</a>
-* <a href="/test_calling_snlo_focus_func.m">test_calling_snlo_focus_func.m</a>
+* [helpfiles/Focus_h.txt](Focus_h.txt)
+* [test_calling_snlo_focus_func.m](test_calling_snlo_focus_func.m)
 
 ### GVM
-* <a href="/helpfiles/GVM_h.txt">GVM_h.txt</a>
-* <a href="/test_calling_snlo_gvm_func.m">test_calling_snlo_gvm_func.m</a>
+* [helpfiles/GVM_h.txt](GVM_h.txt)
+* [test_calling_snlo_gvm_func.m](test_calling_snlo_gvm_func.m)
 
 ### Opo angles
-* <a href="/helpfiles/Opoangles_h.txt">Opoangles_h.txt</a>
-* <a href="/test_calling_snlo_opoangles_func.m">test_calling_snlo_opoangles_func.m</a>
+* [helpfiles/Opoangles_h.txt](Opoangles_h.txt)
+* [test_calling_snlo_opoangles_func.m](test_calling_snlo_opoangles_func.m)
 
 ### QPM
-* <a href="/helpfiles/QPM_h.txt">QPM_h.txt</a>
-* <a href="/test_calling_snlo_qpm_func.m">test_calling_snlo_qpm_func.m</a>
+* [helpfiles/QPM_h.txt](QPM_h.txt)
+* [test_calling_snlo_qpm_func.m](test_calling_snlo_qpm_func.m)
 
 ### PW-mix-LP
-* <a href="/helpfiles/PWmixLP_h.txt">PWmixLP_h.txt</a>
-* <a href="/test_calling_snlo_pw_mix_lp_func.m">test_calling_snlo_pw_mix_lp_func.m</a>
+* [helpfiles/PWmixLP_h.txt](PWmixLP_h.txt)
+* [test_calling_snlo_pw_mix_lp_func.m](test_calling_snlo_pw_mix_lp_func.m)
 
 ### PW-mix-SP
-* <a href="/helpfiles/PWmixSP_h.txt">PWmixSP_h.txt</a>
-* <a href="/test_calling_snlo_pw_mix_sp_func.m">test_calling_snlo_pw_mix_sp_func.m</a>
+* [helpfiles/PWmixSP_h.txt](PWmixSP_h.txt)
+* [test_calling_snlo_pw_mix_sp_func.m](test_calling_snlo_pw_mix_sp_func.m)
 
 ### PW-cav-LP
-* <a href="/helpfiles/PWcavLP_h.txt">PWcavLP_h.txt</a>
-* <a href="/test_calling_snlo_pw_cav_lp_func.m">test_calling_snlo_pw_cav_lp_func.m</a>
+* [helpfiles/PWcavLP_h.txt](PWcavLP_h.txt)
+* [test_calling_snlo_pw_cav_lp_func.m](test_calling_snlo_pw_cav_lp_func.m)
 
 ### PW-mix-BB
-* <a href="/helpfiles/PWmixBB_h.txt">PWmixBB_h.txt</a>
-* <a href="/test_calling_snlo_pw_mix_bb_func.m">test_calling_snlo_pw_mix_bb_func.m</a>
+* [helpfiles/PWmixBB_h.txt](PWmixBB_h.txt)
+* [test_calling_snlo_pw_mix_bb_func.m](test_calling_snlo_pw_mix_bb_func.m)
 
 ### PW-OPO-BB
-* <a href="/helpfiles/PWopoBB_h.txt">PWopoBB_h.txt</a>
-* <a href="/test_calling_snlo_pw_opo_bb_func.m">test_calling_snlo_pw_opo_bb_func.m</a>
+* [helpfiles/PWopoBB_h.txt](PWopoBB_h.txt)
+* [test_calling_snlo_pw_opo_bb_func.m](test_calling_snlo_pw_opo_bb_func.m)
 
 ### PW-OPO-SP
-* <a href="/helpfiles/PWopoSP_h.txt">PWopoSP_h.txt</a>
-* <a href="/test_calling_snlo_pw_opo_sp_func.m">test_calling_snlo_pw_opo_sp_func.m</a>
+* [helpfiles/PWopoSP_h.txt](PWopoSP_h.txt)
+* [test_calling_snlo_pw_opo_sp_func.m](test_calling_snlo_pw_opo_sp_func.m)
 
 ### 2D-mix-LP
-* <a href="/helpfiles/2DmixLP_h.txt">2DmixLP_h.txt</a>
-* <a href="/test_calling_snlo_2d_mix_lp_func.m">test_calling_snlo_2d_mix_lp_func.m</a>
-* <a href="/test_calling_snlo_2d_mix_lp_func_deltak.m">test_calling_snlo_2d_mix_lp_func_deltak.m</a>
+* 2D-mix-LP now allows arbitrary, user-specified spatial and temporal input electric field profiles. These examples show how to do this:
+	 *  [example_custom_input_fields_2d_mix_lp_cw.m](example_custom_input_fields_2d_mix_lp_cw.m): all-continuous wave case
+	 *  [example_custom_input_fields_2d_mix_lp_pulsed.m](example_custom_input_fields_2d_mix_lp_pulsed.m): all-pulsed case
+	 *  [example_custom_input_fields_2d_mix_lp_cw_and_pulse_mixed.m](example_custom_input_fields_2d_mix_lp_cw_and_pulse_mixed.m): a combination of pulsed and cw input beams
+	 *  [example_2d_mix_lp_shg_and_thg_generation.m](example_2d_mix_lp_shg_and_thg_generation.m): a two-crystal system using the output of an second-harmonic generator as the input for a third-harmonic generator
+* [helpfiles/2DmixLP_h.txt](2DmixLP_h.txt)
+* [test_calling_snlo_2d_mix_lp_func.m](test_calling_snlo_2d_mix_lp_func.m)
+* [test_calling_snlo_2d_mix_lp_func_deltak.m](test_calling_snlo_2d_mix_lp_func_deltak.m)
 
 ### 2D-mix-SP
-* <a href="/helpfiles/2DmixSP_h.txt">2DmixSP_h.txt</a>
-* <a href="/test_calling_snlo_2d_mix_sp_func_deltak.m">test_calling_snlo_2d_mix_sp_func_deltak.m</a>
-* <a href="/test_calling_snlo_2d_mix_sp_func_deltak2.m">test_calling_snlo_2d_mix_sp_func_deltak2.m</a>
+* 2D-mix-SP now allows arbitrary, user-specified input temporal pulse profiles (still limited to Gaussian or super-Gaussian spatial profiles). 1 example is included:
+	 *  [test_calling_custom_pulse_2d_mix_sp.m](test_calling_custom_pulse_2d_mix_sp.m): 
+* [helpfiles/2DmixSP_h.txt](2DmixSP_h.txt)
+* [test_calling_snlo_2d_mix_sp_func_deltak.m](test_calling_snlo_2d_mix_sp_func_deltak.m)
+* [test_calling_snlo_2d_mix_sp_func_deltak2.m](test_calling_snlo_2d_mix_sp_func_deltak2.m)
 
 ### 2D-cav-LP
-* <a href="/helpfiles/2DcavLP_h.txt">2DcavLP_h.txt</a>
-* <a href="/test_calling_snlo_2d_cav_lp_func.m">test_calling_snlo_2d_cav_lp_func</a>
+* [helpfiles/2DcavLP_h.txt](2DcavLP_h.txt)
+* [test_calling_snlo_2d_cav_lp_func.m](test_calling_snlo_2d_cav_lp_func)
 
 ### OPG
-* <a href="/helpfiles/OPG_h.txt">OPG_h.txt</a>
-* <a href="/test_calling_snlo_opg_func_deltak.m">test_calling_snlo_opg_func_deltak.m</a>
-* <a href="/test_calling_snlo_opg_func_pump_energy.m">test_calling_snlo_opg_func_pump_energy.m</a>
+* [helpfiles/OPG_h.txt](OPG_h.txt)
+* [test_calling_snlo_opg_func_deltak.m](test_calling_snlo_opg_func_deltak.m)
+* [test_calling_snlo_opg_func_pump_energy.m](test_calling_snlo_opg_func_pump_energy.m)
