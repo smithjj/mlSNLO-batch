@@ -1,0 +1,141 @@
+    Note about modified 2D mix LP model which can now accept input fields that a user 
+specifies:
+
+    As of version 75.2.0, the function "snlo_2d_mix_lp_func", can accept custom, 
+user-specified input electric fields for each of the three waves. It can be 
+called from MATLAB script just as the older versions. The electric fields must be 
+included as a data structure "input_fields" which is itself a structure field of 
+the complete set of input parameters.
+
+-= "input_fields" data structure =-
+The "input_fields" variable in the input argument to call "snlo_2d_mix_lp_func" 
+should include these fieldnames:
+	* "field_red1_xyt", "field_red2_xyt", and "field_blue_xyt" should be 
+3-dimensional complex-valued arrays for modeling pulses, or 2-dimensional for CW. 
+The first two dimensions are the transverse (x,y) values of the red1 electric 
+field. The third dimension is the temporal dimension. The units should be volts 
+per meter.
+	* "xgrid", and "ygrid" should be vectors defining the x and y transverse 
+coordinates upon which the electric fields are specified. The units should be 
+meters.
+	* For pulsed cases, there should be a field "tvec" included which is a vector of 
+times for the temporal dependence for the electric fields. The units should be 
+seconds.
+ 
+-= Outputs =-
+There are many combination of inputs that alter what data is saved to disk. For 
+instance, a pulsed case saves different data than an all cw case. With newly 
+introduced options "Save movie file" and "Analyze beam output" there are several 
+permutations. I'll try to cover them all here but may miss some.
+	
+The function snlo_2d_mix_lp_func, after running, saves the MATLAB .mat files to disk: * 
+"mix_2d_lp_movie.mat" - for pulsed cases only. This file is created regardless of whether 
+the "Save movie file" is checked; if it is checked it contains variables "field_red1_xyt", 
+"field_red2_xyt", and "field_blue_xyt" which are Nx * Ny * Nt+1 arrays in units V/m. It will also 
+always contain the variables:
+	- inputs: 	a data structure of all input parameters used to 
+	generate the data in mix_2d_lp_movie.mat
+	- xgrid and ygrid: 	vectors sized Nx and Ny, respectively
+	- xgridmat & ygridmat: 2d arrays sized Nx * Ny of positions in meters which are 
+	used in calculations. xgridmat is constant in the 2nd dimension and ygridmat is constant in 
+	the first dimensions.
+	- xgrid_display and ygrid_display: 2d arrays sized at most 64 * 64 and are used 
+	to interpolate output electric fields for displaying since more dense grids can 
+	make mesh plotting very slow
+	- zvec: 	1d vector of positions through the crystal
+	- tvec: 	vector of time points in seconds, length Nt+1
+	- power record: a 3 * Nt+1 array of output powers of each wave at the crystal output face
+	- phase_record: a 3 * Nt+1 array of output heterodyne phases of each wave at the crystal output 
+	face
+	- if the "Analyze output beam" option is checked, mix_2d_lp_movie.mat also 
+	contains:
+		- xyt_beam_qual, red1_pulse_m2_output, red2_pulse_m2_output, and 
+		blue_pulse_m2_output. These data structures store the results of analysis 
+		calculations. 
+		- xyt_beam_qual contains 3 fieldnames- "red1", "red2", and "blue" 
+		which have fieldnames "crystal_output_face" which has contents of several fieldnames containing 2 * Nt+1 
+		arrays (the first dimension has 2 values: (1) walk-off direction and (2) perpendicular to it)
+			- msquaredxy: 	M-squared vs time
+			- wavesOfCurvature: Beam curvature in waves
+			- radiusOfCurvature: Beam radius of curvature in m
+			- z0: 			Distance from waist (meters)
+			- w0squared: 	Beam width squared at waist, at location z0 (meters^2)
+			- wxysquared: 	Second-moment width at crystal output face (meters^2)
+			- A_x_y: 		A quantity used in calculating M-squared
+			- xy_bar: 		Centroid of beam (meters)
+			- tilt: 		Tilt of beam output (radians)	
+		- red1_pulse_m2_output: contains fieldname crystal_output_face, which has several 2-element vectors, most are unimportant except for:
+			- pulse_msquaredxy - M-squared beam quality for the pulse (calculated from the fluence)
+
+	- if the "Save movie file" option is selected this file includes additional variables:
+		- "field_red1_xyt", "field_red2_xyt", and "field_blue_xyt" are electric field arrays at the crystal output face, with size Nx * Ny * Nt+1, and have units of V/m
+	If the beam has been propagated using the "Propapagate" button, the file "mix_2d_lp_movie.mat" also contains
+	* "target_plane_curvature" fieldname which has fieldnames of "red1", "red2", "blue", and "tvec". The red1,red2,blue are data structures containing fieldnames: Rx and Ry (meters), wavesOfCurvature_x, and wavesOfCurvature_y which have beam radius of curvature at the plane you have "Propagated" the field to. 
+	* "field_red1_propplane", "field_red2_propplane", and "field_blue_propplane" are electric fields at target plane, each are arrays of size Nx * Ny * Nt+1, and have units of V/m
+	* "fluence_red1_propplane", "fluence_red2_propplane", and "fluence_blue_propplane" which are the fluences at the plane propagated to in units of J/m^2
+
+* "mix_2d_lp_fluence.mat" for both cw and pulsed cases. For cw case, the file doesn't have fluences stored but it does have irradiances at the crystal output face. The file contains these variables:
+	- inputs: a data structure containing all of the input parameters used to generate the 
+	data in this file
+	- fluence, fluence_ff which are Nx * Ny * 3 arrays containing the fluence and the 
+	normalized far-field fluence for each wave
+
+* "mix_2d_lp_cw_data.mat" for cw operation, contains variables
+	- "inputs" which is a data structure containing all of the input parameters used to generate the 
+	data in the file mix_2d_lp_cw_data.mat
+	- "zvec" which is a vector sized Nz+1 of positions through the crystal as the fields propagate and mix
+	- "field_red1", "field_red2", and "field_blue" which are electric field arrays (sized Nx * Ny) at the crystal output face
+	- "field_red1_xyz", "field_red2_xyz", and "field_blue_xyz" which are electric field arrays (sized Nx * Ny * Nz+1) through the crystal at each point listed in the "zvec" variable
+	- phase_vs_z is heterodyne phases through the crystal (at each point listed in the "zvec" variable). It is a 2d array, sized Nz+1 * 3 where the second dimension is ordered in red1, red2, blue order
+	- power_vs_z is powers for each of the 3 waves through the crystal in units of watts
+	
+	If the "Analyze output beam" option is checked, the file "mix_2d_lp_cw_data.mat" also contains the variable
+		- xyz_beam_qual  which is a data structure with 3 fieldnames ("red1", "red2", or "blue"), each contain 1 fieldname "thru_crystal", containing several 2 * Nz+1 arrays. The first dimension is ordered in the direction of walk off, and in the direction perpendicular to walk off. The second dimension defines the results through the crystal, on the grid given by zvec. The arrays are:
+			- msquaredxy-	beam quality M-squared, dimensionless
+			- z0: 		-	distance from focus, units of meters
+			- w0squared -	beam waists at focus, units of meters
+			- wavesOfCurvature 	- beam curvature in waves
+			- radiusOfCurvature - beam radius of curvature, units of meters
+			- wxysquared - 	square of the second moment widths, units of meters squared
+			- xy_bar - 		beam centroids, units of meters
+			- tilt - 		beam tilts, units of radians
+			- A_x_y - 		A quantity used in calculating M-squared
+			
+	
+* "2d_mix_lp_spectra.mat" for pulsed cases; it contains the variables:
+	- freqvec: a vector of frequencies upon which the spectra are defined;
+	- red1_spectrum, red2_spectrum, and blue_spectrum: normalized power spectral density 
+	vectors as a function of frequency shift defined upon the frequencies listed in the 
+	freqvec variable;
+	- dred1, dred2, dblue:vectors of wavelength shifts upon which the spectra vs 
+	wavelength are defined;
+	- red1_power_vs_wavelength_shift, red2_power_vs_wavelength_shift, 
+	blue_power_vs_wavelength_shift: normalized power spectral density vectors as a 
+	function of wavelength shift defined upon the wavelengths listed in the dred1, dred2, 
+	and dblue vectors
+	
+as well as the ascii files
+* "mix_2d_lp_red1_data.dat", "mix_2d_lp_red2_data.dat", and "mix_2d_lp_blue_data.dat"
+* "FLUENCE.DAT", and "FLUENC_F.DAT"     
+
+Note about user-specified input electric fields:
+When passing the 2D-mix-LP function the input electric fields as a data structure you also 
+have to set the rest of the problem's parameters, even if some will not be used to 
+programmatically generate the input electric fields. If you do include input electric 
+fields, some input parameters will not be used and it's possible that you could have some 
+disagreement between the input electric fields some of the values of the parameters (like 
+spatial grid extent or density, or number of time points). Because of this, when you give 
+2D-mix-LP input electric fields, these input boxes in the main input form will be disabled:
+    * mix_2d_lp_phase                       ( the phase of each wave )
+    * mix_2d_lp_pulseenergy                 ( pulse energy or power for each wave )
+    * mix_2d_lp_pulse_durations             ( temporal duration for each wave )
+    * mix_2d_lp_beam_diameters              ( beam diameters of each wave, in both 
+												directions )
+    * mix_2d_lp_supergaussian_coeff         ( spatial supergaussian coefficient )
+    * mix_2d_lp_offset_wodir                ( spatial offset of the electric fields )
+    * mix_2d_lp_rad_curv                    ( radius of curvature for each electric field )
+    * mix_2d_lp_nxny                        ( spatial grid densities in both directions )
+    * mix_2d_lp_lx_ly                       ( spatial extent of the grids in both 
+												directions )
+    * mix_2d_lp_nt                          ( number of time points to consider in model, 
+												for pulsed operation )

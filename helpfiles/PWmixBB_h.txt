@@ -1,66 +1,19 @@
-PW-mix-BB computes three-wave mixing processes for plane waves with      
-input irradiances equal to those of the central ray of lowest order      
-Gaussian beams with energy and diameter specified on the input form.     
-It ignores birefringent walkoff but includes group velocity effects.     
-It is intended for modeling multi-longitudinal-mode pulses.  The         
-number of modes populated in each model run is sufficient to cover       
-the specified bandwidth for each beam. Quantum noise is automatically
-added to the red1 and red2 waves. The noise bandwidths of the red
-waves can be extended by specifying the bandwidth parameter. This
-inclusion of quantum noise is to approximate OPG modeling. However, 
-to properly model OPG the spatial structure of the red beams should be 
-noisy as well. In most other applications it will be invisible. The noise
-spectrum can be seen by setting d_eff to zero and setting the red
-energies or powers to zero, running and clicking 'Spectra'. 
-                                                                         
-If the wavelength, duration, bandwidth, mode spacing, and fm inputs      
-are identical for the red1 and red2 waves, they are assumed to be from   
-the same source and will have identical starting spectra. This allows    
-modeling of type 1 doubling. For type 1 doubling all entries for red1 and
-red2 should be identical and half the power/energy should be in each.    
-                                                                         
-Unless the 'frequency modulated' input is set to one, the broadband      
-light is chaotic, meaning the distribution of field amplitudes among     
-the various modes obeys Gaussian statistics and the phase distribution   
-is random. Some OPO's generate light that is more frequency              
-modulated than chaotic, so the input 'frequency modulated' allows        
-this type of input light. Frequency modulated light has the specified    
-bandwidth but the amplitude modulation is removed, leaving only          
-frequency modulation.                                                    
-                                                                         
-Long pulses with broad bandwidths will require a large amount of         
-computer memory and computation time.  Often you can shorten the         
-pulse duration without losing the important physics and in this way      
-lessen the demands on your computer.  Note that there is no input        
-for nonlinear refractive index effects or for two-photon absorption.     
-They can be added if there is sufficient interest.                       
-                                                                         
-Results are written to the file 'pw_mix_bb.dat' and may be viewed by           
-clicking the 'View' button. The first column is time (in nanoseconds),
-followed by red1, red2, and blue on-axis irradiances (in watts per square
-meter). The last three columns are red1, red2, and blue phases (in 
-radians).
+PW-mix-BB computes three-wave mixing processes for plane waves with input irradiances equal to those of the central ray of lowest order Gaussian beams with energy and diameter specified on the input form. It ignores birefringent walkoff but includes group velocity effects. It is intended for modeling multi-longitudinal-mode pulses.  The number of modes populated in each model run is sufficient to cover the specified bandwidth for each beam. Quantum noise is automatically added to the red1 and red2 waves. The noise bandwidths of the red waves can be extended by specifying the bandwidth parameter. This inclusion of quantum noise is to approximate OPG modeling. However, to properly model OPG the spatial structure of the red beams should be noisy as well. In most other applications it will be invisible. The noise spectrum can be seen by setting d_eff to zero and setting the red energies or powers to zero, running and clicking 'Spectra'.
 
-Also written to the file 'pw_mix_bb_fluence.dat' are the red1, red2, 
-and blue on-axis fluences as a function of z. This file is loaded
-and plotted when pressing the 'Fluence' button. The file consists of
-four columns: the first is z position (in meters), then red1, red2
-and blue on-axis fluences (in joules per square meter).
-                                                                         
-The last used input set is saved in mix.mat so if you would like to       
-save those settings for later recall, copy (do not simply rename)        
-mix.mat to another file name to store. Copy the file back to              
-mix.mat to restore.                                                       
-                                                                         
-If you are running mlSNLO under MATLAB (not the standalone compiled 
-version), this function can be called from a MATLAB script to automate
-parametric studies. See the 'SNLO' help tab for details.																		 
-																		 
-PW-mix-BB examples: 12, 59, 68, 76. See file Examples with exercises 
-and descriptions.pdf in mlSNLO folder, or on our website at 
-as-photonics.com/examples
+If the wavelength, duration, bandwidth, mode spacing, and fm inputs are identical for the red1 and red2 waves, they are assumed to be from the same source and will have identical starting spectra. This allows modeling of type 1 doubling. For type 1 doubling all entries for red1 and red2 should be identical and half the power/energy should be in each.
 
-Detailed discussions of crystal nonlinear optics and
-SNLO examples are presented in the book "Crystal nonlinear optics:
-with SNLO examples," advertised on the SNLO download page or at
-as-photonics.com/book
+Unless the 'frequency modulated' input is set to one, the broadband light is chaotic, meaning the distribution of field amplitudes among the various modes obeys Gaussian statistics and the phase distribution is random. Some OPO's generate light that is more frequency modulated than chaotic, so the input 'frequency modulated' allows this type of input light. Frequency modulated light has the specified bandwidth but the amplitude modulation is removed, leaving only frequency modulation.
+
+Long pulses with broad bandwidths will require a large amount of computer memory and computation time.  Often you can shorten the pulse duration without losing the important physics and in this way lessen the demands on your computer.  Note that there is no input for nonlinear refractive index effects or for two-photon absorption. They can be added if there is sufficient interest.
+
+Results are written to the file 'pw_mix_bb.dat' and may be viewed by clicking the 'View' button. The first column is time (in nanoseconds), followed by red1, red2, and blue on-axis irradiances (in watts per square meter). The last three columns are red1, red2, and blue phases (in radians).
+
+Also written to the file 'pw_mix_bb_fluence.dat' are the red1, red2, and blue on-axis fluences as a function of z. This file is loaded and plotted when pressing the 'Fluence' button. The file consists of four columns: the first is z position (in meters), then red1, red2 and blue on-axis fluences (in joules per square meter).
+
+The last used input set is saved in mix.mat so if you would like to save those settings for later recall, copy (do not simply rename) mix.mat to another file name to store. Copy the file back to mix.mat to restore.
+
+If you are running mlSNLO under MATLAB (not the standalone compiled version), this function can be called from a MATLAB script to automate parametric studies. See the 'SNLO' help tab for details.
+
+PW-mix-BB examples: 12, 59, 68, 76. See file Examples with exercises and descriptions.pdf in mlSNLO folder, or on our website at as-photonics.com/examples
+
+Detailed discussions of crystal nonlinear optics and SNLO examples are presented in the book "Crystal nonlinear optics: with SNLO examples," advertised on the SNLO download page or at as-photonics.com/book

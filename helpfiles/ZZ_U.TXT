@@ -1,0 +1,51 @@
+This file contains Sellmeier coefficients, thermal refractive index
+coefficients, and nonlinear coefficient for a do-it-yourself uniaxial crystal ZZ_U.
+Edit only values between rows of **'s.  Changes take effect after saving this file and starting SNLO.
+
+___________Sellmeier coefficients__________
+Row 1 is for n_o, row 2 is for n_e.  
+Columns are A - M values in Sellmeier of form:  
+n^2 = A + (B lambda^2/lambda^2 - C) + (D lambda^2/lambda^2 - E) + (F lambda^2/lambda^2 - G) + (H/lambda^2 - I) + (J/lambda^2 - K) - M lambda^2 
+where lamda is the wavelength in microns. You must separate the values with commas.
+********************************************
+10.6409,0,0,0,0,0,0,0.3788,0.1232,7090.7,2216.3,0
+8.2477, 0,0,0,0,0,0,0.2881,0.1669,4927.5,1990.1,0
+********************************************
+
+______ Range of validity of the Sellmeier______
+Two wavelengths in microns defining the shortest and longest wavelengths 
+where the Sellmeier is valid. You must separate the values with a comma
+***************
+800,18100
+***************
+
+__________Thermo-optic coefficients_____________
+These are dn/dT coefficients for n_o in row one, n_e in row two.
+Columns are A - E assuming the form dn/dT = A/lambda^4 + B/lambda^3 + C/lambda^2 + D/lambda + E
+Using this information, the refractive indexes are modified according to n(T,lambda) = n(T=298K,lambda)+(dn(T,lambda)/dT)(T-298)
+You must separate the values with commas.
+************************************
+0, 3.8764e-5,-4.9338e-5,2.8974e-5,9.1979e-5
+0,30.3257e-5,-7.4499e-5,3.3385e-5,4.8576e-5
+************************************
+
+__________Nonlinear coefficient d_eff____________
+The first row is for one e wave, the second row is for two e waves.
+Columns are A, B where the forms are d_eff = A sin(theta + rho) + B cos(theta + rho) for row one, and
+d_eff = A sin(2xtheta + 2xrho) + B cos^2(theta + rho) for row two. Theta is the propagation
+angle and rho is the birefringent walk off angle.
+For more information see the expressions displayed by QMIX for a crystal of
+the same symmetry class as yours, or consult a textbook on nonlinear crystals such
+as "Crystal Nonlinear Optics: with SNLO examples" (see Table 15.12 of the fist edition, or Table 16.12 in the second edition).
+The units are pm/V. You must separate the values with commas.
+***************
+  0,    54
+  0,    54
+***************
+The bluest wavelength (in nm) used in the measurement of the d tensor coefficients.
+This is used in Miller scaling the d_eff. For example, if the d coefficients
+were measured by doubling a 1064 nm laser, the reference wavelength would be 532.
+************************************
+5300
+************************************
+

@@ -1,0 +1,28 @@
+This function is an extension of the original Cavity function. It adds the ability to model astigmatic cavities, with the astigmatism arising from tilted and curved mirrors and Brewster-cut crystals. The cavity is assumed to be a ring with two curved mirrors bracketing the nonlinear crystal. The ring is assumed to be planar so the in-plane and out-of-plane mode profiles are independent of one another and can be computed separately. The mode profiles for the two planes are both computed and displayed whenever the function is run. The function also allows user specification of a disturbance to the cavity. Disturbances can be either a tilt or a displacement of the mode in the plane of the cavity, and they can be located anywhere in the cavity. This calculation is useful in understanding how tilting a cavity mirror shifts the mode or how refraction in a tuning prism shifts the mode. This knowledge is useful in deciding how to tweak the alignment of a cavity or where to place a mode selecting aperture in the cavity.
+				
+When a beam is reflected from a curved mirror at an in-plane angle-of-incidence the effective curvature of the mirror is less than the actual radius of curvature in the in-plane direction and greater than the actual radius of curvature in the out-of-plane direction. The cavity is astigmatic even if the crystal faces are perpendicular to the beam.
+				
+When a beam enters a crystal through Brewster cut input face the beam diameter immediately expands be a factor of n in the in-plane direction. The radius of curvature immediately increases in the in-plane direction by a factor of n cubed, and in the out-of-plane direction by a factor of n. These changes are reversed on exiting the crystal through a Brewster output face. 
+				
+The astigmatism of a Brewster cut crystal can be offset to a degree by adjusting the angle-of-incidence of the curved mirrors.
+				
+The function inputs are:
+- Wavelength.
+- Crystal length. This is the physical length of the optical path through the crystal.
+- Crystal refractive index.
+- Mirror radius of curvature. This is the manufacturers radius of curvature, not an effective radius of curvature.
+- Mirror angles-of-incidence. This the in-plane angle-of-incidence on the two curved mirrors.
+- Leg1 length. This is the physical length of the light path between the curved mirrors that includes the crystal. The crystal is located midway between the curved mirrors.
+- Leg2 length. This is the physical length of the path between the curved mirrors that does not include the crystal.
+				
+- Disturbance type and location. The disturbance can be either a beam tilt or a beam displacement and it can be located anywhere in the cavity, including in the crystal, as specified by "Disturbance dist. from L mirr."
+				
+The function outputs are:
+- Plots of the mode diameter, either FWHM or 1/e^2 as selected by the user. The in-plane and out-of-plane diameters are both plotted.
+				
+- Plots of the beam radius of curvature. Both in-plane and out-of-plane curvatures are plotted. There is a step of n for the out-of-plane radius of curvature on entering or exiting the crystal. For the in-plane radius of curvature the step is n for non-Brewster crystal and n cubed for a Brewster crystal.
+				
+- Optional plot of mode shift due to a specified disturbance. At the location of a tilt, the in-plane slope of the mode displacement changes by the specified tilt magnitude. At the location of an offset the in-plane mode displacement changes by the specified offset. The disturbed mode is the mode of the disturbed cavity. Multiple disturbances can be modeled individually, and then the individual mode displacement around the cavity can be summed to find the effect of multiple disturbances.
+				
+Form outputs include the in-plane and out-of-plane Rayleigh range, mode waist diameter at the crystal midpoint, mode waist diameter in leg2 of the cavity. The outputs "L mir beam diam" and "L mir rad curv" give the beam diameter and radius of curvature just inside the curved input mirror. This is necessary information for launching a beam that matches the cavity mode. The "Crystal input beam diam" and "Crystal input rad curv" can similarly be used to launch a mode matched beam at the crystal input face. The round trip time output is the Gouy phase accumulated in one pass of the full cavity. The vert. mirror separation and horiz mirror separation are useful in setting up the curved mirrors for a Brewster crystal. They are the mirror separations in the direction normal to the mode and parallel to the mode necessary to achieve the specified input leg1 length. The Brewster angle output is arctan(n).
+				

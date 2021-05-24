@@ -1,0 +1,118 @@
+V72.5.1 -> V72.5.2 (Nov 12, 2019):
+	2d cav lp: 
+			keep a record of fields through the crystal;
+			calculate beam widths through crystal (cw), add plot of them;
+				add local function calc_xybar, calc_wxysquared;
+			for cw, add record of power vs z through the crystal;
+			add plot of power vs z for pulsed cases, power vs z for cw;
+			fix linear cavity propagation (previously, the first half-step didn't use the "backwards" phase, with spatial walkoff
+			  incorrectly not reversed);
+			fix incorrect spatial walkoff if standing wave cavity when propagating back through crystal;
+						
+V72.5.2 -> V72.5.3 (Jan 2, 2020):
+	2d mix lp:
+			remove confusing debug section in m-squared calculator;
+			move display of S0 to be above input powers/energies;
+			outline future improvements;
+	2d mix sp:
+			removed old comments;
+V72.5.3 -> V72.5.4 (Jan 9, 2020):
+	2d cav lp:
+			fix loading default input form values ('isfield' used now);
+			add plot of power vs z that updates each pass if cw;
+			
+			
+72.5.4 -> 72.5.5 (march 3, 2020):
+	add reference to qmix for specific heat of zgp;
+	fix 2d mix lp printing bug: value too low by x10,
+		run button callback: displayed energy off by x1000 for some cases;
+
+72.5.5 -> 72.5.6 (April 6, 2020):
+	Fix auto calculation of Lx & Ly in 2d-mix-LP;
+
+72.5.6 -> 74.0 (April 22, 2020):
+	version 73 skipped to catch up to APL version;
+	add BGGSE crystal to Qmix, crystals_list.txt, ref ind; remake examples.mat;
+	fix error when calling 2d mix lp blue ref ind input box callback function ;
+
+74.0 -> 74.0.1 (June 8, 2020):
+    fix bug in 2d mix sp to correctly use sech2 pulse shape (rather than crashing);
+
+74.0.1 -> 74.0.2 (June 24, 2020):
+	added lots of help text in comments right after function declarations; include description of 
+	  all fields needed in input data structure if passing them from script or example;
+	remove 'keyboard' commands from most functions since it cannot work if compiled version;
+	added .dat output for 2d mix sp, 2d cav lp, and opg which includes m-squared info;
+	moved 2d mix sp and opg output text files to use 1 fprintf command with appropriately sized 
+  	  array as 2nd argument (rather than hundreds in a for loop);
+	
+74.0.2 -> 74.0.3 (June 25, 2020):
+	fixed some typos in 2d mix sp output dat files;
+	fixed M-squared plot in OPG: was using M^2_x in M^2_y plot and M^2_y plot in M^2_x;
+	fixed .dat output section in 2d mix sp to close file after writing;
+	added list of all  the text files saved to disk to the description_of_output_files.txt document;
+	  some descriptions of format of text files remain incomplete;
+
+74.0.3 -> 74.0.4 (June 30, 2020):
+	add movie playback for 2d mix lp cw cases (irradiance or phase along z)
+	changed 2d mix lp and 2d cav lp functions to read inputs using a data structure rather than dozens of output arguments
+	
+74.0.4 -> 74.0.5 (August 3, 2020):
+	fixed diy crystals in ref_ind.m (I had previously disabled them in the process of making sure they don't reload the ZZ_U.TXT and ZZ_B.TXT files if they haven't changed
+	fixed irradiance profile plotting in 2d mix lp (cw case)
+
+74.0.5 -> 75.0.0 (August 19, 2020)
+	added beam size plot in cavity function, removed 'signal','idler' references in some function's printouts
+	
+75.0.0 -> 75.0.1 (August 31, 2020):
+	fixed 2d-mix-lp plotting of irradiance; new version of examples.mat
+
+75.0.1 -> 75.0.2 (September 8, 2020):
+	to each snlo model, help command now includes all data fieldnames, format, and type
+	added LBGO crystal to Qmix, refind, QPM & helper functions ref_ind, qpm, UNI_NL
+
+75.0.2 -> 75.0.3 (October 9, 2020):
+    add optional 2nd output argument for ref_ind which is a 2-element vector of wavelength range for sellmeier
+    update qmix and ncpm to handle calls from scripts better: changed field for crystal specification to accept either string of crystal name or integer for index
+    fixed up qmix example script
+    started simple ncpm example script
+
+75.0.3 -> 75.0.4 (October 12, 2020):
+	move all snlo functions to have local functions rather than nested functions;
+	standardize input defaults;
+
+75.0.4 -> 75.0.5 (October 17, 2020):
+    brought back mixmaster's copy of mix.mat to current working directory on app launch
+    update help files
+    add NCPM batch script example
+
+75.0.5 -> 75.0.6 (November 16, 2020):
+	Added thermal conductivity values & citation to RTA
+    Fixed missing lambdaref in BI_NL for BGSE
+
+75.0.6 -> 75.0.7 (December 11, 2020):
+	Fixed walk-off compensating crystal segments in 2D-mix-LP, also added to 2D-mix-SP
+
+75.0.7 -> 75.0.8 (March 12, 2021):
+	Added radius of curvature calculator correction to 2D-mix-LP, 2D-mix-SP, 2D-cav-LP, and OPG
+	Fixed cavity function to not steal focus from input form after changing a value in an edit box
+
+75.0.8 -> 75.1.0 (April 9, 2021):
+    Added enhanced cavity function (ring cavity w/ optional Brewster crystal, plus optionally add a tilt or displacement somewhere in cavity & plot how it displaces the mode)
+
+75.1.0 -> 75.1.1 (April 12, 2021)
+    Updated Help function to use listbox & textarea rather than tabs, added increase/decrease font buttons
+
+75.1.1 -> 75.1.2 (April 13, 2021)
+    To make 2D-mix-LP faster, add toggle for saving full movie file & automatically analyzing beams (tilts, curvatures, 2nd moments, and M-squared)
+
+75.1.2 -> 75.2.0 (April 22, 2021)
+    Added optional custom input field to 2D-mix-LP, along with 4 example scripts demonstrating its use:
+        example_custom_input_fields_2d_mix_lp_pulsed
+        example_custom_input_fields_2d_mix_lp_cw_and_pulse_mixed
+        example_custom_input_fields_2d_mix_lp_cw
+        example_2d_mix_lp_shg_and_thg_generation
+
+75.2.0 -> 75.2.1 (May 20, 2021)
+    Converted Gaussian focus function (snlo_focus_func) to use uicontrols rather than javacomponents (which will soon no longer be supported by MATLAB),
+    also add pushbuttons labeled ? next to input and output boxes that will draw the corresponding segment in the diagram

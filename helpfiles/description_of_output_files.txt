@@ -1,0 +1,224 @@
+This file contains descriptions of output data saved by SNLO functions 2D-mix-SP, OPG, 2D-cav-LP,
+2D-mix-LP, PW-mix-SP, PW-mix-LP, PW-cav-LP, PW-opo-SP, PW-mix-BB, and PW-opo-BB.
+
+For standalone versions of mlSNLO, in Windows these files will be saved to a directory in your 
+AppData folder. To access it, you can use a the address '%appdata%\MATLAB SNLO'; this can be used in
+either the run dialog which appears when you hit Win+R keys, or in the location box of a File 
+Explorer window.
+
+For MATLAB App versions of these files, they should be saved into MATLAB's current working directory.
+
+--2D_mix-LP--
+	Ascii (text) data files:
+		'mix_2d_lp_red1_data.dat', 'mix_2d_lp_red2_data.dat', 'mix_2d_lp_blue_data.dat' are saved after each run, and each has a text header describing its contents. Each file contains the values for each wave:
+		(red1) time [s], power [W], phase [rad], M-squared (crystal output face) in x, tilt (crystal output face) [urad] in x, radius of curvature (crystal output face) in x [mm], w_x (crystal output face) [um],
+		M-squared (crystal output face) in y, tilt (crystal output face) [urad] in y, radius of curvature (crystal output face) in y [mm], w_y (crystal output face) [um])
+
+	Because writing and reading large text files is slow, 2D mix LP also saves some data in MATLAB .mat binary files.
+
+	Binary data .mat files:
+
+		For cw cases a file 'mix_2d_lp_cw_data.mat' is saved. It contains a data structure with fieldnames which correspond to the quantity it contains. The cw data structure contains these fields:
+			'field_blue', 'field_red1', and 'field_red2' are nx * ny arrays containing electric fields for the three waves. 
+			'inputs' is a record of the input values used to generate the data file. Inputs is itself a data structure whose fieldnames describe parameters read from the input form
+			'phase_vs_z' is an array of size nz * 3  and is a record of the heterodyne phase of each field at each z slice (xy plane) in the crystal (constructed by taking the phase angle of the 2D electric field summed in x and y dimensions).
+			'power_vs_z' is an array of size nz * 3, and is record of the power of each wave at each z slice (xy plane) in the crystal.
+			'xgrid', 'ygrid', and 'zvec' are vectors of positions. Their length is nx, ny, and nz respectively, and their values range between 0 and the crystal length in x, y, or z direction.
+			'xgridmat', 'ygridmat' are two-dimensional meshgrid arrays which are replicated from xgrid and ygrid so they have size nx * ny, where xgridmat changes in the first dimension but is constant in the second, and ygridmat is constant in the first dimension but changes in the second.
+			'xyz_beam_inputs' is a data structure containing fields 'red1', 'red2', and 'blue', which are each data structures themselves which contain data sent to the M-squared calculator internal function. Fields for each of these are step sizes 'dx' and 'dy', spatial meshgrids 'xgridmat' and 'ygridmat', wavelength 'lambda', # nz points 'x', refractive index 'n', and z positions vector 'z'
+			'xyz_beam_qual' is a data structure returned by the M-squared calculator containing fields 'red1', 'red2', and 'blue', which are each data structures themselves. Fields for each contain values of msquared in x&y at each z point (xy plane) in the crystal 'msquaredxy', curvature (radius of, and waves of) 'radiusOfCurvature' and 'wavesOfCurvature', estimated 1/e^2 radius at waist squared 'w0squared', 1/e^2 radius squared 'wxysquared', centroids 'xy_bar', tilts 'tilts', and a quantity used by the M-squared calculator 'A_x_y'.
+			'xyt_beam_inputs' are similar to xyz_beam_inputs but contain only fields (steady-state) at crystal output face 
+			'xyt_beam_qual' are results from M-squared calculator found using xyt_beam_inputs
+		For pulsed cases, a file 'mix_2d_lp_movie.mat' is saved contains quantities similar to those above. The fieldnames of the data structure written to file are:
+			field_red1_xyt, field_red2_xyt, field_blue_xyt,
+			xgrid, ygrid are vectors of positions in x and y (in meters). Length nx & ny, respectively.
+			xgrid_display, ygrid_display are also position vectors. If nx>64, xgrid_display has 64 points; if ny>64, ygrid_display has 64 points.
+			xgridmat, ygridmat
+			tvec
+			zvec
+			field_red1_xyt_crystaloutput, field_red2_xyt_crystaloutput, and field_blue_xyt_crystaloutput are
+			red1_pulse_m2_output, red2_pulse_m2_output, and blue_pulse_m2_output
+			xyt_beam_qual
+		
+		
+	For quantities such as power_vs_z, which is an nz * 3 array, the first dimension corresponds to z-slices (xy planes) the electric field values are defined on, and the second dimension is which wave, ordered as RED1, RED2, and BLUE. The vector zvec provides the z position for each plane.
+
+
+--2D-mix-SP--
+	Ascii data files
+		'BEAM_3TS.DAT', 'BEAM_3TI.DAT', 'BEAM_3TP.DAT' contain time and power for red1, red2, and blue waves, respectively (units are s, W)
+		'BEAM_3WS.DAT', 'BEAM_3WI.DAT', 'BEAM_3WP.DAT' contain frequency and power for red1, red2, and blue waves, respectively (units are Hz, W)
+		'FLUENCE3.DAT'  near-field fluence; each row contains x value, y value, red1 fluence, red2 fluence, blue fluence (units are mm, mm, J/m^2, J/m^2, J/cm^2)
+		'FLUENCE3F.DAT' far-field fluence; each row contains kx value, ky value, red1 fluence, red2 fluence, blue fluence (units are 1/mm, 1/mm, arb, arb, arb)
+			
+		'mix_2d_sp_beam_analysis.dat' is created by the 'Analyze' function and contains beam analysis
+		products. The values are calculated for 3D array of electric fields (x,y,t) at crystal output face
+		and at detector location (if set when using 'propagate' button). Each row contains values for
+		one time, specified in the first column in seconds, and for each wave M-squared, tilt [mm], radius 
+		of curvature [mm], centroids in x-y- and kx-ky-space [mm] and [1/mm], Rayleigh range [mm], 
+
+	Binary data .mat files 
+		'mix_2d_sp_output.mat' is saved upon completion of the code called with the 'Run' button. It contains
+		a data structure with fieldnames as follows:
+		 - 'field_red1', 'field_red2', and 'field_blue': each are 3D array of complex electric fields at detector 
+			for red1, red2, & blue waves; first two dimensions are values in x & y, positions given in 'xmat' and 'ymat',
+			and third dimension is time, times given in 'tgrid'. Electric fields in units of V/m.
+		 - 'field_red1_xyt_crystaloutput', 'field_red2_xyt_crystaloutput', and 'field_blue_xyt_crystaloutput':  
+			each are 3D array of complex electric fields at crystal output face. for red1, red2, & blue waves; 
+			first two dimensions are values in x & y, positions given in 'xmat' and 'ymat', and third dimension
+			is time, times given in 'tgrid'. Electric fields in units of V/m.
+		 - 'tgrid':  vector of time in seconds upon which time-dependent variables are defined
+		 - 'xgrid' and 'ygrid': each are 1d vectors of spatial coordinates in meters
+		 - 'xmat' and 'ymat': each are 2d arrays of spatial coordinates in meters; xmat is constant valued in 
+		   2nd dimension, ymat is constant valued in 1st dimension
+		 - 'fluences' and 'farfield_fluences': each are 3d arrays (sized 3 x NX x NY); 1st dimension is in order
+		   red1 wave, red2 wave, blue wave. Values of fluences are given in J/m^2, farfield fluences in arb units.
+		 - 'chirp': 2d array of chirp in Hz; 1st dimension is wave (red1, red2, blue order), 2nd is time
+		 - 'field_red1_spectrum', 'field_red2_spectrum', 'field_blue_spectrum'
+		 - 'freqs': a vector of frequencies which spectra are defined on
+		 - 'power': 2d array, sized NT x 4, where 1st dimension varies in time. First column is time in s, columns 2-4
+		   are the powers in W at that time for red1, red2, and blue waves.
+		 - 'kxarray' and 'kyarray'
+		 - 'inputs': data structure containing all of the input parameters
+		 - 'zvec': vector of points in z
+		 - 'energy_vs_z': 2d array, sized NT x 3, containing energy in J at points in zvec for red1, red2, and blue waves.
+		
+		'mix_2d_sp_beam_analysis.mat': data structure with fieldnames:
+		 - 'm2_pulse' - data structure with pulse M-squared, radius of curvature, tilt, x&y centroids, and 
+		   widths, waists, and distances from waists
+		 - 'pulse_inputs', 'xyt_beam_inputs': data structures containing spatial grid xgridmat & ygridmat,
+		   step size dx & dy, wavelength lambda, and field 3d arrays (NX x NY x NT)
+		 - 'powervec':  array NT x 3 with power in W at each time in tgrid for red1, red2, and blue waves
+		 - 'powervec_f': array, padded from fft of power vec, for power at each frequency in freqs; arb scale
+		 - 'tgrid': vector of times in s
+		 - 'freqs': vector of frequencies in Hz
+		 - 'i1': index of smallest time with power >= 1e-6 of max power
+		 - 'i2': index of largest time with power >= 1e-6 of max power
+		 - 'if1': index of smallest frequency with power >= 1e-6 of max power
+		 - 'if2': index of largest frequency with power >= 1e-6 of max power
+
+--OPG--
+	Ascii (text) data files:
+		'OPG_BEAM_3TS.DAT', 'OPG_BEAM_3TI.DAT', and 'OPG_BEAM_3TP.DAT':  are powers for the red1, red2, and blue waves, 
+		  respectively. These files contain two columns of numbers; the first column is the time in s, and 
+		  second is the power in watts for the wave at that time. 
+		
+		'OPG_BEAM_3WS.DAT', 'OPG_BEAM_3WI.DAT', and 'OPG_BEAM_3WP.DAT': are frequencies and powers
+		
+		'OPG_BEAM_3C.DAT' has four columns: time in seconds, red1 chirp in Hz, red2 chirp in Hz, and blue chirp in Hz
+		
+		'OPG_FLUENCE3.DAT' has five columns: x position in m, y position in m, red1, red2, and blue fluences in J/m^2
+		'OPG_FLUENCE3F.DAT' has give columns: kx [1/m], ky [1/m], red1, red2, blue fluences [arb]
+		
+	Binary data .mat files:
+		'opg_2d_output.mat' is a data structure containing fields:
+		  - 'inputs': 
+		  - 'field_red1','field_red2','field_blue': 
+		  - 'tgrid': 
+		  - 'xgrid','ygrid': 
+		  - 'fluences','farfield_fluences':
+		  - 'chirp': 
+		  - 'field_red1_spectrum','field_red2_spectrum','field_blue_spectrum': 
+		  - 'freqs' :
+		  - 'power':
+		  - 'kxarray','kyarray':
+		  - 'energy_vs_z':
+		  - 'input_peak_irradiances':
+		  - 'input_peak_fluences':
+		  - 'output_peak_irradiances': 
+		  - 'output_peak_fluences': 
+		  
+		  After 'Propagate' button function, it also contains
+		  - 'field_red1_propplane', 'field_red2_propplane', 'field_blue_propplane': 
+		  - 'fluence_red1_propplane', 'fluence_red2_propplane', 'fluence_blue_propplane':
+		  - 'power_vs_freq':
+		  - 'target_xyt_beam_qual', 'target_xyf_beam_qual':
+		  - 'dist_to_prop':
+		
+		'opg_2d_beam_analysis.mat' is a data structure containing the fields
+		  - 'inputs': a data structure which contains all the inputs from the main input figure; 
+		  - 'xyt_beam_inputs': a data structure which includes xgrid, ygrid, x and y step size, lambda wavelength,
+		   and 3D arrays of electric fields for red1, red2, and blue waves (x, y, and t)
+		  - 'xyf_beam_inputs': a data structure which includes xgrid, ygrid, x and y step size, lambda wavelength,
+		   and 3D arrays of electric fields for red1, red2, and blue waves (x, y, and frequency)
+		  - 'm2_pulse': M-squared for the pulse (based on the fluence)
+		  - 'xyt_beamqual': beam analysis products for fields varying in time (x, y, t)
+		  - 'xyf_beamqual': beam analysis products for fields varying in frequency (x,y, freq)
+		  - 'powervec': array of column vectors: time, red1 power, red2 power, blue power
+		  - 'powervec_f': array of column vectors: frequency, red1 power, red2 power, blue power
+		
+--2D-cav-LP--
+	Ascii (text) data files
+		'FLU_NL.DAT': near field fluences for output at the left mirror
+		'FLU_NR.DAT': near field fluences for output at the right mirror
+		'FLU_FL.DAT': far field fluences for output at the left mirror
+		'FLU_FR.DAT': far field fluences for output at the right mirror
+		'SPEC_L.DAT': output spectra for left mirror
+		'SPEC_R.DAT': output spectra for right mirror
+		'BEAM_LO.DAT': results from beam analysis of red1, red2, and blue waves at left output mirror;
+		  contains M-squared etc. See first line of file for key.
+		'BEAM_RO.DAT': results from beam analysis of red1, red2, and blue waves at right output mirror;
+		  contains M-squared etc. See first line of file for key.
+		 
+		
+	Binary data .mat files:
+		'outputl.mat': data structure for outputs from left mirror, fields as follows:
+			'power_left': 
+			'field_xyt_red1_left_out','field_xyt_red2_left_out', and 'field_xyt_blue_left_out': 
+			'tvec_left': 
+			'xgridmat','ygridmat': 
+			'kxmat','kymat': 
+			'irradiance_left','ff_irrad_left': 
+		'outputr.mat': data structure for outputs from right mirror, fields as follows:
+			'power_right': 
+			'field_xyt_red1_right_out','field_xyt_red2_right_out', and 'field_xyt_blue_right_out': 
+			'tvec_right': 
+			'xgridmat','ygridmat': 
+			'kxmat','kymat': 
+			'irradiance_right': 
+			'ff_irrad_right':  
+
+--PW-mix-LP--
+	The output file for PW_mix_LP is 'pw_mix_lp.dat' 
+
+	For cw cases, the file contains an array of size (nz+1) * 7. The elements are: 
+		the z position (in m)
+		red1 on-axis irradiance at crystal output face (in W/m^2)
+		red2 on-axis irradiance at crystal output face (in W/m^2)
+		blue on-axis irradiance at crystal output face (in W/m^2)
+		red1 on-axis phase at crystal output face (in radians)
+		red2 on-axis phase at crystal output face (in radians)
+		blue on-axis phase at crystal output face (in radians)
+		
+		
+	In pulsed cases, this file contains a record in time of the output irradiance for each wave (red1, red2, and blue), phase for each wave, and input irradiance for each wave. The file contains an array of size (nt-1) * 10 (if nt is set in the input form to be even) or (nt-2) * 10 (if nt is setp in the input form to odd). For each row vector, the elements are
+		time (in s)
+		red1 output on-axis irradiance (in W/m^2)
+		red2 output on-axis irradiance (in W/m^2)
+		blue output on-axis irradiance (in W/m^2)
+		red1 output phase (in radians)
+		red2 output phase (in radians)
+		blue output phase (in radians)
+		red1 input on-axis irradiance (in W/m^2)
+		red2 input on-axis irradiance (in W/m^2)
+		blue input on-axis irradiance (in W/m^2)
+		
+--PW-mix-SP	
+	Files are pw_mix_sp.dat (ascii) and pw_mix_sp_s.mat (matlab binary)
+	  pw_mix_sp.dat is ascii file contains nt x 7 array: time (s), red1 irrad, red2 irrad, blue irrad, red1 phase, red2 phase, blue phase
+	  pw_mix_sp_s.mat is matlab binary containing spectra data. in fieldname pw_mix_s_s, an nt x 4 array: freq, red1 spectral density, red2 spectral density, blue spectral density (each normalized to have max value of 1)
+
+--PW-mix-BB--
+--PW-cav-LP--
+--PW-opo-SP--
+--PW-OPO-BB--
+--Ref. ind--
+--Qmix--
+--Bmix--
+--QPM--
+--Opoangles--
+--Ncpm--
+--GVM--
+--Focus--
+--Cavity--
+--Thermal--

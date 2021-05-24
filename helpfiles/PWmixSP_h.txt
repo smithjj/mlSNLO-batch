@@ -1,48 +1,17 @@
-PW-mix-SP computes three-wave mixing process for plane waves with   
-irradiances equal to those of the central rays of spatial lowest    
-order Gaussian beams with beam diameters and energies specified in  
-the input form.  It ignores birefringent walkoff but includes group 
-velocity effects, so it is useful for modeling very short pulses.   
-cw light is not allowed in this function.  Pulses are Gaussian or   
-Supergaussian in time at the input face. The three input pulses     
-can have different durations and delays. For help in setting input
-values, right-click on the input edit box. Help text appears in 
-the lower text box. 
-                                                                    
-Clicking the Spectra button once gives the spectral irradiance      
-on a THz scale. Clicking the Spectra button again gives the spectral
-irradiance on a nanometer scale.                                    
-                                                                    
-A post run movie is available if "# z integration steps" input is   
-set to zero before the run. The Run button will turn into a Movie   
-button after the run.                                               
-                                                                    
-This function integrates Maxwell's equations using split-step       
-methods for accurate simulation of group velocity effects.          
-Nonlinear refractive indexes (n2's) and two-photon absorption       
-(beta's) can be included.  The n2 and beta values are not well known
-for most crystals, but some values and references are listed in the 
-file beta_n2.pdf in your SNLO folder.                               
-                                                                    
-Results for the fields are written to the ascii file pw_mix_sp.dat   
-and can be viewed by clicking the 'View' button. Results for the    
-spectra are written to the files pw_mix_sp_s.dat (text format) and
-pw_mix_sp_s.mat (MATLAB file format).                                
-                                                                    
-The last used input set is saved in mix.mat so if you would like to  
-save those settings for later recall, copy (do not simply rename)   
-mix.mat to another file name to store. Copy the file back to         
-mix.mat to restore.                                                  
+PW-mix-SP computes three-wave mixing process for plane waves with irradiances equal to those of the central rays of spatial lowest order Gaussian beams with beam diameters and energies specified in the input form.  It ignores birefringent walkoff but includes group velocity effects, so it is useful for modeling very short pulses. cw light is not allowed in this function.  Pulses are Gaussian or Supergaussian in time at the input face. The three input pulses can have different durations and delays. For help in setting input values, right-click on the input edit box. Help text appears in the lower text box.
 
-If you are running mlSNLO under MATLAB (not the standalone compiled 
-version), this function can be called from a MATLAB script to automate
-parametric studies. See the 'SNLO' help tab for details.
-                                                                    
-PW-mix-SP examples: 1, 2, 6, 8, 11, 13, 17, 74. See file Examples
-with exercises and descriptions.pdf in mlSNLO folder, or on our 
-website at as-photonics.com/examples
+Clicking the Spectra button once gives the spectral irradiance on a THz scale. Clicking the Spectra button again gives the spectral irradiance on a nanometer scale.
 
-Detailed discussions of crystal nonlinear optics and
-SNLO examples are presented in the book "Crystal nonlinear optics:
-with SNLO examples," advertised on the SNLO download page or at
-as-photonics.com/book
+A post run movie is available if "# z integration steps" input is set to zero before the run. The Run button will turn into a Movie button after the run.
+
+This function integrates Maxwell's equations using split-step methods for accurate simulation of group velocity effects. Nonlinear refractive indexes (n2's) and two-photon absorption (beta's) can be included.  The n2 and beta values are not well known for most crystals, but some values and references are listed in the file beta_n2.pdf in your SNLO folder.
+
+Results for the fields are written to the ascii file pw_mix_sp.dat and can be viewed by clicking the 'View' button. Results for the spectra are written to the files pw_mix_sp_s.dat (text format) and pw_mix_sp_s.mat (MATLAB file format).
+
+The last used input set is saved in mix.mat so if you would like to save those settings for later recall, copy (do not simply rename) mix.mat to another file name to store. Copy the file back to mix.mat to restore.
+
+If you are running mlSNLO under MATLAB (not the standalone compiled version), this function can be called from a MATLAB script to automate parametric studies. See the 'SNLO' help tab for details.
+
+PW-mix-SP examples: 1, 2, 6, 8, 11, 13, 17, 74. See file Examples with exercises and descriptions.pdf in mlSNLO folder, or on our website at as-photonics.com/examples
+
+Detailed discussions of crystal nonlinear optics and SNLO examples are presented in the book "Crystal nonlinear optics: with SNLO examples," advertised on the SNLO download page or at as-photonics.com/book

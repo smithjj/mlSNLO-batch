@@ -1,53 +1,19 @@
-QPM calculates properties of quasiphasematched materials including      
-the poling, or domain reversal, period (always specified at room        
-temperature), the temperature bandwidth, the frequency bandwidth,       
-the group velocities, the group delay dispersions.  In addition         
-the tuning of phase matched red1 and red2 wavelengths due to blue       
-(pump) tuning or crystal temperature tuning can be computed using       
-the Pump Tune and Temp Tune buttons. The Sellmeier equations are        
-those referenced in Qmix when a crystal is selected. The temperature    
-range and acceptance bandwidths are calculated as described in          
-Qmix help.                                                              
-                                                                        
-The polarizations of the three waves are chosen from the Pol(rrb)       
-list. The propagation direction is any of the directions x, y, or       
-z that allows the selected polarization set. For example if             
-Pol(rrb)=ZZZ the propagation direction could be x or y; if              
-Pol(rrb)=xzx the propagation direction must be y.                       
-                                                                        
-QPM output data is written to the ascii file QPM.DAT with       
-the format displayed in the View window when you click the 'View'       
-button. Temperature tuning and pump wavelength tuning data are          
-written to the ascii files QPMT.DAT and QPMP.DAT.       
-                                                                        
-If the temperature dependence of the refractive index is unknown,       
-the temperature bandwidth and tuning curves are not computed but        
-the other properties are.                                               
-                                                                        
-The values of deff listed are wavelength scaled according to Miller's   
-rule.  The factor 2/pi, appropriate for first order quasiphase matching,
-is included in this deff value.                                         
+QPM calculates properties of quasiphasematched materials including the poling, or domain reversal, period (always specified at room temperature), the temperature bandwidth, the frequency bandwidth, the group velocities, the group delay dispersions.  In addition the tuning of phase matched red1 and red2 wavelengths due to blue (pump) tuning or crystal temperature tuning can be computed using the Pump Tune and Temp Tune buttons. The Sellmeier equations are those referenced in Qmix when a crystal is selected. The temperature range and acceptance bandwidths are calculated as described in Qmix help.
 
-For pump tuning and temperature tuning, normally Delta k (k_3 - k_1 - k_2)
-is positive and the grating k_g must be subtracted from it to phase match. 
-In that case, the data are plotted with open circles. When Delta k is negative 
-and the grating must be added to phasematch, the data are plotted with filled
-circles.
-                                                                        
-The last used input set is saved in the file mix.mat so if you would     
-like to save those settings for later recall, copy (do not simply       
-rename) mix.mat to another file name to store. Copy the file             
-back to mix.mat to restore.                                              
-                                                                        
-If you are running mlSNLO under MATLAB (not the standalone compiled 
-version), this function can be called from a MATLAB script to automate
-parametric studies. See the 'SNLO' help tab for details.
-																		
-QPM examples: 10, 32, 64, 65. See file Examples with exercises and
-descriptions.pdf in mlSNLO folder, or on our website at 
-as-photonics.com/examples
+The polarizations of the three waves are chosen from the Pol(rrb) list. The propagation direction is any of the directions x, y, or z that allows the selected polarization set. For example if Pol(rrb)=ZZZ the propagation direction could be x or y; if Pol(rrb)=xzx the propagation direction must be y.
 
-Detailed discussions of crystal nonlinear optics and
-SNLO examples are presented in the book "Crystal nonlinear optics:
-with SNLO examples," advertised on the SNLO download page or at
-as-photonics.com/book
+QPM output data is written to the ascii file QPM.DAT with the format displayed in the View window when you click the 'View' button. Temperature tuning and pump wavelength tuning data are written to the ascii files QPMT.DAT and QPMP.DAT.
+
+If the temperature dependence of the refractive index is unknown, the temperature bandwidth and tuning curves are not computed but the other properties are.
+
+The values of deff listed are wavelength scaled according to Miller's rule.  The factor 2/pi, appropriate for first order quasiphase matching, is included in this deff value.
+
+For pump tuning and temperature tuning, normally Delta k (k_3 - k_1 - k_2) is positive and the grating k_g must be subtracted from it to phase match. In that case, the data are plotted with open circles. When Delta k is negative and the grating must be added to phasematch, the data are plotted with filled circles.
+
+The last used input set is saved in the file mix.mat so if you would like to save those settings for later recall, copy (do not simply rename) mix.mat to another file name to store. Copy the file back to mix.mat to restore.
+
+If you are running mlSNLO under MATLAB (not the standalone compiled version), this function can be called from a MATLAB script to automate parametric studies. See the 'SNLO' help tab for details.
+
+QPM examples: 10, 32, 64, 65. See file Examples with exercises and descriptions.pdf in mlSNLO folder, or on our website at as-photonics.com/examples
+
+Detailed discussions of crystal nonlinear optics and SNLO examples are presented in the book "Crystal nonlinear optics: with SNLO examples," advertised on the SNLO download page or at as-photonics.com/book

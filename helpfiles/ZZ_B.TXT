@@ -1,0 +1,52 @@
+This file contains Sellmeier coefficients, thermal refractive index
+coefficients, and nonlinear tensor for a do-it-yourself biaxial crystal ZZ_B.
+Edit only values between rows of **'s.  Changes take effect after saving this file and starting SNLO.
+
+___________Sellmeier coefficients__________
+Row 1 is n_x, row 2 is n_y, row 3 is n_z. The convention nx<ny<nz must be used.  
+Columns are A - M values in Sellmeier of form:  
+n^2 = A + (B lambda^2/[lambda^2 - C]) + (D lambda^2/[lambda^2 - E]) + (F lambda^2/[lambda^2 - G]) + (H/[lambda^2 - I]) + (J/[lambda^2 - K]) - M lambda^2
+where lambda is the wavelength in microns. 
+You must separate the values with commas.
+************************************************
+3.0067,0,0,0,0,0,0,.03950,.04251,0,0,.012470
+3.0319,0,0,0,0,0,0,.04152,.04586,0,0,.013370               
+3.3134,0,0,0,0,0,0,.05694,.05941,0,0,.016713
+************************************************
+
+______ Range of validity of the Sellmeier______
+Two wavelengths (in nm) defining the shortest and longest wavelengths 
+where the Sellmeier is valid. You must separate the values with a comma
+***************
+350,4500
+***************
+
+__________Thermo-optic coefficients_____________
+These are dn/dT coefficients for n_x, n_y, n_z in rows one, two, three respectively.
+The form is A/lambda^4 + B/lambda^3 + C/lambda^2 + D/lambda + E
+Using this information the refractive indexes are modified according to 
+n(T,lambda) = n(T=298K,lambda)+(dn(T,lambda)/dT)(T-298)
+where lambda is the wavelength in microns and T is the temperature in K.
+You must separate the values with commas.
+************************************
+0, 1.427E-6, -4.735E-6, 8.711E-6,   .952E-6
+0, 4.269E-6,-14.761E-6,21.232E-6, -2.113E-6
+0,12.415E-6,-44.414E-6,59.129E-6,-12.101E-6
+************************************
+
+__________Nonlinear tensor_________________
+This is the nonlinear d tensor in the form of a 3 row by 6 column matrix.
+The x,y,z axis system must be the same as that used for the
+Sellmeier equation above. The coefficienta are in units of pm/V.
+You must separate the values with commas.
+************************************
+  0.5,       0.6,      0.7,      0.8,   1.95,     0.9
+  0.9,       1.0,      1.1,    3.9,     0.8,      0.6
+1.95,     3.9,   15.3,     1.1,     0.7,      0.8
+************************************
+The bluest wavelength (in nm) used in the measurement of the d tensor coefficients.
+This is used in Miller scaling the d_eff. For example, if the d coefficients
+were measured by doubling a 1064 nm laser, the reference wavelength would be 532.
+************************************
+532
+************************************

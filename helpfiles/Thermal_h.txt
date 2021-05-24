@@ -1,66 +1,17 @@
-This function computes steady-state temperature profiles created by
-a specified heat profile plus specified thermal boundary conditions
-and thermal properties of the crystal. The crystal shape is assumed
-to be a rectangular prism or cuboid. The three dimensions of the
-prism can be unequal. For help in setting input values, right-click on
-the input edit box. Help text appears in the lower text box.
-                                                                          
-The heat profile is a super Gaussian in the horizontal and vertical
-directions and an exponentially growing or decaying profile in the
-longitudinal direction. The light beam propagates along the
-longitudinal direction.
-                                                                          
-The boundary conditions are specified for four sides of the crystal
-(top, bottom, left and right) as either cooled or uncooled. The
-input and output faces are uncooled. Cooled means the temperature
-is fixed at a zero temperature rise. Uncooled means there is no
-heat flow through the face.
-                                                                          
-The thermal conductivity is specified for the horizontal, vertical,
-and longitudinal directions. This means the thermal conductivity
-tensor is diagonal when expressed in the horizontal, vertical and
-longitudinal axis frame. This is not generally true, since the
-tensor can be nondiagonal in this frame, but that case is not
-treated in this function. If the conductivity is the same or
-nearly the same in all directions this is not a significant
-handicap. The conductivity tensor is diagonal if the crystal is
-aligned for angle noncritical mixing in crystals where the
-conductivity and refractive index tensors are aligned, as they are
-for all crystal classes except triclinic (class 1) or monoclinic
-(classes 2 and m). Thermal conductivities are listed in QMix if
-they are known. It is up to the user to translate those
-conductivities which are specified in the refractive index frame
-x,y,z into the frame h,v,l.
-                                                                          
-The thermal conductivities are assumed to be temperature
-independent, which is a good approximation if the temperature
-rises are small.
-                                                                          
-The outputs include the temperature profile, the heat profile,
-the strengths of the thermal lens in the horizontal and vertical
-directions, and the amount of tilt in the horizontal and vertical
-directions computed at the center of the heat profile. The lens
-and tilt are specified for propagation in air. The thermal lense
-and tilt are computed from the thermally-induced optical path
-length change integrated along the length of the crystal. Thermal
-lensing and tilt due to thermally-induced strain are not included
-in this model.
-                                                                          
-Sources of heating in nonlinear crystals include linear absorption
-of any of the three mixing waves, or two-photon absorption due to
-any combination of the waves. Two-photon absorption heating can be
-derived from some of the SNLO mixing models if the two-photon
-absorption coefficients beta are known.
-                                                                          
-The temperature profile is solved using Fourier transform methods
-(see Numerical Recipes in C). The heat flow equations are presented
-and discussed in the book "Crystal Nonlinear Optics with SNLO
-examples" in Chapter 14.
-                                                                          
-The time required to approach the steady-state temperature that
-is computed by this function can be approximated using the equation
-diffusion time = r^2 * C * rho / K,
-where r i s the distance from the heat source to the side of the
-crystal in meters, C is the specific heat of the crystal in J/kg-K,
-rho is the density in the crystal in kg/m^3, and K is the thermal
-conductivity in W/m-K and the diffusion time is in seconds.
+This function computes steady-state temperature profiles created by a specified heat profile plus specified thermal boundary conditions and thermal properties of the crystal. The crystal shape is assumed to be a rectangular prism or cuboid. The three dimensions of the prism can be unequal. For help in setting input values, right-click on the input edit box. Help text appears in the lower text box.
+
+The heat profile is a super Gaussian in the horizontal and vertical directions and an exponentially growing or decaying profile in the longitudinal direction. The light beam propagates along the longitudinal direction.
+
+The boundary conditions are specified for four sides of the crystal (top, bottom, left and right) as either cooled or uncooled. The input and output faces are uncooled. Cooled means the temperature is fixed at a zero temperature rise. Uncooled means there is no heat flow through the face.
+
+The thermal conductivity is specified for the horizontal, vertical, and longitudinal directions. This means the thermal conductivity tensor is diagonal when expressed in the horizontal, vertical and longitudinal axis frame. This is not generally true, since the tensor can be nondiagonal in this frame, but that case is not treated in this function. If the conductivity is the same or nearly the same in all directions this is not a significant handicap. The conductivity tensor is diagonal if the crystal is aligned for angle noncritical mixing in crystals where the conductivity and refractive index tensors are aligned, as they are for all crystal classes except triclinic (class 1) or monoclinic (classes 2 and m). Thermal conductivities are listed in QMix if they are known. It is up to the user to translate those conductivities which are specified in the refractive index frame x,y,z into the frame h,v,l.
+
+The thermal conductivities are assumed to be temperature independent, which is a good approximation if the temperature rises are small.
+
+The outputs include the temperature profile, the heat profile, the strengths of the thermal lens in the horizontal and vertical directions, and the amount of tilt in the horizontal and vertical directions computed at the center of the heat profile. The lens and tilt are specified for propagation in air. The thermal lense and tilt are computed from the thermally-induced optical path length change integrated along the length of the crystal. Thermal lensing and tilt due to thermally-induced strain are not included in this model.
+
+Sources of heating in nonlinear crystals include linear absorption of any of the three mixing waves, or two-photon absorption due to any combination of the waves. Two-photon absorption heating can be derived from some of the SNLO mixing models if the two-photon absorption coefficients beta are known.
+
+The temperature profile is solved using Fourier transform methods (see Numerical Recipes in C). The heat flow equations are presented and discussed in the book "Crystal Nonlinear Optics with SNLO examples" in Chapter 14.
+
+The time required to approach the steady-state temperature that is computed by this function can be approximated using the equation diffusion time = r^2 * C * rho / K, where r i s the distance from the heat source to the side of the crystal in meters, C is the specific heat of the crystal in J/kg-K, rho is the density in the crystal in kg/m^3, and K is the thermal conductivity in W/m-K and the diffusion time is in seconds.

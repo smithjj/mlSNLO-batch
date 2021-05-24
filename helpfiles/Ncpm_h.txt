@@ -1,49 +1,18 @@
-NCPM (noncritical phase matching) helps you quickly search the list     
-of crystals for one that can noncritically phase match your wavelengths.
-                                                                        
-Noncricitcal phase match refers to collinear phase matching with no     
-birefringent walk off. It is desirable for efficient mixing of weak,    
-tightly focused beams, and for maintaining the widest acceptance angle  
-for all three beams. For uniaxial crystals the propagation direction    
-is normal to the optic axis. For biaxial crystals the propagation       
-direction is along one of the principal axes, X, Y, or Z.
-                                                                        
-For uniaxial crystals only mixing processes that involve a single       
-e wave have nonzero d_eff. For negative uniaxial crystals the e wave    
-is the bluest wave; for positive uniaxial crystals the bluest wave is   
-o polarized and one of the two red waves is e polarized, the other is   
-o polarized.
-                                                                        
-For biaxial crystals d_eff is sometimes nonzero only along two of the   
-principal axes. When such a crystal is selected the appropriate radio   
-buttons for the Propagation Axis are activated. Select the one of       
-interest. Similarly, in some cases two polarization sets with nonzero   
-d_eff are possible and the appropriate Mixing Type radio buttons are    
-activated. Select the one of interest.
-                                                                        
-You can enter target wavelengths for one red wave and the blue wave.    
-Horizontal and vertical gray lines will appear on the output plot       
-at these wavelengths so you can conveniently adjust the temperature/    
-mixing type/propagation axis/crystal to search for noncritical          
-phase matching at the desired wavelengths.
-                                                                        
-If the temperature dependence of the refractive indices for a           
-crystal are unknown and the temperature is not set to 300K,             
-when the Run button is clicked the temperature will be set to 300K.
-                                                                        
-The calculations of this function are based on the d-tensor and
-Sellmeier equations listed in Qmix. Other crystal properties such 
-as d_eff, group velocity, or gdd may be found using QMIX or Ref. 
-Ind. once a noncritical phase match is found.
-                                                                        
-The computed phase matching data is written to the file NCPM.DAT,
-in the same format as displayed by the 'View' button.
-                                                                        
-NCPM examples: 67. See file Examples with exercises and
-descriptions.pdf in mlSNLO folder, or on our website at 
-as-photonics.com/examples
+NCPM (noncritical phase matching) helps you quickly search the list of crystals for one that can noncritically phase match your wavelengths.
 
-Detailed discussions of crystal nonlinear optics and
-SNLO examples are presented in the book "Crystal nonlinear optics:
-with SNLO examples," advertised on the SNLO download page or at
-as-photonics.com/book
+Noncricitcal phase match refers to collinear phase matching with no birefringent walk off. It is desirable for efficient mixing of weak, tightly focused beams, and for maintaining the widest acceptance angle for all three beams. For uniaxial crystals the propagation direction is normal to the optic axis. For biaxial crystals the propagation direction is along one of the principal axes, X, Y, or Z.
+ For uniaxial crystals only mixing processes that involve a single e wave have nonzero d_eff. For negative uniaxial crystals the e wave is the bluest wave; for positive uniaxial crystals the bluest wave is o polarized and one of the two red waves is e polarized, the other is o polarized.
+
+For biaxial crystals d_eff is sometimes nonzero only along two of the principal axes. When such a crystal is selected the appropriate radio buttons for the Propagation Axis are activated. Select the one of interest. Similarly, in some cases two polarization sets with nonzero d_eff are possible and the appropriate Mixing Type radio buttons are activated. Select the one of interest.
+
+You can enter target wavelengths for one red wave and the blue wave. Horizontal and vertical gray lines will appear on the output plot at these wavelengths so you can conveniently adjust the temperature/ mixing type/propagation axis/crystal to search for noncritical phase matching at the desired wavelengths.
+
+If the temperature dependence of the refractive indices for a crystal are unknown and the temperature is not set to 300K, when the Run button is clicked the temperature will be set to 300K.
+
+The calculations of this function are based on the d-tensor and Sellmeier equations listed in Qmix. Other crystal properties such as d_eff, group velocity, or gdd may be found using QMIX or Ref. Ind. once a noncritical phase match is found.
+
+The computed phase matching data is written to the file NCPM.DAT, in the same format as displayed by the 'View' button.
+
+NCPM examples: 67. See file Examples with exercises and descriptions.pdf in mlSNLO folder, or on our website at as-photonics.com/examples
+
+Detailed discussions of crystal nonlinear optics and SNLO examples are presented in the book "Crystal nonlinear optics: with SNLO examples," advertised on the SNLO download page or at as-photonics.com/book

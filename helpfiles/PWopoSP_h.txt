@@ -1,71 +1,17 @@
-PW-OPO-SP models a singly-resonant, plane-wave, synchronously-pumped    
-OPO.  The irradiance of the plane pump wave is set equal to the central 
-ray of a lowest-order spatial Gaussian whose beam diameter is specified 
-in the input form under 'Beam diameter'.  This function includes        
-group velocity and group delay dispersion but not higher order          
-dispersion. The OPO cavity is a ring, with only the red1 wave           
-resonated. The duration of the blue (pump) pulses are specified. The
-shape of these pulses can be changed by including an optional integer
-0-10 following the duration, separated by a space. 
-For integer value of 0, the pulse is a hyperbolic secant squared; a
-value of 1 is a typical Gaussian; values of 2+ are super Gaussians
-which increasingly resemble top-hat profiles with increasing value.
-For help in setting input values, right-click on the input edit box. 
-Help text appears in the lower text box.
-                                                                        
-The modeling procedure is to propagate the three light pulses           
-(red1, red2, blue) thru the crystal, then apply any Compensator         
-(see diagram in the plot window) changes to the red1 pulse.             
-The output pulses from that pass of the cavity are then plotted.        
-The red1 pulse can be emitted before or after the compensator and       
-both possibilities are plotted as the red and gray traces. For          
-the next cavity pass, a new blue (pump) pulse is used, along with       
-the last reflected red1 pulse. This is repeated until the pulses        
-stabilize.  At the bottom of the Windows input form the pass number     
-is indicated along with the % change in the red1 pulse on the last      
-pass. When the % change is sufficiently small to indicate convergence   
-(usually when the % change < .05) click the STOP button and the         
-results of the previous pass are plotted and written to the ASCII       
-output file PWOPO_SP.DAT which you can view after running a case        
-by clicking the 'View' button. The Display radio buttons can be         
-used to display either the irradiance, normalized irradiance,           
-frequency chirp, or phase. The Display button can be changed            
-during a run.                                                           
-                                                                        
-Simulated quantum noise on the red1 and red2 beams is added on          
-each cavity pass. The OPO starts from this noise. The quantum noise     
-can be viewed by setting d_eff=0 and selecting the 'Norm Irrad'         
-radio button and running.                                               
-                                                                        
-Stable operation of the OPO is not guaranteed. In some cases the        
-OPO never turns on, perhaps because the cavity delay input is           
-incorrect. In other cases the OPO turns on but never reaches            
-stable operation.                                                       
-                                                                        
-After the run is stopped, you can click the 'Irradiance',               
-'Norm Irrad', 'Chirp', 'Phase', or 'Spectra' buttons to view            
-results from the last pass. Clicking 'Spectra' once displays            
-the spectrum on a THz scale. Clicking it again displays on a            
-nm scale. Compress adds a gdd to the red1 output. This is               
-useful in testing the compressibility of the output pulse. Click        
-the up or down arrow buttons repeatedly to find the best                
-compression. The size of the up or down step can be adjusted            
-by clicking the + or - button.                                          
-                                                                        
-The last-run input set is saved in mix.mat, so if you would like         
-to save those settings for later recall, copy (do not just rename)      
-mix.mat to another file name to store. Copy the file back to             
-mix.mat to restore settings.                                             
+PW-OPO-SP models a singly-resonant, plane-wave, synchronously-pumped OPO.  The irradiance of the plane pump wave is set equal to the central ray of a lowest-order spatial Gaussian whose beam diameter is specified in the input form under 'Beam diameter'.  This function includes group velocity and group delay dispersion but not higher order dispersion. The OPO cavity is a ring, with only the red1 wave resonated. The duration of the blue (pump) pulses are specified. The shape of these pulses can be changed by including an optional integer 0-10 following the duration, separated by a space. For integer value of 0, the pulse is a hyperbolic secant squared; a value of 1 is a typical Gaussian; values of 2+ are super Gaussians which increasingly resemble top-hat profiles with increasing value. For help in setting input values, right-click on the input edit box. Help text appears in the lower text box.
 
-If you are running mlSNLO under MATLAB (not the standalone compiled 
-version), this function can be called from a MATLAB script to automate
-parametric studies. See the 'SNLO' help tab for details.
-                                                                        
-PW-OPO-SP examples: 35, 71, 77. See file Examples with exercises and
-descriptions.pdf in mlSNLO folder, or on our website at 
-as-photonics.com/examples
+The modeling procedure is to propagate the three light pulses (red1, red2, blue) through the crystal, then apply any Compensator (see diagram in the plot window) changes to the red1 pulse. The output pulses from that pass of the cavity are then plotted. The red1 pulse can be emitted before or after the compensator and both possibilities are plotted as the red and gray traces. For the next cavity pass, a new blue (pump) pulse is used, along with the last reflected red1 pulse. This is repeated until the pulses stabilize.  At the bottom of the Windows input form the pass number is indicated along with the % change in the red1 pulse on the last pass. When the % change is sufficiently small to indicate convergence (usually when the % change < .05) click the STOP button and the results of the previous pass are plotted and written to the ASCII output file PWOPO_SP.DAT which you can view after running a case by clicking the 'View' button. The Display radio buttons can be used to display either the irradiance, normalized irradiance, frequency chirp, or phase. The Display button can be changed during a run.
 
-Detailed discussions of crystal nonlinear optics and
-SNLO examples are presented in the book "Crystal nonlinear optics:
-with SNLO examples," advertised on the SNLO download page or at
-as-photonics.com/book
+Simulated quantum noise on the red1 and red2 beams is added on each cavity pass. The OPO starts from this noise. The quantum noise can be viewed by setting d_eff=0 and selecting the 'Norm Irrad' radio button and running.
+
+Stable operation of the OPO is not guaranteed. In some cases the OPO never turns on, perhaps because the cavity delay input is incorrect. In other cases the OPO turns on but never reaches stable operation.
+
+After the run is stopped, you can click the 'Irradiance', 'Norm Irrad', 'Chirp', 'Phase', or 'Spectra' buttons to view results from the last pass. Clicking 'Spectra' once displays the spectrum on a THz scale. Clicking it again displays on a nm scale. Compress adds a gdd to the red1 output. This is useful in testing the compressibility of the output pulse. Click the up or down arrow buttons repeatedly to find the best compression. The size of the up or down step can be adjusted by clicking the + or - button.
+
+The last-run input set is saved in mix.mat, so if you would like to save those settings for later recall, copy (do not just rename) mix.mat to another file name to store. Copy the file back to mix.mat to restore settings.
+
+If you are running mlSNLO under MATLAB (not the standalone compiled version), this function can be called from a MATLAB script to automate parametric studies. See the 'SNLO' help tab for details.
+
+PW-OPO-SP examples: 35, 71, 77. See file Examples with exercises and descriptions.pdf in mlSNLO folder, or on our website at as-photonics.com/examples
+
+Detailed discussions of crystal nonlinear optics and SNLO examples are presented in the book "Crystal nonlinear optics: with SNLO examples," advertised on the SNLO download page or at as-photonics.com/book
