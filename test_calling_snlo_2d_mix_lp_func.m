@@ -25,6 +25,7 @@ if calculate_curves
     inputs.mix_2d_lp_crystal_losses = [0,0,0];              % linear absorption (in 1/mm)
     inputs.mix_2d_lp_pulseenergy = [8e-2,8e-2,0];           % input pulse energies (in joules)
     inputs.mix_2d_lp_pulse_durations = [1,1,1; 2, 2, 2];    % input pulse durations of 1 ns and temporal super gaussian coefficients of 2. pulse durations are fwhm ns, and the optional supergaussian coefficients are on a separate row
+    inputs.mix_2d_lp_pulse_delays = [0, 0, 0];              % input pulse delays relative to blue wave
     inputs.mix_2d_lp_beam_diameters = [10,10,10;10,10,10].';% input beam diameters (in fwhm mm) [red1 in walkoff dir, red2 in walkoff dir, blue in walkoff dir;red1 perp to walkoff, red2 perp to walkoff, blue perp to walkoff]
     inputs.mix_2d_lp_supergaussian_coeff = [10,10,10];      % supergaussian coefficient for spatial input beam profile
     inputs.mix_2d_lp_n2_red1 = [0,0,0];                     % red1 nonlinear refractive index (in sq. cm/W)
@@ -44,7 +45,8 @@ if calculate_curves
     inputs.mix_2d_lp_deltak = 0;                            % phase mismatch (in rad/mm)
     inputs.mix_2d_lp_dist_to_image = 0;                     % Distance from the crystal exit face to image plane  (in mm) of the output beam profile displayed during the run and by the post-run fluence and movie buttons.
     inputs.mix_2d_lp_nt = 30;                               % number of time steps to include (Recommend starting with 32 and varying to check convergence.)
-    
+    inputs.mix_2d_lp_save_movie = false;
+    inputs.mix_2d_lp_auto_analyze = false;
     %% call 2d mix lp, run model, load output
     output_red1 = cell(size(red1red2_pulse_energy_list)); % pre-allocate a cell array to store the contents of the red1 output files in
     output_red2 = cell(size(red1red2_pulse_energy_list)); % pre-allocate a cell array to store the contents of the red2 output files in

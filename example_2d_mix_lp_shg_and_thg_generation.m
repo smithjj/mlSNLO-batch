@@ -30,7 +30,7 @@
 c = 3e8;
 epsilon_0 = 8.85e-12;
 
-calculate_curves = false;
+calculate_curves = true;
 if calculate_curves
     % Construct the vector of red energies we'll consider (this energy goes
     % into each of the red waves, so the total input energy will be twice
@@ -163,8 +163,8 @@ if calculate_curves
         % time), fourth through ninth columns have to do with M-squared
         % calculations (M-squared, tilt, curvature for each direction)
         shg_output_red1{K} = importdata('mix_2d_lp_red1_data.dat'); % load the red1 2d mix lp output file into memory, stick into the output cell array
-        shg_output_red2{K} = importdata('mix_2d_lp_red2_data.dat'); % load the red1 2d mix lp output file into memory, stick into the output cell array
-        shg_output_blue{K} = importdata('mix_2d_lp_blue_data.dat'); % load the red1 2d mix lp output file into memory, stick into the output cell array
+        shg_output_red2{K} = importdata('mix_2d_lp_red2_data.dat'); % load the red2 2d mix lp output file into memory, stick into the output cell array
+        shg_output_blue{K} = importdata('mix_2d_lp_blue_data.dat'); % load the blue 2d mix lp output file into memory, stick into the output cell array
 
         % Integrate the power vector in time (using the trapezoidal method,
         % with the times given as the first argument and power as second)
@@ -221,8 +221,8 @@ if calculate_curves
         thg_run_handle();       % call the 'Run' button callback - equivalent to clicking the run button
         
         thg_output_red1{K} = importdata('mix_2d_lp_red1_data.dat'); % load the red1 2d mix lp output file into memory, stick into the output cell array
-        thg_output_red2{K} = importdata('mix_2d_lp_red2_data.dat'); % load the red1 2d mix lp output file into memory, stick into the output cell array
-        thg_output_blue{K} = importdata('mix_2d_lp_blue_data.dat'); % load the red1 2d mix lp output file into memory, stick into the output cell array
+        thg_output_red2{K} = importdata('mix_2d_lp_red2_data.dat'); % load the red2 2d mix lp output file into memory, stick into the output cell array
+        thg_output_blue{K} = importdata('mix_2d_lp_blue_data.dat'); % load the blue 2d mix lp output file into memory, stick into the output cell array
         
         % integrate power vectors (using the trapz function) in time to get output energies
         thg_red1_energy_out(K) = trapz(thg_output_red1{K}.data(:,1),thg_output_red1{K}.data(:,2))*1e3; % in mJ
