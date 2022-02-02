@@ -123,4 +123,4 @@ The help text files here are the ones displayed after clicking the 'Help' button
 
 ### Other files:
 * [simple_freespace_propagate.m](simple_freespace_propagate.m) A simple function to propagate a beam in free space using FFT
-* [example_simple_freespace_propagate](example_simple_freespace_propagate) A simple example script to use the script (simple_freespace_propagate.m)
+* [example_simple_freespace_propagate.m](example_simple_freespace_propagate.m) A simple example script to use the script (simple_freespace_propagate.m)
