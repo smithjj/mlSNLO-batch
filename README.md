@@ -26,7 +26,7 @@ Example batch scripts for mlSNLO nonlinear optics numerical modeling software. T
 ## Introduction
 These scripts are MATLAB scripts. They require the MATLAB App version of mlSNLO to run. These files are examples of how to call most SNLO models from a batch script. This is often useful to optimize the design of your nonlinear optical device; for example, you might want to choose the nonlinear crystal length with produces the largest output energy of a pulsed second harmonic generation device. Using a batch script like these examples could automate this optimization: set up the script, press 'Run' and view the results.
 
-Each example script is comprised of a for loop in which iteration creates a set of inputs for an SNLO model function, calls the model and passes it the set of inputs, simulates pressing the 'Run' (and sometimes 'Accept') buttons on the model, loads the model output from file, processes and stores the result.
+Each example script is comprised of a for loop in which iteratively creates a set of inputs for an SNLO model function, calls the model and passes it the set of inputs, simulates pressing the 'Run' (and sometimes 'Accept') buttons on the model, loads the model output from file, processes and stores the result.
 
 The inputs for each SNLO function match the main input form input boxes. The inputs are passed to each SNLO function as an input argument consisting of a MATLAB data structure with fieldnames the model requires, each field populated with values with units that match the input form labels.
 
@@ -37,6 +37,8 @@ For each SNLO modeling function below, there is a link to the 'Help' text file a
 The help text files here are the ones displayed after clicking the 'Help' button in the main menu of SNLO.
 
 ## SNLO functions
+(in the order they appear in the main menu)
+
 ### Qmix
 * [helpfiles/Qmix_h.txt](helpfiles/Qmix_h.txt)
 * [test_calling_snlo_qmix_func.m](test_calling_snlo_qmix_func.m)
@@ -98,6 +100,7 @@ The help text files here are the ones displayed after clicking the 'Help' button
 	 *  [example_custom_input_fields_2d_mix_lp_pulsed.m](example_custom_input_fields_2d_mix_lp_pulsed.m): all-pulsed case
 	 *  [example_custom_input_fields_2d_mix_lp_cw_and_pulse_mixed.m](example_custom_input_fields_2d_mix_lp_cw_and_pulse_mixed.m): a combination of pulsed and cw input beams
 	 *  [example_2d_mix_lp_shg_and_thg_generation.m](example_2d_mix_lp_shg_and_thg_generation.m): a two-crystal system using the output of an second-harmonic generator as the input for a third-harmonic generator
+	 *  [example_prop_2d_mix_lp_shg_and_thg_generation.m](example_prop_2d_mix_lp_shg_and_thg_generation.m): a two-crystal system using the output of an second-harmonic generator as the input for a third-harmonic generator with a free-space FFT propagation bwetween the two crystals
 * [helpfiles/2DmixLP_h.txt](2DmixLP_h.txt)
 * [test_calling_snlo_2d_mix_lp_func.m](test_calling_snlo_2d_mix_lp_func.m)
 * [test_calling_snlo_2d_mix_lp_func_deltak.m](test_calling_snlo_2d_mix_lp_func_deltak.m)
@@ -117,3 +120,7 @@ The help text files here are the ones displayed after clicking the 'Help' button
 * [helpfiles/OPG_h.txt](OPG_h.txt)
 * [test_calling_snlo_opg_func_deltak.m](test_calling_snlo_opg_func_deltak.m)
 * [test_calling_snlo_opg_func_pump_energy.m](test_calling_snlo_opg_func_pump_energy.m)
+
+### Other files:
+* [simple_freespace_propagate.m](simple_freespace_propagate.m) A simple function to propagate a beam in free space using FFT
+* [example_simple_freespace_propagate](example_simple_freespace_propagate) A simple example script to use the script (simple_freespace_propagate.m)
