@@ -124,3 +124,4 @@ The help text files here are the ones displayed after clicking the 'Help' button
 ### Other files:
 * [simple_freespace_propagate.m](simple_freespace_propagate.m) A simple function to propagate a beam in free space using FFT
 * [example_simple_freespace_propagate.m](example_simple_freespace_propagate.m) A simple example script to use the script (simple_freespace_propagate.m)
+* [crystal_info.m](crystal_info.m) a script that does most of what snlo_ref_ind_func does but without the graphical user interface components; it uses ref_ind and N12 to find refractive indices for isotropic, uniaxial, and biaxial crystals, as well as group velocity indices, group delay dispersions, third order dispersions, walkoff angles, and thermo optic coefficients for a given crystal, temperature, wavelength, and propagation direction.
