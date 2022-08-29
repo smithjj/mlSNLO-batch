@@ -4,7 +4,7 @@
 % generate a Gaussian beam
 % call simple_freespace_propagate with position wavelength, x matrix, y matrix, field, and distance to propagate
 
-wavelength  = 1000e-9;  % 1000 m
+wavelength  = 1000e-9;  % 1000 nm
 prop_dist   = 15e-3;    % 15 mm
 %% construct x,y position matrices
 % Make 1mm x 1mm grid with 100x100 points centered around 0,0
