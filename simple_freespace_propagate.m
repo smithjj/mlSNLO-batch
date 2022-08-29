@@ -1,6 +1,6 @@
 function output_field = simple_freespace_propagate(wavelength, xgridmat, ygridmat, input_field, distance)
 % Inputs:
-%  wavelength [nm]  (scalar)
+%  wavelength [m]  (scalar)
 %  xgridmat   [m]   (2D array)          constant value in 2nd dimension
 %  ygridmat   [m]   (2D array)          constant value in 1st dimension
 %  field      [V/m] (2D or 3D array)    electric field in x,y, or x,y,time
