@@ -2,14 +2,14 @@
 %
 % This is an example of two-stage third-harmonic generation (using two
 % crystals in series) without propagation between them. The first crystal
-% is second-harmonic generation, and the second third-harmonic generation.
+% is Type I second-harmonic generation, and the second third-harmonic generation.
 % This example is a simple batch of runs where the SHG red input energy is
 % varied.
 %
 % Note: This example script doesn't generate any fields to use as input
-% fields to the modified 2D-mix-LP model directly, but rather uses the
-% modified 2D-mix-LP model to generate them for the from first stage SHG,
-% then loads the output fields from the SHG model run from disk and uses
+% fields to the 2D-mix-LP model directly, but rather uses the outputs of
+% the first 2D-mix-LP stage as inputs for the second. SHG runs, then the
+% script loads the output fields from the SHG model run from disk and uses
 % them as the input fields for the THG (after some manipulation.)
 %
 % If you wish to generate your own electric field arrays to use as inputs
@@ -17,13 +17,15 @@
 % 'notes_on_snlo_2d_mix_lp_with_electric_field_inputs.txt' contains further
 % information.
 %
-% SHG: 1064 nm -> 532 nm
-%   * In SNLO we do SHG by splitting the red input into both
-%   red waves with equal powers (with identical values for other properties)
+% SHG (type I): 1064 nm -> 532 nm
+%   * In SNLO we do type I SHG by splitting the red input into both
+%   red waves with equal powers (with identical values for other properties).
+%   * Blue wave (532 nm) input energy is 0.
 % THG: 1064 nm + 532 nm -> 354.7 nm
-%   * We will collect both red output waves of the SHG and combine them for
-%   one of the red THG waves, and use the 532 nm output of SHG as
-%   the other red wave.
+%   * We will collect the residual of both red output waves of the SHG and 
+%   combine them in one of the red THG waves, and use the frequency doubled 
+%   output of the SHG stage as the other red wave.
+%   * Blue wave (354.7 nm) input energy is 0.
 %
 %   
 
@@ -180,7 +182,8 @@ if calculate_curves
         % Now, load the output fields from the file saved by the SHG model
         shg_output_filename = 'mix_2d_lp_movie.mat';
         shg_output_fields = load(shg_output_filename);
-        % From the SHG output fields, generate the THG input fields
+        
+        % Make a copy of the SHG output fields, generate the THG input fields
         thg_input_fields = shg_output_fields;
         
         % In the frequency doubling stage, we split the red input energy
@@ -211,7 +214,7 @@ if calculate_curves
 
         thg_problem(K) = thg_inputs;
         thg_problem(K).input_fields = thg_input_fields;
-        thg_problem(K).mix_2d_lp_pulseenergy(1) = (shg_red1_energy_out(K) + shg_red2_energy_out(K)); % these are ignored but set to the values they are supposed to be to avoid confusion
+        thg_problem(K).mix_2d_lp_pulseenergy(1) = (shg_red1_energy_out(K) + shg_red2_energy_out(K)); % Since we specify field profiles, these values are ignored we use the values calculated from SHG output for clarity
         thg_problem(K).mix_2d_lp_pulseenergy(2) = (shg_blue_energy_out(K));
         thg_fcn_handles = snlo_2d_mix_lp_func(thg_problem(K)); % call the SNLO 2D-MIX-LP function with the problem set, and assign the returned cell array of function handles which are local to that file to 'fcn_handles'
         thg_run_handle = thg_fcn_handles{1}; % the function handle of the 'Run' button callback is the first returned; the 'run' button callback function is always the first element of the cell array of returned function handles
