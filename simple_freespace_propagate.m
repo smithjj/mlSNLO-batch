@@ -3,7 +3,7 @@ function output_field = simple_freespace_propagate(wavelength, xgridmat, ygridma
 % Created by Jesse Smith (jesse.smith@as-photonics.com), last modified October 26, 2023
 %
 % Inputs:
-%  wavelength  [m]   (scalar)            wavelength of light to propgate
+%  wavelength [m]  (scalar)
 %  xgridmat   [m]   (2D array)          constant value in 2nd dimension
 %  ygridmat   [m]   (2D array)          constant value in 1st dimension
 %  input_field [V/m] (2D or 3D array)    electric field in x,y, or x,y,time
