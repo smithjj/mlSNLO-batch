@@ -41,58 +41,58 @@ The help text files here are the ones displayed after clicking the 'Help' button
 
 ### Qmix
 * [helpfiles/Qmix_h.txt](helpfiles/Qmix_h.txt)
-* [test_calling_snlo_qmix_func.m](test_calling_snlo_qmix_func.m)
+* [example_script_qmix.m](example_script_qmix.m)
 
 ### Ncpm
 * [helpfiles/Ncpm_h.txt](helpfiles/Ncpm_h.txt)
-* [test_calling_snlo_ncpm_func.m](test_calling_snlo_ncpm_func.m)
+* [example_script_ncpm.m](example_script_ncpm.m)
 
 ### Bmix
 * [helpfiles/Bmix_h.txt](Bmix_h.txt)
-* [test_calling_snlo_bmix_func.m](test_calling_snlo_bmix_func.m)
+* [example_script_bmix.m](example_script_bmix.m)
 
 ### Focus
 * [helpfiles/Focus_h.txt](Focus_h.txt)
-* [test_calling_snlo_focus_func.m](test_calling_snlo_focus_func.m)
+* [example_script_focus.m](example_script_focus.m)
 
 ### Cavity2
 * [helpfiles/Brewster_cavity_help.txt](helpfiles/Brewster_cavity_help.txt)
 
 ### GVM
 * [helpfiles/GVM_h.txt](GVM_h.txt)
-* [test_calling_snlo_gvm_func.m](test_calling_snlo_gvm_func.m)
+* [example_script_gvm.m](example_script_gvm.m)
 
 ### Opo angles
 * [helpfiles/Opoangles_h.txt](Opoangles_h.txt)
-* [test_calling_snlo_opoangles_func.m](test_calling_snlo_opoangles_func.m)
+* [example_script_opoangles.m](example_script_opoangles.m)
 
 ### QPM
 * [helpfiles/QPM_h.txt](QPM_h.txt)
-* [test_calling_snlo_qpm_func.m](test_calling_snlo_qpm_func.m)
+* [example_script_qpm.m](example_script_qpm.m)
 
 ### PW-mix-LP
 * [helpfiles/PWmixLP_h.txt](PWmixLP_h.txt)
-* [test_calling_snlo_pw_mix_lp_func.m](test_calling_snlo_pw_mix_lp_func.m)
+* [example_script_pw_mix_lp.m](example_script_pw_mix_lp.m)
 
 ### PW-mix-SP
 * [helpfiles/PWmixSP_h.txt](PWmixSP_h.txt)
-* [test_calling_snlo_pw_mix_sp_func.m](test_calling_snlo_pw_mix_sp_func.m)
+* [example_script_pw_mix_sp.m](example_script_pw_mix_sp.m)
 
 ### PW-cav-LP
 * [helpfiles/PWcavLP_h.txt](PWcavLP_h.txt)
-* [test_calling_snlo_pw_cav_lp_func.m](test_calling_snlo_pw_cav_lp_func.m)
+* [example_script_pw_cav_lp.m](example_script_pw_cav_lp.m)
 
 ### PW-mix-BB
 * [helpfiles/PWmixBB_h.txt](PWmixBB_h.txt)
-* [test_calling_snlo_pw_mix_bb_func.m](test_calling_snlo_pw_mix_bb_func.m)
+* [example_script_pw_mix_bb.m](example_script_pw_mix_bb.m)
 
 ### PW-OPO-BB
 * [helpfiles/PWopoBB_h.txt](PWopoBB_h.txt)
-* [test_calling_snlo_pw_opo_bb_func.m](test_calling_snlo_pw_opo_bb_func.m)
+* [example_script_pw_opo_bb.m](example_script_pw_opo_bb.m)
 
 ### PW-OPO-SP
 * [helpfiles/PWopoSP_h.txt](PWopoSP_h.txt)
-* [test_calling_snlo_pw_opo_sp_func.m](test_calling_snlo_pw_opo_sp_func.m)
+* [example_script_pw_opo_sp.m](example_script_pw_opo_sp.m)
 
 ### 2D-mix-LP
 * 2D-mix-LP now allows arbitrary, user-specified spatial and temporal input electric field profiles. These examples show how to do this:
@@ -102,24 +102,25 @@ The help text files here are the ones displayed after clicking the 'Help' button
 	 *  [example_2d_mix_lp_shg_and_thg_generation.m](example_2d_mix_lp_shg_and_thg_generation.m): a two-crystal system using the output of an second-harmonic generator as the input for a third-harmonic generator
 	 *  [example_prop_2d_mix_lp_shg_and_thg_generation.m](example_prop_2d_mix_lp_shg_and_thg_generation.m): a two-crystal system using the output of an second-harmonic generator as the input for a third-harmonic generator with a free-space FFT propagation bwetween the two crystals
 * [helpfiles/2DmixLP_h.txt](2DmixLP_h.txt)
-* [test_calling_snlo_2d_mix_lp_func.m](test_calling_snlo_2d_mix_lp_func.m)
-* [test_calling_snlo_2d_mix_lp_func_deltak.m](test_calling_snlo_2d_mix_lp_func_deltak.m)
+* [example_script_2d_mix_lp.m](example_script_2d_mix_lp.m)
+* [example_script_2d_mix_lp_vary_deltak.m](example_script_2d_mix_lp_vary_deltak.m)
 
 ### 2D-mix-SP
 * 2D-mix-SP now allows arbitrary, user-specified input temporal pulse profiles (still limited to Gaussian or super-Gaussian spatial profiles). 1 example is included:
-	 *  [test_calling_custom_pulse_2d_mix_sp.m](test_calling_custom_pulse_2d_mix_sp.m): 
+	 *  [example_script_2d_mix_sp_custom_pulse_profile.m](example_script_2d_mix_sp_custom_pulse_profile.m): 
 * [helpfiles/2DmixSP_h.txt](2DmixSP_h.txt)
-* [test_calling_snlo_2d_mix_sp_func_deltak.m](test_calling_snlo_2d_mix_sp_func_deltak.m)
-* [test_calling_snlo_2d_mix_sp_func_deltak2.m](test_calling_snlo_2d_mix_sp_func_deltak2.m)
+* [example_script_2d_mix_sp_vary_deltak.m](example_script_2d_mix_sp_vary_deltak.m)
+* [example_script_2d_mix_sp_vary_deltak_2.m](example_script_2d_mix_sp_vary_deltak_2.m)
 
 ### 2D-cav-LP
 * [helpfiles/2DcavLP_h.txt](2DcavLP_h.txt)
-* [test_calling_snlo_2d_cav_lp_func.m](test_calling_snlo_2d_cav_lp_func)
+* [example_script_2d_cav_lp.m](example_script_2d_cav_lp.m)
 
 ### OPG
 * [helpfiles/OPG_h.txt](OPG_h.txt)
-* [test_calling_snlo_opg_func_deltak.m](test_calling_snlo_opg_func_deltak.m)
-* [test_calling_snlo_opg_func_pump_energy.m](test_calling_snlo_opg_func_pump_energy.m)
+* [example_script_opg.m](example_script_opg.m)
+* [example_script_opg_vary_deltak.m](example_script_opg_vary_deltak.m)
+* [example_script_opg_vary_pump_energy.m](example_script_opg_vary_pump_energy.m)
 
 ### Other files:
 * [simple_freespace_propagate.m](simple_freespace_propagate.m) A simple function to propagate a beam in free space using FFT
