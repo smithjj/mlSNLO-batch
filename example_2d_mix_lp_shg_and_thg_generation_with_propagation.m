@@ -1,3 +1,8 @@
+%% 2D-mix-LP: cascaded SHG to THG devices with propagation between crystals
+%
+% Jesse Smith [jesse.smith@as-photonics.com]
+% last modified Feb 2, 2024
+% 
 % Example of how to use 2D-mix-LP (diffractive long pulse mixing) to model a two stage
 % device, with the second using the outputs of the first.
 %
@@ -26,6 +31,23 @@
 %   the other red wave.
 %
 %   
+%  Results and other thoughts
+%  -Using 1064 nm input energies from 0.1 to 20 mJ, we find that the conversion efficiency
+%   peaks around input energy of 1.5 mJ; peak efficiency is about 58%, with 870 mJ output at
+%   354.7 nm.
+% - Increasing output energy with more input energy still boosts the 354.7 nm
+%   energy but with slightly decreased efficiency. 
+% - If you look at the 1064 nm output from the THG crystal you can see there's been some 
+%   substantial back-conversion at the center of the beam. This is a problem that will get
+%   worse as you increase input energy. The beam quality of the THG light is still good,
+%   but starting to deteriorate; at 2 mJ input energy M^2 = 1.10 
+% - These are big beams. The actual example of propagating in free space between the crystals is
+%   of dubious utility, but this example should help you start designing your own optimization.
+%   If you care to, you could shrink the beams and use something other than collimated input
+%   light. You could even add a thin lens between the two crystals if you propagate part way,
+%   add phase curvature, and propagate the rest of the way.
+% 
+
 
 c = 3e8;
 epsilon_0 = 8.85e-12;
@@ -36,7 +58,7 @@ if calculate_curves
     % Construct the vector of red energies we'll consider (this energy goes
     % into each of the red waves, so the total input energy will be twice
     % this value)
-    red1_red2_energy_vec = linspace(0.05,0.550,6)*1e-3; % pulse energies of red1 and red2 waves in joules (total red input energy is twice this value)
+    red1_red2_energy_vec = linspace(0.05,1.00,11)*1e-3; % pulse energies of red1 and red2 waves in joules (total red input energy is twice this value)
     
     % distance between first-stage shg crystal output face and second-stage thg crystal input face (we'll propagate
     % the waves this distance in free space)
@@ -223,22 +245,35 @@ if calculate_curves
         % distance specified using the FFT beam propagation method. This method of
         % propagating beams has the potential to run into trouble if your fields expand
         % (or propagate, in the case of tilted beams) to not be fully contained by the
-        % spatial grid; it handles this by sticking the light on the face opposite where
+        % spatial grid; the fft handles this by sticking the light on the face opposite where
         % it exited. This is a sort of aliasing effect, I think, and can produce some
         % unexpected interference effects. This propagator is "simple" in the sense that
         % it doesn't do anything to prevent this (for instance, you might pad the spatial
         % grid with more points out the faces, or do some resampling thing).
         % 
-        % You can read the code in simple_freespace_propagate.m for the mechanics about
+        % You can read the code in propagate_freespace_class.m for the mechanics about
         % what it actually does and what input variables you must provide in your function
         % call.
         % 
 
         % Propagate beams in free space the shg_thg_distance propagate the 1064 nm and the
         % 532 nm beams (which are called the red1 and red2 waves now in our THG modeling):
-        red1_propagated_field = simple_freespace_propagate(thg_inputs.mix_2d_lp_wavelengths(1)*1e-9, thg_input_fields.xgridmat, thg_input_fields.ygridmat, thg_input_fields.field_red1_xyt, shg_thg_distance);
-        red2_propagated_field = simple_freespace_propagate(thg_inputs.mix_2d_lp_wavelengths(2)*1e-9, thg_input_fields.xgridmat, thg_input_fields.ygridmat, thg_input_fields.field_red2_xyt, shg_thg_distance);
-        
+
+        % Old method:
+        % red1_propagated_field = simple_freespace_propagate(thg_inputs.mix_2d_lp_wavelengths(1)*1e-9, thg_input_fields.xgridmat, thg_input_fields.ygridmat, thg_input_fields.field_red1_xyt, shg_thg_distance);
+        % red2_propagated_field = simple_freespace_propagate(thg_inputs.mix_2d_lp_wavelengths(2)*1e-9, thg_input_fields.xgridmat, thg_input_fields.ygridmat, thg_input_fields.field_red2_xyt, shg_thg_distance);
+        propgtobj = propagate_freespace_class;
+        propgtobj.wavelength    = thg_inputs.mix_2d_lp_wavelengths(1)*1e-9;
+        propgtobj.xgridmat      = thg_input_fields.xgridmat;
+        propgtobj.ygridmat      = thg_input_fields.ygridmat;
+        propgtobj.input_field   = thg_input_fields.field_red1_xyt;
+        red1_propagated_field   = propgtobj.propagate(shg_thg_distance);
+        % keyboard;
+        % Redo for red2 wave
+        propgtobj.wavelength    = thg_inputs.mix_2d_lp_wavelengths(2)*1e-9;
+        propgtobj.input_field   = thg_input_fields.field_red2_xyt;
+        red2_propagated_field   = propgtobj.propagate(shg_thg_distance);
+
         %% Testing propagated beams
         % The propagator might produce bad results; a couple of checks you should do are
         % check that the total energy or power is unchanged from propagation, and try to
@@ -320,7 +355,6 @@ if calculate_curves
             F_r1 = dt*0.5*epsilon_0*c*trapz(abs(red1_propagated_field).^2, 3);
             F_r2 = dt*0.5*epsilon_0*c*trapz(abs(red2_propagated_field).^2, 3);
 
-%             keyboard;
         end
         % place the newly propagated fields into the thg_input_fields structure
         thg_input_fields.field_red1_xyt = red1_propagated_field;
@@ -378,7 +412,6 @@ if calculate_curves
         thg_red2_m2_vs_t(K,:,:) = M2_vs_t.red2.crystal_output_face.msquaredxy.';
         thg_blue_m2_vs_t(K,:,:) = M2_vs_t.blue.crystal_output_face.msquaredxy.';
 
-%         keyboard;
         % integrate power vectors (using the trapz function) in time to get output energies
         thg_red1_energy_out(K) = trapz(thg_output_red1{K}.data(:,1),thg_output_red1{K}.data(:,2))*1e3; % in mJ
         thg_red2_energy_out(K) = trapz(thg_output_red2{K}.data(:,1),thg_output_red2{K}.data(:,2))*1e3; % in mJ
@@ -390,7 +423,7 @@ if calculate_curves
 %         close_handle(); % call the 'Close figure' callback - not usually
 %         necessary, and it's often useful to keep it open to look at
 %         outputs we haven't collected and saved
-%         keyboard;
+
     end
     
 else
@@ -443,7 +476,7 @@ ax3 = axes('Parent',fh); % make new axes in that output figure
 subplot(2,2,3,ax3); % set it as the 2nd subplot
 % plot the THG red1, red2, and blue output energies as a function of total
 % input pulse energy (red1+red2) in mJ
-ph3 = plot(ax3,red1_red2_energy_vec*2e3, thg_red1_pulse_m2s,'rs-',...
+ph3 = plot(ax3, red1_red2_energy_vec*2e3, thg_red1_pulse_m2s,'rs-',...
     red1_red2_energy_vec*2e3, thg_red2_pulse_m2s,'bo-',...
     red1_red2_energy_vec*2e3, thg_blue_pulse_m2s,'g*-');
 % xlabel(ax2,'SHG input energy [mJ]');  % label x-axis 
@@ -452,12 +485,24 @@ ylabel(ax3,'THG output pulse beam quality');    % label y-axis
 lh3 = legend(ax3,'1064 nm','532 nm',...
     '354.7 nm','Location','Best'); % make legend to describe each curve on the plot
 
+% plot efficiency: third-harmonic output energy / energy in
+ax4 = axes('parent', fh);
+subplot(2,2,4,ax4);
+ph4 = plot(ax4, red1_red2_energy_vec*2e3, thg_blue_energy_out ./ (red1_red2_energy_vec*2e3)*100);
+xlabel(ax4, sprintf('%.1f nm input energy [mJ]',shg_inputs.mix_2d_lp_wavelengths(1)));
+ylabel(ax4, 'Conversion efficiency [%]');
+
 if calculate_curves 
-    % If you ran the batch set of models, save the results of the batch
-    % script
+    % If you ran the batch set of models, save the results of the batch script 
+    %  the figure saved to thg_results_xx.fig, 
+    %  and .mat file of calculation results to the_results_xx.mat, 
+    % where xx is the date & time in year, month, day, hour, minute order
+    tstring = [datestr(now,'yymmdd'),'_',datestr(now,'hhMM')];
+    figurefilename = ['thg_results_',tstring,'.fig'];
     rmfield(thg_problem,'input_fields');
-    saveas(fh,'thg_results.fig');
-    save('thg_results.mat', 'c', 'epsilon_0', 'red1_red2_energy_vec', ...
+    saveas(fh,figurefilename);
+    savefilename = ['thg_results',tstring,'.mat'];
+    save(savefilename, 'c', 'epsilon_0', 'red1_red2_energy_vec', ...
         'shg_inputs', 'thg_inputs', 'shg_output_red1', 'shg_output_red2', ...
         'shg_output_blue', 'thg_output_red1', 'thg_output_red2', ...
         'thg_output_blue', 'shg_red1_energy_out', 'shg_red2_energy_out', ...
@@ -466,3 +511,6 @@ if calculate_curves
         'dx', 'dy', 'dt', 'thg_r1_energy_in', ...
         'thg_r2_energy_in', 'thg_bl_energy_in', 'shg_problem', 'thg_problem');
 end
+
+
+

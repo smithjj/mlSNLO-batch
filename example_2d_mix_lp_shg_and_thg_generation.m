@@ -26,8 +26,7 @@
 %   combine them in one of the red THG waves, and use the frequency doubled 
 %   output of the SHG stage as the other red wave.
 %   * Blue wave (354.7 nm) input energy is 0.
-%
-%   
+
 
 c = 3e8;
 epsilon_0 = 8.85e-12;
@@ -156,7 +155,8 @@ if calculate_curves
         shg_close_handle  = shg_fcn_handles{end};   % the function handle of the 'Close figure' callback is last returned
         shg_accept_handle();                        % call the 'accept' button's callback - equivalent to clicking the accept button
         shg_run_handle();                           % call the 'Run' button callback - equivalent to clicking the run button
-        
+        % can pause to look things over here if you uncomment this:
+        keyboard;
         
         % After running, 2D-mix-LP saves some output files to disk, with
         % one file per wave in ascii format. The first columns are
@@ -194,8 +194,9 @@ if calculate_curves
         % If the first stage is not type 1 SHG, all of this is irrelevant.
         thg_input_fields.field_red1_xyt = sqrt(0.5) * (shg_output_fields.field_red1_xyt + shg_output_fields.field_red2_xyt); % 1064 nm
         thg_input_fields.field_red2_xyt = shg_output_fields.field_blue_xyt;     % 532 nm
-        thg_input_fields.field_blue_xyt = 0*shg_output_fields.field_blue_xyt;   % 354.7nm
-        
+        % thg_input_fields.field_blue_xyt = 0*shg_output_fields.field_blue_xyt;   % 354.7nm % Note, the current version of mlSNLO's 2D-mix-LP model errors out if all of one of the input fields is 0, just use a very small portion of other wave
+        thg_input_fields.field_blue_xyt = 1e-30*shg_output_fields.field_blue_xyt;
+
         % As a check, we calculate the THG input pulse energies by
         % integrating the THG input fields in x,y, and t
         dx = thg_input_fields.xgrid(2) - thg_input_fields.xgrid(1);     % x-step
@@ -216,13 +217,16 @@ if calculate_curves
         thg_problem(K).input_fields = thg_input_fields;
         thg_problem(K).mix_2d_lp_pulseenergy(1) = (shg_red1_energy_out(K) + shg_red2_energy_out(K)); % Since we specify field profiles, these values are ignored we use the values calculated from SHG output for clarity
         thg_problem(K).mix_2d_lp_pulseenergy(2) = (shg_blue_energy_out(K));
-        thg_fcn_handles = snlo_2d_mix_lp_func(thg_problem(K)); % call the SNLO 2D-MIX-LP function with the problem set, and assign the returned cell array of function handles which are local to that file to 'fcn_handles'
-        thg_run_handle = thg_fcn_handles{1}; % the function handle of the 'Run' button callback is the first returned; the 'run' button callback function is always the first element of the cell array of returned function handles
-        thg_accept_handle = thg_fcn_handles{2}; % the function handle of the 'Run' button callback is the first returned; the 'accept' button callback function is always the second element of the cell array of returned function handles, if the function has an 'accept' button
-        thg_close_handle = thg_fcn_handles{end}; % the function handle of the 'Close figure' callback is last returned
+        thg_fcn_handles     = snlo_2d_mix_lp_func(thg_problem(K)); % call the SNLO 2D-MIX-LP function with the problem set, and assign the returned cell array of function handles which are local to that file to 'fcn_handles'
+        thg_run_handle      = thg_fcn_handles{1}; % the function handle of the 'Run' button callback is the first returned; the 'run' button callback function is always the first element of the cell array of returned function handles
+        thg_accept_handle   = thg_fcn_handles{2}; % the function handle of the 'Run' button callback is the first returned; the 'accept' button callback function is always the second element of the cell array of returned function handles, if the function has an 'accept' button
+        thg_close_handle    = thg_fcn_handles{end}; % the function handle of the 'Close figure' callback is last returned
         thg_accept_handle();    % call the 'accept' button's callback - equivalent to clicking the accept button
         thg_run_handle();       % call the 'Run' button callback - equivalent to clicking the run button
         
+        % can pause to look things over here if you uncomment this:
+        % keyboard
+
         thg_output_red1{K} = importdata('mix_2d_lp_red1_data.dat'); % load the red1 2d mix lp output file into memory, stick into the output cell array
         thg_output_red2{K} = importdata('mix_2d_lp_red2_data.dat'); % load the red2 2d mix lp output file into memory, stick into the output cell array
         thg_output_blue{K} = importdata('mix_2d_lp_blue_data.dat'); % load the blue 2d mix lp output file into memory, stick into the output cell array
