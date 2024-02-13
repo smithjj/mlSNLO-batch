@@ -1,0 +1,2152 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>All</title>
+  <link rel="stylesheet" href="https://stackedit.io/style.css" />
+</head>
+
+<body class="stackedit">
+  <div class="stackedit__left">
+    <div class="stackedit__toc">
+      
+<ul>
+<li><a href="#ref-ind">Ref ind</a></li>
+<li><a href="#qmix">Qmix</a></li>
+<li><a href="#bmix">Bmix</a></li>
+<li><a href="#cavity-ii">Cavity II</a></li>
+<li><a href="#focus">Focus</a></li>
+<li><a href="#gvm">GVM</a></li>
+<li><a href="#ncpm">NCPM</a></li>
+<li><a href="#opoangles">Opoangles</a></li>
+<li><a href="#pw-cav-lp">PW-cav-LP</a></li>
+<li><a href="#pw-mix-bb">PW-mix-BB</a></li>
+<li><a href="#pw-mix-bb-1">PW-mix-BB</a></li>
+<li><a href="#pw-mix-sp">PW-mix-SP</a></li>
+<li><a href="#pw-opo-bb">PW-opo-BB</a></li>
+<li><a href="#pw-opo-sp">PW-opo-SP</a></li>
+<li><a href="#qpm">QPM</a></li>
+<li><a href="#thermal">Thermal</a></li>
+<li><a href="#d-cav-lp">2D-cav-LP</a></li>
+<li><a href="#d-mix-lp">2D-mix-LP</a></li>
+<li><a href="#d-mix-sp">2D-mix-SP</a></li>
+<li><a href="#opg">OPG</a></li>
+</ul>
+
+    </div>
+  </div>
+  <div class="stackedit__right">
+    <div class="stackedit__html">
+      <h1 id="ref-ind">Ref ind</h1>
+<p><em>snlo_ref_ind_func.m</em><br>
+Ref.Ind. computes the refractive indexes, group velocities, group delay dispersions, and birefringent walkoff angles for uniaxial or biaxial crystals with any specified propagation direction. This function is useful if you wish to manually calculate phase matching or group velocities for situations not covered by SNLO functions Qmix, Bmix, QPM, Opoangles, Ncpm, or GVM.</p>
+<p>Optionally, this MATLAB function can be called with an input argument to pass the model input parameters. The input argument must be a data structure with fieldnames as follows:</p>
+
+<table>
+<thead>
+<tr>
+<th>Fieldname</th>
+<th>Shape</th>
+<th>Units</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ref_ind_selected_crystal</td>
+<td>scalar</td>
+<td>integer</td>
+<td>Of</td>
+</tr>
+<tr>
+<td>ref_ind_temperature</td>
+<td>scalar</td>
+<td>K</td>
+<td>Temperature</td>
+</tr>
+<tr>
+<td>ref_ind_theta</td>
+<td>scalar</td>
+<td>degrees</td>
+<td>Propagation angle</td>
+</tr>
+<tr>
+<td>ref_ind_phi</td>
+<td>scalar</td>
+<td>degrees</td>
+<td>Propagation angle</td>
+</tr>
+<tr>
+<td>ref_ind_wavelength</td>
+<td>scalar</td>
+<td>nm</td>
+<td>Wavelength</td>
+</tr>
+</tbody>
+</table><h1 id="qmix">Qmix</h1>
+<p><em>snlo_qmix_func.m</em><br>
+QMIX helps you quickly select the best crystal for your application from a list of over 60 crystals.  It calculates all the possible phase-matching orientations for the chosen crystal at the wavelengths specified, returning phase-matching angles, polarizations, refractive indexes, group velocities, group delay dispersion, effective nonlinearity, crystal tilt tolerance, acceptance angles, acceptance bandwidths, and acceptance temperatures. The three beams are assumed to have collinear propagation vectors. If the nonlinearity, deff, is zero, the other properties are not calculated. (If you want to find noncritical wavelengths, use function Ncpm.)<br>
+Optionally, this MATLAB function can be called with an input argument to pass the model input parameters. The input argument must be a data structure with fieldnames as follows:</p>
+
+<table>
+<thead>
+<tr>
+<th>Fieldname</th>
+<th>Shape</th>
+<th>Units</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>qmix_selected_crystal</td>
+<td>scalar</td>
+<td></td>
+<td>Select your crystal by which line of crystal_list.txt it appears on</td>
+</tr>
+<tr>
+<td>qmix_temperature</td>
+<td>scalar</td>
+<td>kelvin</td>
+<td>Temperature to calculate refractive indices at</td>
+</tr>
+<tr>
+<td>qmix_wavelength_red1</td>
+<td>scalar</td>
+<td>nm</td>
+<td>Wavelength of red2 wave</td>
+</tr>
+<tr>
+<td>qmix_wavelength_red2</td>
+<td>scalar</td>
+<td>nm</td>
+<td>Wavelength of Red2 wave</td>
+</tr>
+<tr>
+<td>qmix_wavelength_blue</td>
+<td>scalar</td>
+<td>nm</td>
+<td>Wavelength of Blue  wave</td>
+</tr>
+<tr>
+<td>qmix_principal_plane</td>
+<td>2 element character vector</td>
+<td>Should be ‘XY’, ‘XZ’, or ‘YZ’</td>
+<td></td>
+</tr>
+<tr>
+<td>qmix_type</td>
+<td>3 element character vector</td>
+<td></td>
+<td>Should be ‘Mix’ or ‘OPO’</td>
+</tr>
+</tbody>
+</table><h1 id="bmix">Bmix</h1>
+<p><em>snlo_bmix_func.m</em><br>
+Bmix calculates the properties of biaxial crystals for propagation in any direction including out of the principal planes (in contrast to Qmix where propagation in a principal plane is assumed).  The calculations are based on the d-tensor and Sellmeier listed in Qmix. Phase matching curves are computed along with the associated effective nonlinearity, walkoff, and acceptance angles.  The purple circle on the phase matching plot indicates the location of the optic axes in the x-z plane. Parallel propagation directions (k vectors) of the three interacting waves red1, red2, and blue are assumed.<br>
+For passing a set of inputs as an input argument to this function, the argument must be a data structure with fields named as follows:</p>
+
+<table>
+<thead>
+<tr>
+<th>Fieldname</th>
+<th>Shape</th>
+<th>Units</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>bmix_selected_crystal</td>
+<td>String</td>
+<td></td>
+<td>String containing abbreviation of the nonlinear crystal selection. See crystal_listb.txt for list of choices.</td>
+</tr>
+<tr>
+<td>bmix_temperature</td>
+<td>scalar</td>
+<td>K</td>
+<td>Temperature of crystal for calculations.</td>
+</tr>
+<tr>
+<td>bmix_wavelengths</td>
+<td>3 element vector</td>
+<td>nm</td>
+<td>Wavelengths for red1, red2, blue waves.</td>
+</tr>
+<tr>
+<td>bmix_rotation_axis</td>
+<td>character</td>
+<td>Member of set X, Y, Z</td>
+<td>Rotation axis.</td>
+</tr>
+<tr>
+<td>bmix_type</td>
+<td>string</td>
+<td>member of set “Type 1”, “Type 2”, or “Type 3”</td>
+<td>Mixing type.</td>
+</tr>
+</tbody>
+</table><h1 id="cavity-ii">Cavity II</h1>
+<p><em>snlo_brewster_displacement_cavity_func.m</em><br>
+Updated cavity function. Can handle Brewster angle crystals, plots the beam width and radius of curvature through the cavity, also displays how a small displacement or tilt added at some specified location alters the cavity mode.<br>
+For passing a set of inputs as an input argument to this function, the argument must be a data structure with fields named as follows:</p>
+
+<table>
+<thead>
+<tr>
+<th>Fieldname</th>
+<th>Shape</th>
+<th>Units</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>brewster_dist_cav_wavelength</td>
+<td>scalar</td>
+<td>nm</td>
+<td>Wavelength</td>
+</tr>
+<tr>
+<td>brewster_dist_cav_crystal_length</td>
+<td>scalar</td>
+<td>mm</td>
+<td>Length of the crystal</td>
+</tr>
+<tr>
+<td>brewster_dist_cav_ref_ind</td>
+<td>scalar</td>
+<td></td>
+<td>Crystal refractive index</td>
+</tr>
+<tr>
+<td>brewster_dist_cav_mirror_roc</td>
+<td>scalar</td>
+<td>mm</td>
+<td>Radius of curvature of mirrors</td>
+</tr>
+<tr>
+<td>brewster_dist_cav_mirror_angle</td>
+<td>scalar</td>
+<td>degrees</td>
+<td>Mirror angle</td>
+</tr>
+<tr>
+<td>brewster_dist_cav_leg1</td>
+<td>scalar</td>
+<td>mm</td>
+<td>Leg 1 length. The distance between the left mirror and right curved mirrors.</td>
+</tr>
+<tr>
+<td>brewster_dist_cav_leg2</td>
+<td>scalar</td>
+<td>mm</td>
+<td>Leg 2 length. Not used for linear cavities; for ring cavities, this is the length of the leg that bypasses the crystal.</td>
+</tr>
+<tr>
+<td>brewster_dist_cav_type</td>
+<td>string</td>
+<td>‘Ring cavity’ or ‘Linear cavity’</td>
+<td>Type of cavity - must be either ‘Ring cavity’ or ‘Linear cavity’</td>
+</tr>
+<tr>
+<td>brewster_dist_cav_brewster_crystal</td>
+<td>scalar</td>
+<td>logical</td>
+<td>Whether the crystal is tilted at the Brewster angle</td>
+</tr>
+<tr>
+<td>brewster_dist_cav_propagate_disturbance</td>
+<td>scalar</td>
+<td>logical</td>
+<td>Whether to model and plot a disturbance, which can be either an tilt or a displacement added at some location specified.</td>
+</tr>
+<tr>
+<td>brewster_dist_cav_tilt_or_disp</td>
+<td>string</td>
+<td>‘Tilt (urad)’ or ‘Displacement’</td>
+<td></td>
+</tr>
+<tr>
+<td>brewster_dist_cav_dist_z</td>
+<td>scalar</td>
+<td>mm</td>
+<td>Location of the displacement or tilt, measured from the left input mirror.</td>
+</tr>
+<tr>
+<td>brewster_dist_cav_dist_size</td>
+<td>scalar</td>
+<td>um or urad</td>
+<td>Magnitude of the displacement or tilt</td>
+</tr>
+</tbody>
+</table><h1 id="focus">Focus</h1>
+<p><em>snlo_focus_func.m</em><br>
+Calculate the width and curvature of a Gaussian beam at a specified location. These values are needed for the input parameters of 2D-mix-SP, 2D-mix-LP, and OPG.</p>
+<p>For passing a set of inputs as an input argument to this function, the following fields must be present in that data structure:</p>
+
+<table>
+<thead>
+<tr>
+<th>Fieldname</th>
+<th>shape</th>
+<th>units</th>
+<th>description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>focus_wavelength</td>
+<td>scalar</td>
+<td>nm</td>
+<td>Wavelength</td>
+</tr>
+<tr>
+<td>focus_ref_ind</td>
+<td>scalar</td>
+<td></td>
+<td>Crystal refractive index</td>
+</tr>
+<tr>
+<td>focus_waist</td>
+<td>scalar</td>
+<td>mm</td>
+<td>1/e^2 radius of beam at waist</td>
+</tr>
+<tr>
+<td>focus_face_to_focus</td>
+<td>scalar</td>
+<td>mm</td>
+<td>Distance between face of crystal and focus waist.</td>
+</tr>
+<tr>
+<td>focus_dist</td>
+<td>scalar</td>
+<td>mm</td>
+<td>Distance from the beam waist to calculate properties</td>
+</tr>
+</tbody>
+</table><h1 id="gvm">GVM</h1>
+<p>Group velocity mismatch.<br>
+<em>snlo_gvm_func.m</em><br>
+GVM calculates group velocity (mis)match for noncollinear phase matching. The paper “Group-velocity-matched three-wave mixing in birefringent crystals” Optics Letters vol. 26, page 719 (2001) describes the method of group velocity matching in birefringent crystals implemented in this function. This paper is available online at <a href="http://www.as-photonics.com/Publications.html">http://www.as-photonics.com/Publications.html</a>. The calculations are based on the d-tensor and Sellmeier equations displayed in Qmix.</p>
+<p>For passing a set of inputs as an input argument to this function, the following fields must be present in that data structure:</p>
+
+<table>
+<thead>
+<tr>
+<th>Fieldname</th>
+<th>shape</th>
+<th>units</th>
+<th>description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>gvm_temperature</td>
+<td>scalar</td>
+<td>K</td>
+<td>Temperature</td>
+</tr>
+<tr>
+<td>gvm_currentCrystalValue</td>
+<td>scalar</td>
+<td>Integer</td>
+<td>Which index in cell array of crystal names matches the one we’ve selected. The cell array of crystal names is loaded from <em>crystals.txt</em> with one cell element per line.</td>
+</tr>
+<tr>
+<td>gvm_wavelengths</td>
+<td>3 element vector</td>
+<td>nm</td>
+<td>Wavelengths. 1 element must be 0.</td>
+</tr>
+<tr>
+<td>gvm_slant_angle</td>
+<td>scalar</td>
+<td>degrees</td>
+<td>Slant angle</td>
+</tr>
+<tr>
+<td>gvm_polarization</td>
+<td>character array, length 3</td>
+<td></td>
+<td>Red1, red2, blue polarizations (ordinary or extraordinary); choose from ‘ooe’, ‘oee’, ‘eoe’, ‘eeo,’ ‘eoo’, and ‘oeo’.</td>
+</tr>
+<tr>
+<td>gvm_plane</td>
+<td>character array, length 2</td>
+<td></td>
+<td>The plane containing the optic axis (z axis) of the crystal; choose from XY, XZ, YZ</td>
+</tr>
+</tbody>
+</table><h1 id="ncpm">NCPM</h1>
+<p><em>snlo_ncpm_func.m</em><br>
+NCPM (noncritical phase matching) helps you quickly search the list of crystals for one that can noncritically phase match your wavelengths. Noncricitcal phase match refers to collinear phase matching with no birefringent walk off. It is desirable for efficient mixing of weak, tightly focused beams, and for maintaining the widest acceptance angle for all three beams. For uniaxial crystals the propagation direction is normal to the optic axis. For biaxial crystals the propagation direction is along one of the principal axes, X, Y, or Z.</p>
+<p>For passing a set of inputs as an input argument to this function, the following fields must be present in that data structure:</p>
+
+<table>
+<thead>
+<tr>
+<th>Fieldname</th>
+<th>Shape</th>
+<th>Units</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ncpm_temperature</td>
+<td>scalar</td>
+<td>K</td>
+<td>Temperature</td>
+</tr>
+<tr>
+<td>ncpm_currentCrystalPopupValue</td>
+<td>scalar</td>
+<td>integer</td>
+<td>index</td>
+</tr>
+<tr>
+<td>ncpm_type</td>
+<td>6 elements</td>
+<td>character vector</td>
+<td>Must be ‘Type 1’ or ‘Type 2’.</td>
+</tr>
+<tr>
+<td>ncpm_propagation_axis</td>
+<td>1 element</td>
+<td>character</td>
+<td>‘X’ or ‘Y’ or ‘Z’</td>
+</tr>
+<tr>
+<td>ncpm_wavelengths</td>
+<td>2 element vector</td>
+<td>nm</td>
+<td>Red and blue wavelength target.</td>
+</tr>
+</tbody>
+</table><h1 id="opoangles">Opoangles</h1>
+<p><em>snlo_opoangles_func.m</em><br>
+Calculates red1 and red2 wavelengths in opo or opa as a function of propagation in birefringent crystals assuming the blue pump wavelength is fixed. For biaxial crystals, propagation is in one of the principal planes of the crystal so the Plane radio buttons are activated. Select the plane of interest. In biaxial crystals the angle is theta, measured from the Z axis for propagation in the XZ and YZ planes.  For propagation in the XY plane the angle is phi, measured from the X axis toward the Y axis. Calculations are based on the d-tensor and Sellmeier listed in Qmix.<br>
+For passing a set of inputs as an input argument to this function, the following fields must be present in that data structure:</p>
+
+<table>
+<thead>
+<tr>
+<th>Fieldname</th>
+<th>Shape</th>
+<th>Units</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>opoangles_lambda</td>
+<td>(3 element vector)</td>
+<td>nm</td>
+<td>Wavelengths for for red1, red2, and blue waves</td>
+</tr>
+<tr>
+<td>opoangles_temperature</td>
+<td>scalar</td>
+<td>kelvin</td>
+<td>Temperature for refractive indices for phasematching</td>
+</tr>
+<tr>
+<td>opoangles_currentCrystalPopupValue</td>
+<td>scalar</td>
+<td>integer</td>
+<td>Which line number of crystals.txt matches your crystal</td>
+</tr>
+<tr>
+<td>opoangles_type</td>
+<td>character vector</td>
+<td></td>
+<td>Should be ‘Type 1’ or ‘Type 2’</td>
+</tr>
+<tr>
+<td>opoangles_plane</td>
+<td>2 element character vector</td>
+<td></td>
+<td>Should be ‘XY’ or ‘XZ’ or ‘YZ’</td>
+</tr>
+<tr>
+<td>opoangles_delta</td>
+<td>scalar</td>
+<td>degrees</td>
+<td>Pump tilt: the angle between signal wave vector and pump wave vector.</td>
+</tr>
+<tr>
+<td>opoangles_signal_pol</td>
+<td>scalar character</td>
+<td></td>
+<td>Should be ‘o’ or ‘e’</td>
+</tr>
+</tbody>
+</table><h1 id="pw-cav-lp">PW-cav-LP</h1>
+<p><em>snlo_pw_cav_lp_func.m</em><br>
+PW-cav-LP models plane-wave mixing in cavities.  Input irradiances are those of the central rays of lowest order Gaussian beams with diameters specified by the Beam diam. input values.  You can model an OPO, cavity resonant SHG or any other cavity mixing process by specifying the input beams and the reflectivity of the mirrors at those wavelengths.  The crystal mixing is similar to PW-mix-LP. The cavity configuration can be standing wave or ring.<br>
+For passing a set of inputs as an input argument to this function, the following fields must be present in that data structure:</p>
+
+<table>
+<thead>
+<tr>
+<th>Fieldname</th>
+<th>Shape</th>
+<th>Units</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>pw_cav_lp_wavelengths</td>
+<td>(3 element vector)</td>
+<td>nm</td>
+<td>Wavelengths for red1, red2, and blue waves</td>
+</tr>
+<tr>
+<td>pw_cav_lp_ref_inds</td>
+<td>(3 element vector)</td>
+<td></td>
+<td>Refractive indices for red1, red2, and blue waves (at wavelengths specified in pw_cav_lp_wavelengths)</td>
+</tr>
+<tr>
+<td>pw_cav_lp_left_refl_c</td>
+<td>(3 element vector)</td>
+<td></td>
+<td>Left crystal reflectivity; this light is lost, not resonated.</td>
+</tr>
+<tr>
+<td>pw_cav_lp_right_refl_c</td>
+<td>(3 element vector)</td>
+<td></td>
+<td>Right crystal reflectivity; this light is lost, not resonated.</td>
+</tr>
+<tr>
+<td>pw_cav_lp_crystal_loss</td>
+<td>(3 element vector)</td>
+<td>1/mm</td>
+<td>Crystal linear absorption for each wave</td>
+</tr>
+<tr>
+<td>pw_cav_lp_left_energy_pwr</td>
+<td>(3 element vector)</td>
+<td>J or W</td>
+<td>For red1, red2, and blue waves this is the left input pulse energy (if wave is pulsed), or power (if wave is cw)</td>
+</tr>
+<tr>
+<td>pw_cav_lp_right_energy_pwr</td>
+<td>(3 element vector)</td>
+<td>J or W</td>
+<td>For red1, red2, and blue waves this is the right input pulse energy (if wave is pulsed), or power (if wave is cw)</td>
+</tr>
+<tr>
+<td>pw_cav_lp_pulse_duration</td>
+<td>(3 element vector)</td>
+<td>FWHM ns</td>
+<td>Red1, red2, and blue wave pulse durations (FWHM)</td>
+</tr>
+<tr>
+<td>pw_cav_lp_beam_diameters</td>
+<td>(3 element vector)</td>
+<td>mm</td>
+<td>Red1, red2, and blue beam diameters (FWHM irrad.) at crystal entrance face. Lowest order Gaussian is assumed, and we model the ray at the beam center. To convert from the RADIUS of (1/e)^2 irradiance, multiply by 1.18.</td>
+</tr>
+<tr>
+<td>pw_cav_lp_left_refl_m</td>
+<td>(3 element vector)</td>
+<td></td>
+<td>Red1, red2, and blue wave power reflectivities at the left mirror.</td>
+</tr>
+<tr>
+<td>pw_cav_lp_right_refl_m</td>
+<td>(3 element vector</td>
+<td></td>
+<td>Red1, red2, and blue wave power reflectivities at the right mirror.</td>
+</tr>
+<tr>
+<td>pw_cav_lp_phase_left</td>
+<td>(3 element vector)</td>
+<td>radians</td>
+<td>Additional phase to add to the beam between the left mirror and crystal input face.</td>
+</tr>
+<tr>
+<td>pw_cav_lp_phase_right</td>
+<td>(3 element vector)</td>
+<td>radians</td>
+<td>Additional phase to add to the beam between the crystal output face and right mirror.</td>
+</tr>
+<tr>
+<td>pw_cav_lp_third_leg_phase</td>
+<td>(3 element vector)</td>
+<td>radians</td>
+<td>For ring cavities, an additiona phase to add to the beam between the right mirror and left mirror</td>
+</tr>
+<tr>
+<td>pw_cav_lp_cavity_length</td>
+<td>(scalar)</td>
+<td>mm</td>
+<td>Total cavity length</td>
+</tr>
+<tr>
+<td>pw_cav_lp_crystal_length</td>
+<td>(scalar)</td>
+<td>mm</td>
+<td>Crystal length</td>
+</tr>
+<tr>
+<td>pw_cav_lp_deff</td>
+<td>(scalar)</td>
+<td>pm/V</td>
+<td>Effective nonlinear coefficient Deff</td>
+</tr>
+<tr>
+<td>pw_cav_lp_cavity_type</td>
+<td>(scalar)</td>
+<td>integer</td>
+<td>Sets the cavity type to linear cavity (value of 1) or ring cavity (value of 0).</td>
+</tr>
+<tr>
+<td>pw_cav_lp_deltak</td>
+<td>(scalar)</td>
+<td>1/mm</td>
+<td>Phase mismatch Delta k = k_blue - k_red1 - k_red2</td>
+</tr>
+<tr>
+<td>pw_cav_lp_nz</td>
+<td>(scalar) integer</td>
+<td></td>
+<td># integration steps through the crystal</td>
+</tr>
+<tr>
+<td>pw_cav_lp_n_starts</td>
+<td>(scalar) integer</td>
+<td></td>
+<td>Number of starts; use a value of 1 for fasted computation; larger values provide better temporal resolution. Effective time step is (cavity length) / ((speed of light) * (# starts)).</td>
+</tr>
+</tbody>
+</table><h1 id="pw-mix-bb">PW-mix-BB</h1>
+<p><em>snlo_pw_mix_bb_func.m</em><br>
+PW-mix-BB computes three-wave mixing processes for plane waves with input irradiances equal to those of the central ray of lowest order Gaussian beams with energy and diameter specified on the input form. It ignores birefringent walkoff but includes group velocity effects. It is intended for modeling multi-longitudinal-mode pulses.  The number of modes populated in each model run is sufficient to cover the specified bandwidth for each beam. Quantum noise is automatically added to the red1 and red2 waves. The noise bandwidths of the red waves can be extended by specifying the bandwidth parameter. This inclusion of quantum noise is to approximate OPG modeling. However, to properly model OPG the spatial structure of the red beams should be noisy as well. In most other applications it will be invisible. The noise spectrum can be seen by setting d_eff to zero and setting the red energies or powers to zero, running and clicking<br>
+‘Spectra’.<br>
+For passing a set of inputs as an input argument to this function, the following fields must be present in that data structure:</p>
+
+<table>
+<thead>
+<tr>
+<th>Fieldname</th>
+<th>Shape</th>
+<th>Units</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>pw_mix_bb_wavelengths</td>
+<td>(3 element vector)</td>
+<td>nm</td>
+<td>Red1, red2, blue wave wavelengths</td>
+</tr>
+<tr>
+<td>pw_mix_bb_ref_inds</td>
+<td>(3 element vector)</td>
+<td></td>
+<td>Refractive indices</td>
+</tr>
+<tr>
+<td>pw_mix_bb_gvi</td>
+<td>(3 element vector)</td>
+<td></td>
+<td>Group velocity indices</td>
+</tr>
+<tr>
+<td>pw_mix_bb_gdd</td>
+<td>(3 element vector)</td>
+<td>fs^2/mm</td>
+<td>gdd group delay dispersion</td>
+</tr>
+<tr>
+<td>pw_mix_bb_input_refl</td>
+<td>(3 element vector)</td>
+<td></td>
+<td>Crystal input power reflectivity</td>
+</tr>
+<tr>
+<td>pw_mix_bb_output_refl</td>
+<td>(3 element vector)</td>
+<td></td>
+<td>Crystal output power reflectivity</td>
+</tr>
+<tr>
+<td>pw_mix_bb_crystal_loss</td>
+<td>(3 element vector)</td>
+<td>1/mm</td>
+<td>Linear absorption</td>
+</tr>
+<tr>
+<td>pw_mix_bb_pulse_energy_power</td>
+<td>(3 element vector)</td>
+<td>J or W</td>
+<td>Input energy (for pulsed waves) or power (for cw waves)</td>
+</tr>
+<tr>
+<td>pw_mix_bb_pulse_duration</td>
+<td>(3 element vector)</td>
+<td>FWHM ns</td>
+<td>Input pulse durations</td>
+</tr>
+<tr>
+<td>pw_mix_bb_beam_diameter</td>
+<td>(3 element vector)</td>
+<td>FWHM mm</td>
+<td>Input beam diameters at crystal input face. Lowest order Gaussian is assumed, and we model the ray at the beam center. To convert from the RADIUS of (1/e)^2 irradiance, multiply by 1.18.</td>
+</tr>
+<tr>
+<td>pw_mix_bb_bandwidth</td>
+<td>(3 element vector)</td>
+<td>FWHM GHz</td>
+<td>Bandwidth</td>
+</tr>
+<tr>
+<td>pw_mix_bb_mode_spacing</td>
+<td>(3 element vector)</td>
+<td>GHz</td>
+<td>Mode spacing</td>
+</tr>
+<tr>
+<td>pw_mix_bb_freq_mod</td>
+<td>(3 element vector, boolean)</td>
+<td></td>
+<td>True: Frequency modulated; false: amplitude noise also.</td>
+</tr>
+<tr>
+<td>pw_mix_bb_crystal_length</td>
+<td>(scalar)</td>
+<td>mm</td>
+<td>Crystal length</td>
+</tr>
+<tr>
+<td>pw_mix_bb_deff</td>
+<td>(scalar)</td>
+<td>pm/V</td>
+<td>Effective nonlinear coefficient deff</td>
+</tr>
+<tr>
+<td>pw_mix_bb_deltak</td>
+<td>(scalar)</td>
+<td>1/mm</td>
+<td>Phase mismatch Delta k = (k_3-k_1-k_2)</td>
+</tr>
+<tr>
+<td>pw_mix_bb_nz</td>
+<td>(scalar)</td>
+<td></td>
+<td>Nnumber of points in z through the crystal for integration.</td>
+</tr>
+</tbody>
+</table><h1 id="pw-mix-bb-1">PW-mix-BB</h1>
+<p><em>snlo_pw_mix_bb_func.m</em><br>
+PW-mix-LP computes three-wave mixing process for long-pulse plane- waves. The input irradiances are those of the central rays of spatial lowest-order Gaussian beams with diameters and energies specified in the input form.  This function ignores birefringent and group velocity walkoff.  It is intended for very quick evaluation of a proposed mixing process. For help in setting input values, right- click on the input edit box. Help text appears in the lower text box.<br>
+For passing a set of inputs as an input argument to this function, the following fields must be present in that data structure:</p>
+
+<table>
+<thead>
+<tr>
+<th>Fieldname</th>
+<th>Shape</th>
+<th>Units</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>pw_mix_lp_wavelengths</td>
+<td>(3 element vector)</td>
+<td>nm</td>
+<td>Wavelengths</td>
+</tr>
+<tr>
+<td>pw_mix_lp_ref_inds</td>
+<td>(3 element vector)</td>
+<td></td>
+<td>Refractive indices</td>
+</tr>
+<tr>
+<td>pw_mix_lp_phases</td>
+<td>(3 element vector)</td>
+<td>radians</td>
+<td>Input phases</td>
+</tr>
+<tr>
+<td>pw_mix_lp_input_reflectivities</td>
+<td>(3 element vector)</td>
+<td></td>
+<td>Power reflectivity at crystal input face</td>
+</tr>
+<tr>
+<td>pw_mix_lp_output_reflectivities</td>
+<td>(3 element vector)</td>
+<td></td>
+<td>Power reflectivity at crystal output face</td>
+</tr>
+<tr>
+<td>pw_mix_lp_crystal_losses</td>
+<td>(3 element vector)</td>
+<td>1/mm</td>
+<td>Crystal linear absorption</td>
+</tr>
+<tr>
+<td>pw_mix_lp_energy_power</td>
+<td>(3 element vector)</td>
+<td>J or W</td>
+<td>Input energy (if wave is pulsed) or power (if wave is cw)</td>
+</tr>
+<tr>
+<td>pw_mix_lp_pulse_durations</td>
+<td>(3 element vector)</td>
+<td>fwhm ns</td>
+<td>Pulse durations</td>
+</tr>
+<tr>
+<td>pw_mix_lp_beam_diameters</td>
+<td>(3 element vector)</td>
+<td>fwhm mm</td>
+<td>Beam diameters. Lowest order Gaussian is assumed, and we model the ray at the beam center. To convert from the RADIUS of (1/e)^2 irradiance, multiply by 1.18.</td>
+</tr>
+<tr>
+<td>pw_mix_lp_crystal_length</td>
+<td>(scalar)</td>
+<td>mm</td>
+<td>crystal length</td>
+</tr>
+<tr>
+<td>pw_mix_lp_deff</td>
+<td>(scalar)</td>
+<td>pm/V</td>
+<td>Effective nonlinear coefficient deff</td>
+</tr>
+<tr>
+<td>pw_mix_lp_deltak</td>
+<td>(scalar)</td>
+<td>1/mm</td>
+<td>Phase mismatch Delta k = (k_3 - k_1 - k_2)</td>
+</tr>
+<tr>
+<td>pw_mix_lp_nz</td>
+<td>scalar integer</td>
+<td>Number of integration z points through the crystal</td>
+<td></td>
+</tr>
+<tr>
+<td>pw_mix_lp_nt</td>
+<td>(scalar integer</td>
+<td></td>
+<td>Number of time steps (ignored if no waves are pulsed).</td>
+</tr>
+</tbody>
+</table><p>The input values that have 3 elements are in order of red1, red2, and blue waves where blue has the shortest wavelength and the other two are interchangeable.|</p>
+<h1 id="pw-mix-sp">PW-mix-SP</h1>
+<p><em>snlo_pw_mix_sp_func.m</em><br>
+PW-mix-SP computes three-wave mixing process for plane waves with irradiances equal to those of the central rays of spatial lowest order Gaussian beams with beam diameters and energies specified in the input form.  It ignores birefringent walkoff but includes group velocity effects, so it is useful for modeling very short pulses. cw light is not allowed in this function.  Pulses are Gaussian or Supergaussian in time at the input face. The three input pulses can have different durations and delays. For help in setting input values, right-click on the input edit box. Help text appears in the lower text box.<br>
+For passing a set of inputs as an input argument to this function, the following fields must be present in that data structure:</p>
+
+<table>
+<thead>
+<tr>
+<th>Fieldname</th>
+<th>Shape</th>
+<th>Units</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>pw_mix_sp_wavelengths</td>
+<td>3 element vector</td>
+<td>nm</td>
+<td>Wavelengths for red1, red2, blue waves.</td>
+</tr>
+<tr>
+<td>pw_mix_sp_ref_inds</td>
+<td>(3x1 array)</td>
+<td></td>
+<td>ref ind</td>
+</tr>
+<tr>
+<td>pw_mix_sp_gvi</td>
+<td>(3x1 array)</td>
+<td></td>
+<td>group velocity index</td>
+</tr>
+<tr>
+<td>pw_mix_sp_gdd</td>
+<td>(3x1 array)</td>
+<td>(fs^2/mm)</td>
+<td>group delay dispersion gdd</td>
+</tr>
+<tr>
+<td>pw_mix_sp_phases</td>
+<td>(3x1 array)</td>
+<td>rad</td>
+<td>Input phases</td>
+</tr>
+<tr>
+<td>pw_mix_sp_n2_red1</td>
+<td>(3x1 array)</td>
+<td>cm^2/W</td>
+<td>nonlinear refractive index n2 (red1)</td>
+</tr>
+<tr>
+<td>pw_mix_sp_n2_red2</td>
+<td>(3x1 array) nonlinear refractive index n2 (red2) (sq cm/W)</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>pw_mix_sp_n2_blue</td>
+<td>(3x1 array) nonlinear refractive index n2 (blue) (sq cm/W)</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>pw_mix_sp_beta_red1</td>
+<td>(3x1 array) 2-photon absorption beta (red1) (cm/W)</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>pw_mix_sp_beta_red2</td>
+<td>(3x1 array) 2-photon absorption beta (red2) (cm/W)</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>pw_mix_sp_beta_blue</td>
+<td>(3x1 array) 2-photon absorption beta (blue) (cm/W)</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>pw_mix_sp_input_refl</td>
+<td>(3x1 array) input power reflectivity</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>pw_mix_sp_output_refl</td>
+<td>(3x1 array) output power reflectivity</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>pw_mix_sp_crystal_losses</td>
+<td>(3x1 array) crystal loss (1/mm)</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>pw_mix_sp_pulseenergy</td>
+<td>(3x1 array) pulse energies (J)</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>pw_mix_sp_beam_diameter</td>
+<td>(3x1 array) beam diam (FWHM mm)</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>pw_mix_sp_pulse_durations</td>
+<td>(3x2 array) pulse durations (FWHM ps), and temporal super gaussian index (0 = sech^2, 1 = Gaussian, &gt;1 more tophat-like)</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>pw_mix_sp_pulse_chirp</td>
+<td>(3x3 array) pulse chirp: red1, red2, blue in first dimension; linear, quadratic and cubic in second dimension (THz/ps, THz/ps^2, and THz/ps^3);</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>pw_mix_sp_pulse_delay</td>
+<td>(2x1 array) pulse delay relative to center of blue pulse (ps)</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>pw_mix_sp_crystal_length</td>
+<td>(scalar) crystal length (mm)</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>pw_mix_sp_deff</td>
+<td>(scalar) effective nonlinear coefficient deff (pm/V)</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>pw_mix_sp_deltak</td>
+<td>(scalar) phase mismatch (k_3 - k_1 - k_2) [1/mm]</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>pw_mix_sp_nz</td>
+<td>(scalar) num z points</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>pw_mix_sp_nt</td>
+<td>(scalar) num time points</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table><h1 id="pw-opo-bb">PW-opo-BB</h1>
+<p><em>snlo_pw_opo_bb_func.m</em><br>
+PW-OPO-BB models broad-bandwidth, nanosecond, plane-wave (actually the central ray of a<br>
+spatial Gaussian) OPO’s.  It is similar to PW-cav-LP except it allows for differing<br>
+group velocities for the three waves and broad bandwidths.  The mathematical methods are<br>
+described in paper “Numerical models of broad bandwidth nanosecond optical parametric<br>
+oscillators” JOSA B vol. 16 p. 609 (1999), available at<br>
+<a href="http://www.as-photonics.com/Publications.html">http://www.as-photonics.com/Publications.html</a> This function permits studies of unseeded<br>
+OPO’s and the transition to seeding. It also models double resonance effects and pumping<br>
+by multi-mode lasers. I suggest you narrow the range of input parameters using the much<br>
+faster function PW-cav-LP before you run this function because it is demanding of<br>
+computer resources and user patience. For help in setting input values, right-click on<br>
+the input edit box. Help text appears in the lower text box.<br>
+For passing a set of inputs as an input argument to this function, the following fields must be present in that data structure:</p>
+
+<table>
+<thead>
+<tr>
+<th>Fieldname</th>
+<th>Shape</th>
+<th>Units</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>pw_opo_bb_wavelengths</td>
+<td>3x1 array</td>
+<td>nm</td>
+<td>Wavelengths</td>
+</tr>
+<tr>
+<td>pw_opo_bb_gvi</td>
+<td>3x1 array</td>
+<td></td>
+<td>Group velocity indices</td>
+</tr>
+<tr>
+<td>pw_opo_bb_ref_inds</td>
+<td>3x1 array</td>
+<td></td>
+<td>Refractive indices</td>
+</tr>
+<tr>
+<td>pw_opo_bb_left_refl_c</td>
+<td>3x1 array</td>
+<td></td>
+<td>Left crystal reflectivities</td>
+</tr>
+<tr>
+<td>pw_opo_bb_right_refl_c</td>
+<td>3x1 array</td>
+<td></td>
+<td>Right crystal reflectivity</td>
+</tr>
+<tr>
+<td>pw_opo_bb_crystal_loss</td>
+<td>3x1 array</td>
+<td>1/mm</td>
+<td>Crystal linear absorption</td>
+</tr>
+<tr>
+<td>pw_opo_bb_left_energy_pwr</td>
+<td>3x1 array</td>
+<td>J or W</td>
+<td>Left mirror input power (if wave is cw) or energy (if wave is pulsed)</td>
+</tr>
+<tr>
+<td>pw_opo_bb_right_energy_pwr</td>
+<td>3x1 array</td>
+<td>J or W</td>
+<td>Right mirror input power (if wave is cw) or energy (if wave is pulsed)</td>
+</tr>
+<tr>
+<td>pw_opo_bb_pulse_duration</td>
+<td>3x1 array</td>
+<td>FWHM ns</td>
+<td>Pulse durations (0 for cw).</td>
+</tr>
+<tr>
+<td>pw_opo_bb_beam_diameters</td>
+<td>3x1 array</td>
+<td>FWHM mm</td>
+<td>Beam diameters. Lowest order Gaussian is assumed, and we model the ray at the beam center. To convert from the RADIUS of (1/e)^2 irradiance, multiply by 1.18.</td>
+</tr>
+<tr>
+<td>pw_opo_bb_left_refl_m</td>
+<td>3x1 array</td>
+<td></td>
+<td>Left cavity mirror reflectivity</td>
+</tr>
+<tr>
+<td>pw_opo_bb_right_refl_m</td>
+<td>3x1 array</td>
+<td></td>
+<td>Right cavity mirror reflectivity</td>
+</tr>
+<tr>
+<td>pw_opo_bb_phase_left</td>
+<td>3x1</td>
+<td>radians</td>
+<td>Additional phase to apply between the left cavity mirror and crystal input face</td>
+</tr>
+<tr>
+<td>pw_opo_bb_phase_right</td>
+<td>3x1</td>
+<td>radians</td>
+<td>Additional phase to apply between the crystal output face and right cavity mirror</td>
+</tr>
+<tr>
+<td>pw_opo_bb_cavity_length</td>
+<td>scalar</td>
+<td>mm</td>
+<td>Cavity length</td>
+</tr>
+<tr>
+<td>pw_opo_bb_crystal_length</td>
+<td>scalar</td>
+<td>mm</td>
+<td>Length of crystal</td>
+</tr>
+<tr>
+<td>pw_opo_bb_pump_bandwidth</td>
+<td>scalar</td>
+<td>MHz</td>
+<td>Pump bandwidth</td>
+</tr>
+<tr>
+<td>pw_opo_bb_pump_mode_spacing</td>
+<td>scalar</td>
+<td>MHz</td>
+<td>Pump mode spacing</td>
+</tr>
+<tr>
+<td>pw_opo_bb_pump_fm</td>
+<td>scalar logical</td>
+<td></td>
+<td>Whether the pump is just frequency modulated (value of 1) or amplitude modulated as well (value of 0)</td>
+</tr>
+<tr>
+<td>pw_opo_bb_deff</td>
+<td>scalar</td>
+<td>pm/V</td>
+<td>Effective nonlinear coefficient d</td>
+</tr>
+<tr>
+<td>pw_opo_bb_cavity_type</td>
+<td>scalar logical</td>
+<td></td>
+<td>Cavity type: 1 for linear cavity, 0 for ring cavity</td>
+</tr>
+<tr>
+<td>pw_opo_bb_deltak</td>
+<td>scalar</td>
+<td>1/mm</td>
+<td>Phase mismatch Deltak = (k_blue - k_red1 - k_red2)</td>
+</tr>
+<tr>
+<td>pw_opo_bb_nz</td>
+<td>scalar integer</td>
+<td></td>
+<td>Number of integration steps through crystal</td>
+</tr>
+<tr>
+<td>pw_opo_bb_new_noise</td>
+<td>scalar integer</td>
+<td></td>
+<td>Use new noise (value of 1) or try to re-use previous run’s noise (value of 0)</td>
+</tr>
+</tbody>
+</table><p>For inputs with 3x1 arrays, first element is for red1 wave, second is for red2 wave, and third is for blue wave. The blue wave is the wave with the shortest wavelength, and red1 and red2 are interchangeable.</p>
+<h1 id="pw-opo-sp">PW-opo-SP</h1>
+<p><em>snlo_pw_opo_sp_func.m</em><br>
+PW-OPO-SP models a singly-resonant, plane-wave, synchronously-pumped OPO.  The<br>
+irradiance of the plane pump wave is set equal to the central ray of a lowest-order<br>
+spatial Gaussian whose beam diameter is specified in the input form under ‘Beam<br>
+diameter’.  This function includes group velocity and group delay dispersion but not<br>
+higher order dispersion. The OPO cavity is a ring, with only the red1 wave resonated.<br>
+The duration of the blue (pump) pulses are specified. The shape of these pulses can be<br>
+changed by including an optional integer 0-10 following the duration, separated by a<br>
+space. For integer value of 0, the pulse is a hyperbolic secant squared; a value of 1 is<br>
+a typical Gaussian; values of 2+ are super Gaussians which increasingly resemble top-hat<br>
+profiles with increasing value. For help in setting input values, right-click on the<br>
+input edit box. Help text appears in the lower text box.</p>
+<p>For passing a set of inputs as an input argument to this function, the following fields must be present in that data structure:</p>
+
+<table>
+<thead>
+<tr>
+<th>Fieldname</th>
+<th>Shape</th>
+<th>Units</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>pw_opo_sp_wavelengths</td>
+<td>3x1 array</td>
+<td>nm</td>
+<td>Wavelengths</td>
+</tr>
+<tr>
+<td>pw_opo_sp_ref_inds</td>
+<td>3x1 array</td>
+<td></td>
+<td>Refractive indices</td>
+</tr>
+<tr>
+<td>pw_opo_sp_gvi</td>
+<td>3x1 array</td>
+<td></td>
+<td>Group velocity indices</td>
+</tr>
+<tr>
+<td>pw_opo_sp_gdd</td>
+<td>3x1 array</td>
+<td>fs^2/m</td>
+<td>Group delay dispersion</td>
+</tr>
+<tr>
+<td>pw_opo_sp_crystal_loss</td>
+<td>3x1 array</td>
+<td>1/mm</td>
+<td>Crystal linear absorption</td>
+</tr>
+<tr>
+<td>pw_opo_sp_n2_red1</td>
+<td>3x1 array</td>
+<td>cm^2/W</td>
+<td>n2 from red1 light</td>
+</tr>
+<tr>
+<td>pw_opo_sp_n2_red2</td>
+<td>3x1 array</td>
+<td>cm^2/W</td>
+<td>n2 from red2 light</td>
+</tr>
+<tr>
+<td>pw_opo_sp_n2_blue</td>
+<td>3x1 array</td>
+<td>cm^2/W</td>
+<td>n2 from blue light</td>
+</tr>
+<tr>
+<td>pw_opo_sp_beta_red1</td>
+<td>3x1 array</td>
+<td>cm/W</td>
+<td>Two-photon absorption beta from red1 light</td>
+</tr>
+<tr>
+<td>pw_opo_sp_beta_red2</td>
+<td>3x1 array</td>
+<td>cm/W</td>
+<td>Two-photon absorption beta from red2 light</td>
+</tr>
+<tr>
+<td>pw_opo_sp_beta_blue</td>
+<td>3x1 array</td>
+<td>cm/W</td>
+<td>Two-photon absorption beta from blue light</td>
+</tr>
+<tr>
+<td>pw_opo_sp_pulse_energy</td>
+<td>scalar</td>
+<td>uJ</td>
+<td>Input pulse energy</td>
+</tr>
+<tr>
+<td>pw_opo_sp_pulse_duration</td>
+<td>scalar or 2x1 array</td>
+<td>FWHM ps</td>
+<td>Pulse duration (FWHM ps), optionally provide a second element for temporal Supergaussian index (value of 1 is Gaussian, larger values are more flat-topped)</td>
+</tr>
+<tr>
+<td>pw_opo_sp_chirp</td>
+<td>scalar</td>
+<td>THz/ps</td>
+<td>Chirp of blue wave</td>
+</tr>
+<tr>
+<td>pw_opo_sp_beam_diameter</td>
+<td>3x1 array</td>
+<td>FWHM mm</td>
+<td>Beam diameters. Lowest order Gaussian is assumed, and we model the ray at the beam center. To convert from the RADIUS of (1/e)^2 irradiance, multiply by 1.18.</td>
+</tr>
+<tr>
+<td>pw_opo_sp_output_refl</td>
+<td>scalar</td>
+<td></td>
+<td>Output coupler reflectivity for blue wave</td>
+</tr>
+<tr>
+<td>pw_opo_sp_loss</td>
+<td>scalar</td>
+<td>1/mm</td>
+<td>Other cavity loss</td>
+</tr>
+<tr>
+<td>pw_opo_sp_cavity_delay</td>
+<td>scalar</td>
+<td>ps</td>
+<td>Cavity delay</td>
+</tr>
+<tr>
+<td>pw_opo_sp_cavity_gdd</td>
+<td>scalar</td>
+<td>fs^2</td>
+<td>Cavity group delay dispersion</td>
+</tr>
+<tr>
+<td>pw_opo_sp_lcrystal</td>
+<td>scalar</td>
+<td>mm</td>
+<td>Crystal length</td>
+</tr>
+<tr>
+<td>pw_opo_sp_deff</td>
+<td>scalar</td>
+<td>pm/V</td>
+<td>Effective nonlinear coefficient deff</td>
+</tr>
+<tr>
+<td>pw_opo_sp_deltak</td>
+<td>scalar</td>
+<td>1/mm</td>
+<td>Phase mismatch Delta k = k_blue - k_red1 - k_red2</td>
+</tr>
+<tr>
+<td>pw_opo_sp_nz</td>
+<td>scalar integer</td>
+<td></td>
+<td>Number of z points through crystal for integration</td>
+</tr>
+<tr>
+<td>pw_opo_sp_nt</td>
+<td>scalar, integer</td>
+<td></td>
+<td>Number of time points</td>
+</tr>
+</tbody>
+</table><p>For inputs with 3x1 arrays, first element is for red1 wave, second is for red2 wave, and third is for blue wave. The blue wave is the wave with the shortest wavelength, and red1 and red2 are interchangeable.</p>
+<h1 id="qpm">QPM</h1>
+<p><em>snlo_qpm_func.m</em><br>
+QPM calculates properties of quasiphasematched materials including the poling, or domain<br>
+reversal, period (always specified at room temperature), the temperature bandwidth, the<br>
+frequency bandwidth, the group velocities, the group delay dispersions.  In addition the<br>
+tuning of phase matched red1 and red2 wavelengths due to blue (pump) tuning or crystal<br>
+temperature tuning can be computed using the Pump Tune and Temp Tune buttons. The<br>
+Sellmeier equations are those referenced in Qmix when a crystal is selected. The<br>
+temperature range and acceptance bandwidths are calculated as described in Qmix help.</p>
+<p>For passing a set of inputs as an input argument to this function, the following fields must be present in that data structure:</p>
+
+<table>
+<thead>
+<tr>
+<th>Fieldname</th>
+<th>Shape</th>
+<th>Units</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>qpm_temperature</td>
+<td>scalar</td>
+<td>kelvin</td>
+<td>Crystal temperature</td>
+</tr>
+<tr>
+<td>qpm_wavelengths</td>
+<td>3x1 array</td>
+<td>nm</td>
+<td>Wavelengths of red1, red2, blue waves.</td>
+</tr>
+<tr>
+<td>qpm_currentCrystalPopupValue</td>
+<td>scalar integer</td>
+<td></td>
+<td>Set this to which line of crystals.txt your crystal appears on</td>
+</tr>
+<tr>
+<td>qpm_currentPolValue</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>qpm_temptune_temp_range</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>qpm_temptune_period</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>qpm_pumptune_wavelength_range</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>qpm_pumptune_period</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table><h1 id="thermal">Thermal</h1>
+<p><em>snlo_thermal_func.m</em><br>
+Simple 3D steady-state thermal solver. Cuboid volume temperature, volume heating. Input and output faces are insulated. The side faces can each be perfectly insulated or perfectly cooled with temperature of 0.<br>
+Uses spectral methods, cosine and sine transforms.</p>
+<h1 id="d-cav-lp">2D-cav-LP</h1>
+<p>Diffractive, long-pulse intracavity mixing<br>
+<em>snlo_2d_cav_lp_func.m</em></p>
+<p>2D-cav-LP is similar to PW-cav-LP except it handles the full spatial profiles so it can realistically model beams with Gaussian or Supergaussian spatial profiles. It includes diffraction, birefringent walkoff, displaced beams, etc. for pulsed or cw light. The light is assumed to be monochromatic and the pulses are assumed to be long enough that group velocity effects are unimportant. The temporal shape of the pulse can be altered by including the super Gaussian index as an optional second argument in the duration box, separating the two arguments with a space; this second argument should be between 1 and 20, where a value of 1 is the typical Gaussian shape, and larger values are more flat-topped. For help in setting input values, right-click on the input edit box. Help text appears in the lower text box.</p>
+<p>For passing a set of inputs as an input argument to this function, the argument must be a data structure with fields named as follows:</p>
+
+<table>
+<thead>
+<tr>
+<th>Fieldname</th>
+<th>Shape</th>
+<th>Units</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>cav_2d_lp_wavelengths</td>
+<td>3 element vector</td>
+<td>nm</td>
+<td>Wavelengths for red1, red2, and blue waves</td>
+</tr>
+<tr>
+<td>cav_2d_lp_ref_inds</td>
+<td>3 element vector</td>
+<td></td>
+<td>Refractive indices for red1, red2, and blue waves</td>
+</tr>
+<tr>
+<td>cav_2d_lp_left_refl_c</td>
+<td>3 element vector</td>
+<td></td>
+<td>Crystal input face power reflectivity for red1, red2, and blue waves</td>
+</tr>
+<tr>
+<td>cav_2d_lp_right_refl_c</td>
+<td>3 element vector</td>
+<td></td>
+<td>Crystal output face power reflectivity for red1, red2, and blue waves</td>
+</tr>
+<tr>
+<td>cav_2d_lp_crystal_loss</td>
+<td>3 element vector</td>
+<td>1 / mm</td>
+<td>Linear absorption for red1, red2, and blue waves</td>
+</tr>
+<tr>
+<td>cav_2d_lp_left_energy_pwr</td>
+<td>3 element vector</td>
+<td>W (cw) or J (pulsed)</td>
+<td>Left mirror input power in W or pulse energy in J for red1, red2, and blue waves</td>
+</tr>
+<tr>
+<td>cav_2d_lp_right_energy_pwr</td>
+<td>2 element vector</td>
+<td>W (cw) or J (pulsed)</td>
+<td>Right mirror input power in W or pulse energy in J for red1, and red2 waves</td>
+</tr>
+<tr>
+<td>cav_2d_lp_pulse_duration</td>
+<td>3 element vector or 2x3 array</td>
+<td>fhwm ns</td>
+<td>Input pulse duration in fwhm ns, optionally spatial Supergaussian coefficient for red1, red2, and blue waves. Supergaussian index should be between 1 and 20, 1 is Gaussian and larger values are increasingly flat-topped.</td>
+</tr>
+<tr>
+<td>cav_2d_lp_pulse_delay</td>
+<td>2 element vector</td>
+<td>ns</td>
+<td>Input pulse delay in ns for red1 and red2 wave relative to center of input blue wave</td>
+</tr>
+<tr>
+<td>cav_2d_lp_beam_diameters</td>
+<td>3 element vector or 2x3 array</td>
+<td>fwhm mm</td>
+<td>Input beam diameters in fwhm mm for red1, red2, and blue waves. Optionally, use array sized 2x3 for elliptical beams where the 1st dimension is in the direction of walk off and perpendicular to it.</td>
+</tr>
+<tr>
+<td>cav_2d_lp_spatial_supergaussian</td>
+<td>3 element vector</td>
+<td></td>
+<td>Super Gaussian coefficient for spatial profile of input beams for red1, red2, and blue waves. Values between 1 and 20, 1 is Gaussian and larger values are increasingly flat-topped.</td>
+</tr>
+<tr>
+<td>cav_2d_lp_walkoff_angles</td>
+<td>3 element vector</td>
+<td>mrad</td>
+<td>birefringent walk off angles in mrad; for red1, red2, and blue waves</td>
+</tr>
+<tr>
+<td>cav_2d_lp_beam_offset</td>
+<td>3 element vector</td>
+<td>mm</td>
+<td>Input beam displacements in the walk off direction for red1, red2, and blue waves.</td>
+</tr>
+<tr>
+<td>cav_2d_lp_beam_roc</td>
+<td>3 element vector or 2x3 array</td>
+<td>mm</td>
+<td>Input beam radius of curvature in mm for red1, red2, and blue waves. Optionally, array sized 2x3; first dimension is radius of curvature [in the dimension of birefringent walkoff, perpendicular to it].</td>
+</tr>
+<tr>
+<td>cav_2d_lp_left_refl_m</td>
+<td>3 element vector</td>
+<td></td>
+<td>Left mirror reflectivity for red1, red2, and blue waves.</td>
+</tr>
+<tr>
+<td>cav_2d_lp_right_refl_m</td>
+<td>3 element vector</td>
+<td></td>
+<td>Right mirror reflectivity;  for red1, red2, and blue waves.</td>
+</tr>
+<tr>
+<td>cav_2d_lp_phase_lc</td>
+<td>3 element vector</td>
+<td>radians</td>
+<td>Additional phase introduced between left mirror and crystal for red1, red2, and blue waves.</td>
+</tr>
+<tr>
+<td>cav_2d_lp_phase_cr</td>
+<td>3 element vector</td>
+<td>radians</td>
+<td>Additional phase introduced between crystal and right mirror for red1, red2, and blue waves.</td>
+</tr>
+<tr>
+<td>cav_2d_lp_phase_rl</td>
+<td>3 element vector</td>
+<td>radians</td>
+<td>Additional phase introduced between right mirror and left mirror for red1, red2, and blue waves.</td>
+</tr>
+<tr>
+<td>cav_2d_lp_mirror_rocs</td>
+<td>2 element vector</td>
+<td>mm</td>
+<td>Radius of curvature for mirrors (left, right order).</td>
+</tr>
+<tr>
+<td>cav_2d_lp_leg_lengths</td>
+<td>3 element vector</td>
+<td>mm</td>
+<td>Leg lengs in between left mirror and crystal, crystal and right mirror, and for ring cavitys between right mirror and left mirror.</td>
+</tr>
+<tr>
+<td>cav_2d_lp_nz</td>
+<td>(scalar)</td>
+<td>Integer</td>
+<td>Number of steps through the crystal in z.</td>
+</tr>
+<tr>
+<td>cav_2d_lp_nxny</td>
+<td>(2 element vector)</td>
+<td>Integer</td>
+<td>Number of points in transverse dimensions, in the walk off direction and perpendicular to it.</td>
+</tr>
+<tr>
+<td>cav_2d_lp_crystal_length</td>
+<td>scalar</td>
+<td>mm</td>
+<td>Length of opo crystal.</td>
+</tr>
+<tr>
+<td>cav_2d_lp_lxly</td>
+<td>2 element vector</td>
+<td>mm</td>
+<td>Extent of transverse dimensions, in the direction of birefringent walkoff, and perpendicular to it.</td>
+</tr>
+<tr>
+<td>cav_2d_lp_cavity_type</td>
+<td>scalar</td>
+<td>0 or 1</td>
+<td>Cavity type: choose whether cavity is ring (value of 0) or linear (value of 1).</td>
+</tr>
+<tr>
+<td>cav_2d_lp_cavity_inversion</td>
+<td>scalar</td>
+<td>0 or 1</td>
+<td>Cavity inversion. 0 for no inversion between cavity passes; 1 inverts beam in walk off direction.</td>
+</tr>
+<tr>
+<td>cav_2d_lp_deff</td>
+<td>scalar</td>
+<td>pm/V</td>
+<td>Effective nonlinear coefficient. Find with Qmix.</td>
+</tr>
+<tr>
+<td>cav_2d_lp_deltak</td>
+<td>scalar</td>
+<td>1/mm</td>
+<td>Phase mismatch Delta k = k_blue - k_red1 - k_red2</td>
+</tr>
+<tr>
+<td>cav_2d_lp_nstarts</td>
+<td>scalar</td>
+<td>integer 1 or larger</td>
+<td>For pulsed operation, the number of starts. Values of 1 give a time resolution of one round trip time, larger numbers subdivide the pulse into finer temporal resolution.</td>
+</tr>
+</tbody>
+</table><h1 id="d-mix-lp">2D-mix-LP</h1>
+<p>Long-pulse, diffractive mixing<br>
+<em>snlo_2d_mix_lp_func.m</em><br>
+2D-mix-LP is similar to PW-mix-LP except it handles the full spatial profiles so it can realistically model circular or elliptical beams with Gaussian or Supergaussian transverse profiles.  It includes diffraction, birefringent walkoff, displaced beams, etc. for gaussian or super-guassian pulses or cw light. The light is assumed to be monochromatic and the pulses are assumed to be long enough that group velocity effects are unimportant. Maxwell’s equations are integrated using split-step methods to give true diffractive calculations. For help in setting input values, right-click on the input edit box. Help text appears in the lower text box.</p>
+<p>For passing a set of inputs as an input argument to this function, the argument must be a data structure with fields named as follows:</p>
+
+<table>
+<thead>
+<tr>
+<th>Fieldname</th>
+<th>Shape</th>
+<th>Units</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>mix_2d_lp_wavelengths</td>
+<td>3 element vector</td>
+<td>nm</td>
+<td>Wavelengths for red1, red2, blue waves.</td>
+</tr>
+<tr>
+<td>mix_2d_lp_ref_inds</td>
+<td>3 element vector</td>
+<td></td>
+<td>Refractive indices in the crystal for the red1, red2, blue waves.</td>
+</tr>
+<tr>
+<td>mix_2d_lp_phase</td>
+<td>3 element vector</td>
+<td>radians</td>
+<td>Input phases for the red1, red2, blue waves.</td>
+</tr>
+<tr>
+<td>mix_2d_lp_input_refl</td>
+<td>3 element vector</td>
+<td></td>
+<td>Crystal input face (power) reflectivity for red1, red2, blue waves.</td>
+</tr>
+<tr>
+<td>mix_2d_lp_output_refl</td>
+<td>3 element vector</td>
+<td></td>
+<td>Crystal output face (power) reflectivity for red1, red2, blue waves.</td>
+</tr>
+<tr>
+<td>mix_2d_lp_crystal_losses</td>
+<td>3 element vector</td>
+<td>1/mm</td>
+<td>Linear absorption in crystal for red1, red2, blue waves.</td>
+</tr>
+<tr>
+<td>mix_2d_lp_pulseenergy</td>
+<td>3 element vector</td>
+<td>W (cw) or J (pulsed)</td>
+<td>Input pulse energies/powers in J/W for red1, red2, blue waves.</td>
+</tr>
+<tr>
+<td>mix_2d_lp_pulse_durations</td>
+<td>3 element vector or 2x3 array</td>
+<td>ns</td>
+<td>Pulse duration in ns for red1, red2, blue waves. Optionally, values in second row set temporal supergaussian; values of 1 are Gaussian, larger values are more flat-toppped.</td>
+</tr>
+<tr>
+<td>mix_2d_lp_pulse_delays</td>
+<td>3 element vector</td>
+<td>ns</td>
+<td>Pulse delay for red1, red2, blue waves.</td>
+</tr>
+<tr>
+<td>mix_2d_lp_beam_diameters</td>
+<td>3 element vector or 2x3 array</td>
+<td>fwhm mm</td>
+<td>Beam diameter for red1, red2, blue waves. Optionally two rows; the first is in direction of birefringent walkoff, second is perpendicular to it.</td>
+</tr>
+<tr>
+<td>mix_2d_lp_supergaussian_coeff</td>
+<td>3 element vector</td>
+<td></td>
+<td>Spatial Supergaussian coefficient for red1, red2, blue waves. Values between 1 and 20; 1 is Gaussian, larger is more flat-topped.</td>
+</tr>
+<tr>
+<td>mix_2d_lp_n2_red1</td>
+<td>3 element vector</td>
+<td>m^2/W</td>
+<td>Nonlinear index for red1, red2, blue waves caused by red1 light.</td>
+</tr>
+<tr>
+<td>mix_2d_lp_n2_red2</td>
+<td>3 element vector</td>
+<td>m^2/W</td>
+<td>Nonlinear index for red1, red2, blue waves caused by red2 light.</td>
+</tr>
+<tr>
+<td>mix_2d_lp_n2_blue</td>
+<td>3 element vector</td>
+<td>m^2/W</td>
+<td>Nonlinear index for red1, red2, blue waves caused by blue light.</td>
+</tr>
+<tr>
+<td>mix_2d_lp_beta_red1</td>
+<td>3 element vector</td>
+<td></td>
+<td>beta. Two-photon absorption coefficient for red1, red2, blue waves caused by red1 light.</td>
+</tr>
+<tr>
+<td>mix_2d_lp_beta_red2</td>
+<td>3 element vector</td>
+<td></td>
+<td>beta. Two-photon absorption coefficient for red1, red2, blue waves caused by red2 light.</td>
+</tr>
+<tr>
+<td>mix_2d_lp_beta_blue</td>
+<td>3 element vector</td>
+<td></td>
+<td>beta. Two-photon absorption coefficient for red1, red2, blue waves caused by blue light.</td>
+</tr>
+<tr>
+<td>mix_2d_lp_wo_angles</td>
+<td>3 element vector</td>
+<td>mrad</td>
+<td>Birefringent walk off angle for red1, red2, blue waves.</td>
+</tr>
+<tr>
+<td>mix_2d_lp_offset_wodir</td>
+<td>3 element vector</td>
+<td>mm</td>
+<td>Input beam offset in the direction of walk off for red1, red2, blue waves.</td>
+</tr>
+<tr>
+<td>mix_2d_lp_rad_curv</td>
+<td>3 element vector or 2x3 array</td>
+<td>mm</td>
+<td>Input beam radius of curvature for red1, red2, blue waves. Optionally two rows; the first is in direction of birefringent walkoff, second is perpendicular to it.</td>
+</tr>
+<tr>
+<td>mix_2d_lp_nz</td>
+<td>scalar</td>
+<td>Integer</td>
+<td>Number of z steps through crystal.</td>
+</tr>
+<tr>
+<td>mix_2d_lp_nxny</td>
+<td>2 element vector</td>
+<td>mm</td>
+<td>Number of transverse grid points, in the direction of walkoff and perpendicular to it.</td>
+</tr>
+<tr>
+<td>mix_2d_lp_crystal_length</td>
+<td>scalar</td>
+<td>mm</td>
+<td>Crystal length.</td>
+</tr>
+<tr>
+<td>mix_2d_lp_lx_ly</td>
+<td>2 element vector</td>
+<td>mm</td>
+<td>Transverse grid length, in the direction of walkoff and perpendicular to it.</td>
+</tr>
+<tr>
+<td>mix_2d_lp_deff</td>
+<td>scalar</td>
+<td>pm/V</td>
+<td>Effective nonlinear coefficient.</td>
+</tr>
+<tr>
+<td>mix_2d_lp_deltak</td>
+<td>scalar</td>
+<td>1/mm</td>
+<td>Phase mismatch Deltak = k_blue - k_red1 - k_red2.</td>
+</tr>
+<tr>
+<td>mix_2d_lp_nt</td>
+<td>scalar</td>
+<td>Integer</td>
+<td>Number of time points (for pulsed cases).</td>
+</tr>
+<tr>
+<td>mix_2d_lp_save_movie</td>
+<td>scalar</td>
+<td>(logical)</td>
+<td>Save movie data to file.</td>
+</tr>
+<tr>
+<td>mix_2d_lp_auto_analyze</td>
+<td>scalar</td>
+<td>(logical)</td>
+<td>Automatically analyze beam for each wave after model finishes (beam quality, tilt, radius of curvature).</td>
+</tr>
+</tbody>
+</table><h1 id="d-mix-sp">2D-mix-SP</h1>
+<p>Short-pulse, diffractive mixing<br>
+<em>snlo_2d_mix_sp_func.m</em><br>
+% Units for chirps? Order for chirps? Does each wave get one column, or one row?</p>
+
+<table>
+<thead>
+<tr>
+<th>Fieldname</th>
+<th>Shape</th>
+<th>Units</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>mix_2d_sp_wavelengths</td>
+<td>3 element vector</td>
+<td>nm</td>
+<td>Wavelengths for red1, red2, blue waves.</td>
+</tr>
+<tr>
+<td>mix_2d_sp_ref_inds</td>
+<td>3 element vector</td>
+<td></td>
+<td>Crystal refractive indices for red1, red2, blue waves.</td>
+</tr>
+<tr>
+<td>mix_2d_sp_gvi</td>
+<td>3 element vector</td>
+<td></td>
+<td>Crystal group velocity indices for red1, red2, blue waves.</td>
+</tr>
+<tr>
+<td>mix_2d_sp_gdd</td>
+<td>3 element vector</td>
+<td>fs^2/mm</td>
+<td>Group delay dispersion for red1, red2, blue waves.</td>
+</tr>
+<tr>
+<td>mix_2d_sp_phase</td>
+<td>3 element vector</td>
+<td>radians</td>
+<td>Input phase for red1, red2, blue waves.</td>
+</tr>
+<tr>
+<td>mix_2d_sp_input_refl</td>
+<td>3 element vector</td>
+<td></td>
+<td>Crystal input face  reflectiviy for red1, red2, blue waves.</td>
+</tr>
+<tr>
+<td>mix_2d_sp_output_refl</td>
+<td>3 element vector</td>
+<td></td>
+<td>Crystal output face reflectivity for red1, red2, blue waves.</td>
+</tr>
+<tr>
+<td>mix_2d_sp_crystal_losses</td>
+<td>3 element vector</td>
+<td>% crystal loss (1/mm)</td>
+<td></td>
+</tr>
+<tr>
+<td>mix_2d_sp_n2_red1</td>
+<td>3 element vector</td>
+<td></td>
+<td>n2 (red1) sq cm/W</td>
+</tr>
+<tr>
+<td>mix_2d_sp_n2_red2</td>
+<td>3 element vector</td>
+<td></td>
+<td>n2 (red2) sq cm/W</td>
+</tr>
+<tr>
+<td>mix_2d_sp_n2_blue</td>
+<td>3 element vector</td>
+<td></td>
+<td>n2 (blue) sq cm/W</td>
+</tr>
+<tr>
+<td>mix_2d_sp_beta_red1</td>
+<td>3 element vector</td>
+<td></td>
+<td>beta (red1) cm/W</td>
+</tr>
+<tr>
+<td>mix_2d_sp_beta_red2</td>
+<td>3 element vector</td>
+<td></td>
+<td>beta (red2) cm/W</td>
+</tr>
+<tr>
+<td>mix_2d_sp_beta_blue</td>
+<td>3 element vector</td>
+<td></td>
+<td>beta (blue) cm/W</td>
+</tr>
+<tr>
+<td>mix_2d_sp_pulseenergy</td>
+<td>3 element vector</td>
+<td>W or J</td>
+<td>Input pulse energies (J) or powers (W) for red1, red2, blue waves.</td>
+</tr>
+<tr>
+<td>mix_2d_sp_pulse_durations</td>
+<td>3 element vector or 2x3 array</td>
+<td>ps</td>
+<td>Pulse durations (fwhm). Optionally, second row are temporal supergaussian indices – values of 1 are Gaussian, larger values are more flat-topped.</td>
+</tr>
+<tr>
+<td>mix_2d_sp_pulse_delays</td>
+<td>2 element vector</td>
+<td>ps</td>
+<td>Pulse delays for red1, red2, blue waves.</td>
+</tr>
+<tr>
+<td>mix_2d_sp_pulse_chirps</td>
+<td>0, or 3 element vector, or 2x3 array, or 3x3 array</td>
+<td>THz/ps, or THz/ps^2, or THz/ps^3</td>
+<td>Pulse chirps for red1, red2, blue waves. You can enter 0, or a 3 element vector for linear chirps; optionally, add one row to specify the quadratic chirp, and another for cubic chirp.</td>
+</tr>
+<tr>
+<td>mix_2d_sp_beam_diameters</td>
+<td>3 element vector or 2x3 array</td>
+<td>fwhm mm</td>
+<td>Beam diam (fwhm), optionally second row (first is in the direction of birefringent walkoff, second is perpendicular to it).</td>
+</tr>
+<tr>
+<td>mix_2d_sp_supergaussian_coeff</td>
+<td>3 element vector</td>
+<td></td>
+<td>Spatial supergaussian indices for red1, red2, blue waves. Value of 1 is Gaussian, larger values are more flat-topped.</td>
+</tr>
+<tr>
+<td>mix_2d_sp_wo_angles</td>
+<td>3 element vector</td>
+<td>mrad</td>
+<td>Birefringent walk off angles for red1, red2, blue waves.</td>
+</tr>
+<tr>
+<td>mix_2d_sp_offset_wodir</td>
+<td>3 element vector</td>
+<td>mm</td>
+<td>Beam offset in the direction of birefringent walk off for red1, red2, blue waves.</td>
+</tr>
+<tr>
+<td>mix_2d_sp_rad_curv</td>
+<td>3 element vector or 2x3 array</td>
+<td>mm</td>
+<td>Input beam radius of curvature (in air) for red1, red2, blue waves. With an optional second row, the first row is radius of curvature in the direction of birefringent walk off and the second is perpendicular to it.</td>
+</tr>
+<tr>
+<td>mix_2d_sp_nz</td>
+<td>scalar</td>
+<td>Integer</td>
+<td>Number of mixing &amp; propagation z steps through crystal</td>
+</tr>
+<tr>
+<td>mix_2d_sp_nxny</td>
+<td>2 element vector</td>
+<td>Integer</td>
+<td>Number of transverse grid points, in the direction of birefringent walkoff and perpendicular to it.</td>
+</tr>
+<tr>
+<td>mix_2d_sp_crystal_length</td>
+<td>scalar</td>
+<td>mm</td>
+<td>Crystal length.</td>
+</tr>
+<tr>
+<td>mix_2d_sp_lx_ly</td>
+<td>2 element vector</td>
+<td>Integer</td>
+<td>Crystal width and height.</td>
+</tr>
+<tr>
+<td>mix_2d_sp_deff</td>
+<td>scalar</td>
+<td>pm/V</td>
+<td>Effective nonlinear coefficient.</td>
+</tr>
+<tr>
+<td>mix_2d_sp_deltak</td>
+<td>scalar</td>
+<td>1/mm</td>
+<td>Phase mismatch Deltak = k_blue - k_red1 - k_red2.</td>
+</tr>
+<tr>
+<td>mix_2d_sp_nt</td>
+<td>scalar</td>
+<td>Integer</td>
+<td>Number of time points.</td>
+</tr>
+</tbody>
+</table><h1 id="opg">OPG</h1>
+<p>OPG models single-pass mixing with diffraction, birefringent walkoff, group velocity walk off, and group velocity dispersion with simulated quantum noise in both red waves. The quantum noise is automatically computed based on the inputs. Optional red seed light can be added to the noise by specifying red pulse energies and pulse durations.</p>
+
+<table>
+<thead>
+<tr>
+<th>Fieldname</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>opg_2d_wavelengths:</td>
+<td>(3 element vector) wavelengths in nm; for red1, red2, and blue waves</td>
+</tr>
+<tr>
+<td>opg_2d_ref_inds:</td>
+<td>(3 element vector) refractive indices; for red1, red2, and blue waves</td>
+</tr>
+<tr>
+<td>opg_2d_gvi:</td>
+<td>(3 element vector) group velocity indices; for red1, red2, and blue waves</td>
+</tr>
+<tr>
+<td>opg_2d_gdd:</td>
+<td>(3 element vector) group delay dispersions in fs^2/mm; for red1, red2, and blue waves</td>
+</tr>
+<tr>
+<td>opg_2d_phase:</td>
+<td>(3 element vector) input phase of waves red1, red2, blue; for red1, red2, and blue waves</td>
+</tr>
+<tr>
+<td>opg_2d_input_refl:</td>
+<td>(3 element vector) input crystal face power reflectivity; for red1, red2, and blue waves</td>
+</tr>
+<tr>
+<td>opg_2d_output_refl:</td>
+<td>(3 element vector) output crystal face power reflecitivity; for red1, red2, and blue waves</td>
+</tr>
+<tr>
+<td>opg_2d_crystal_losses:</td>
+<td>(3 element vector) linear absorption in 1/mm; for red1, red2, and blue waves</td>
+</tr>
+<tr>
+<td>opg_2d_n2_red1:</td>
+<td>(3 element vector) for red1, nonlinear refractive index in sq cm/W; for red1, red2, and blue waves</td>
+</tr>
+<tr>
+<td>opg_2d_n2_red2:</td>
+<td>(3 element vector) for red2, nonlinear refractive index in sq cm/W; for red1, red2, and blue waves</td>
+</tr>
+<tr>
+<td>opg_2d_n2_blue:</td>
+<td>(3 element vector) for blue, nonlinear refractive index in sq cm/W; for red1, red2, and blue waves</td>
+</tr>
+<tr>
+<td>opg_2d_beta_red1:</td>
+<td>(3 element vector) for red1, two-photon absorption in cm/W; for red1, red2, and blue waves</td>
+</tr>
+<tr>
+<td>opg_2d_beta_red2:</td>
+<td>(3 element vector) for red2, two-photon absorption in cm/W; for red1, red2, and blue waves</td>
+</tr>
+<tr>
+<td>opg_2d_beta_blue:</td>
+<td>(3 element vector) for blue, two-photon absorption in cm/W; for red1, red2, and blue waves</td>
+</tr>
+<tr>
+<td>opg_2d_pulseenergy:</td>
+<td>(3 element vector) input pulse energy in J; for red1, red2, and blue waves</td>
+</tr>
+<tr>
+<td>opg_2d_pulse_durations:</td>
+<td>(3 element vector) input pulse durations power fwhm ps; for red1, red2, and blue waves; optionally array of 3x2 where 2nd dimension is integer 0-10 for sech^2 or (super) gaussian shape</td>
+</tr>
+<tr>
+<td>opg_2d_pulse_delays:</td>
+<td>(3 element vector) input pulse delays relative to blue pulse center in ps; vector of 2 elements: for red1, red2</td>
+</tr>
+<tr>
+<td>opg_2d_pulse_chirps:</td>
+<td>(3 element vector) chirp of input pulse in THz/ps; for red1, red2, and blue waves; optionally array of 3x2 or 3x3 for 2nd &amp; 3rd order chirps (in THz/ps^2 and THz/ps^3);</td>
+</tr>
+<tr>
+<td>opg_2d_beam_diameters:</td>
+<td>(3 element vector) diameters of input beam fwhm mm; for red1, red2, and blue waves; optionally, 3x2 array with 1st column walk off direction diam, 2nd column perpendicular to that</td>
+</tr>
+<tr>
+<td>opg_2d_supergaussian_coeff:</td>
+<td>(3 element vector) spatial super gaussian coefficient (integer valued); for red1, red2, and blue waves</td>
+</tr>
+<tr>
+<td>opg_2d_wo_angles:</td>
+<td>(3 element vector) birefringent walk off angle in mrad; for red1, red2, and blue waves</td>
+</tr>
+<tr>
+<td>opg_2d_offset_wodir:</td>
+<td>(3 element vector) input beam displacement relative to center of grid in mm; ; for red1, red2, and blue waves</td>
+</tr>
+<tr>
+<td>opg_2d_rad_curv:</td>
+<td>(3 element vector) radius of curvature for input beams in mm; for red1, red2, and blue waves; optionally, 3x2 array with 1st column walk off direction diam, 2nd column perpendicular to that</td>
+</tr>
+<tr>
+<td>opg_2d_nz:</td>
+<td>(scalar) number of steps in z</td>
+</tr>
+<tr>
+<td>opg_2d_nxny:</td>
+<td>(2 element vector) number of points in transverse dimensions (walk off direction and perpendicular to that)</td>
+</tr>
+<tr>
+<td>opg_2d_grid_duration:</td>
+<td>(scalar) duration for simulation in ps</td>
+</tr>
+<tr>
+<td>opg_2d_crystal_length:</td>
+<td>(scalar) crystal length in mm</td>
+</tr>
+<tr>
+<td>opg_2d_lx_ly:</td>
+<td>(2 element vector) transverse spatial grid extend in mm; walk off direction and perpendicular to that</td>
+</tr>
+<tr>
+<td>opg_2d_deff:</td>
+<td>(scalar) effective nonlinear coefficient in pm/V</td>
+</tr>
+<tr>
+<td>opg_2d_deltak:</td>
+<td>(scalar) phase mismatch delta k in 1/mm; (k_blue - k_red1 - k_red2</td>
+</tr>
+<tr>
+<td>opg_2d_nt:</td>
+<td>(scalar) number of points in time for simulation</td>
+</tr>
+</tbody>
+</table>
+    </div>
+  </div>
+</body>
+
+</html>
