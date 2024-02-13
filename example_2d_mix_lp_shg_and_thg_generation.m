@@ -156,7 +156,7 @@ if calculate_curves
         shg_accept_handle();                        % call the 'accept' button's callback - equivalent to clicking the accept button
         shg_run_handle();                           % call the 'Run' button callback - equivalent to clicking the run button
         % can pause to look things over here if you uncomment this:
-        keyboard;
+        % keyboard;
         
         % After running, 2D-mix-LP saves some output files to disk, with
         % one file per wave in ascii format. The first columns are
