@@ -1,5 +1,11 @@
 % Modified 2D-mix-LP example (with user-specified input fields)
 %
+% This script does not work with mlSNLO versions prior to 75.2.0
+% (from April, 2021.)
+% It will execute without throwing any errors but 2D-mix-LP will not 
+% correctly use the input field profiles specified here and instead just 
+% uses the input box values to create Gaussian or super Gaussian input fields.
+%
 % This is an example of two-stage third-harmonic generation (using two
 % crystals in series) without propagation between them. The first crystal
 % is Type I second-harmonic generation, and the second third-harmonic generation.
