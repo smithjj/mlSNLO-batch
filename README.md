@@ -38,7 +38,7 @@ For each SNLO modeling function below, there is a link to the 'Help' text file a
 
 The help text files here are the ones displayed after clicking the 'Help' button in the main menu of SNLO.
 
-Additional information about how to specify the model's input parameters can be found at 
+Additional information about how to specify the model's input parameters can be found at [mlSNLO_function_input_data_structures.md](mlSNLO_function_input_data_structures.md)
 
 ### SNLO functions
 (in the order they appear in the main menu)
