@@ -4,8 +4,8 @@ The units are usually kept in MKS for simplicity and consistency.
 <a href="#inputs">Inputs</a> and <a href="#outputs">outputs</a> below.
 
 # Input parameters
-<p id="inputs">
-2D-mix-SP *(snlo_2d_mix_sp_func)* accepts model parameters as a input argument to the MATLAB function file which is a data structure. The structure looks for matching fieldnames and tries to use the corresponding values to populate the edit boxes in the main GUI input form. Below is a list of the fieldnames with a remark about how the values should be formatted (and their units):</p>
+<p id="inputs">2D-mix-SP *(snlo_2d_mix_sp_func)* accepts model parameters as a input argument to the MATLAB function file which is a data structure. The structure looks for matching fieldnames and tries to use the corresponding values to populate the edit boxes in the main GUI input form. Below is a list of the fieldnames with a remark about how the values should be formatted (and their units):</p>
+
 |**Fieldname** | **Shape** | **Units** | **Description** |
 | -- | -- | -- | -- |
 | **mix_2d_sp_wavelengths** | 3 element vector | nm | Wavelengths for red1, red2, blue waves. |
@@ -41,7 +41,9 @@ The units are usually kept in MKS for simplicity and consistency.
 
 
 # Outputs
+
 <p id="outputs">Model outputs in the MATLAB file *mix_2d_sp_output.mat*</p>
+
 |   **field_red1_xyt_crystaloutput** | (3D array) | Red1 wave output electric fields (units of V/m) at crystal output face (in air). NX x NY x NT sized array, specified at crystal output face in air. | 
 |   **field_red2_xyt_crystaloutput** | (3D array) | Red2 wave output electric fields (units of V/m) at crystal output face (in air). NX x NY x NT sized array, specified at crystal output face in air. | 
 |   **field_blue_xyt_crystaloutput** | (3D array) | Blue wave output electric fields (units of V/m) at crystal output face (in air). NX x NY x NT sized array, specified at crystal output face in air. | 
