@@ -6,11 +6,32 @@
 * For second harmonic generation with type 1 phasematching split the energy or power equally between red1 and red2 waves.
 * See example script files for each function which will demonstrate how to use these and how to simulate pressing the pushbuttons in the GUI forms.
 
+## Contents:
+* [Ref ind](#ref_ind)
+* [Qmix](#qmix)
+* [Bmix](#bmix)
+* [Cavity II](#cavity)
+* [Focus](#focus)
+* [GVM](#gvm)
+* [NCPM](#ncpm)
+* [Opoangles](#opoangles)
+* [PW-cav-LP](#pw_cav_lp)
+* [PW-mix-BB](#pw_mix_bb)
+* [PW-mix-LP](#pw_mix_lp)
+* [PW-mix-SP](#pw_mix_sp)
+* [PW-opo-BB](#pw_opo_bb)
+* [PW-opo_SP](#pw_opo_sp)
+* [QPM](#qpm)
+* [Thermal](#thermal)
+* [2D-cav-LP](#2d_cav_lp)
+* [2D-mix-LP](#2d_mix_lp)
+* [2D-mix-SP](#2d_mix_sp)
+* [OPG](#opg)
+  
 ## Ref ind
-
 *snlo_ref_ind_func.m*
 
-See [example_script_ref_ind.m](../example_script_ref_ind.m) for example script.
+<p id="ref_ind">See [example_script_ref_ind.m](../example_script_ref_ind.m) for example script.</p>
 
 Ref.Ind. computes the refractive indexes, group velocities, group delay dispersions, and birefringent walkoff angles for uniaxial or biaxial crystals with any specified propagation direction. This function is useful if you wish to manually calculate phase matching or group velocities for situations not covered by SNLO functions Qmix, Bmix, QPM, Opoangles, Ncpm, or GVM.  
 
@@ -25,10 +46,9 @@ Optionally, this MATLAB function can be called with an input argument to pass th
 
 
 ## Qmix
-
 *snlo_qmix_func.m*
 
-See [example_script_qmix.m](../example_script_qmix.m) for example script.
+<p id="qmix">See [example_script_qmix.m](../example_script_qmix.m) for example script.</p>
 
 QMIX helps you quickly select the best crystal for your application from a list of over 60 crystals.  It calculates all the possible phase-matching orientations for the chosen crystal at the wavelengths specified, returning phase-matching angles, polarizations, refractive indexes, group velocities, group delay dispersion, effective nonlinearity, crystal tilt tolerance, acceptance angles, acceptance bandwidths, and acceptance temperatures. The three beams are assumed to have collinear propagation vectors. If the nonlinearity, deff, is zero, the other properties are not calculated. (If you want to find noncritical wavelengths, use function Ncpm.) 
 
@@ -47,7 +67,7 @@ Optionally, this MATLAB function can be called with an input argument to pass th
 
 *snlo_bmix_func.m*
 
-See [example_script_bmix.m](../example_script_bmix.m) for example script.
+<p id="Bmix">See [example_script_bmix.m](../example_script_bmix.m) for example script.</p>
 
 Bmix calculates the properties of biaxial crystals for propagation in any direction including out of the principal planes (in contrast to Qmix where propagation in a principal plane is assumed).  The calculations are based on the d-tensor and Sellmeier listed in Qmix. Phase matching curves are computed along with the associated effective nonlinearity, walkoff, and acceptance angles.  The purple circle on the phase matching plot indicates the location of the optic axes in the x-z plane. Parallel propagation directions (k vectors) of the three interacting waves red1, red2, and blue are assumed. 
 
@@ -65,7 +85,7 @@ For passing a set of inputs as an input argument to this function, the argument 
 
 *snlo_brewster_displacement_cavity_func.m*
 
-Updated cavity function. Can handle Brewster angle crystals, plots the beam width and radius of curvature through the cavity, also displays how a small displacement or tilt added at some specified location alters the cavity mode.
+<p id="cavity">Updated cavity function. Can handle Brewster angle crystals, plots the beam width and radius of curvature through the cavity, also displays how a small displacement or tilt added at some specified location alters the cavity mode.</p>
 
 For passing a set of inputs as an input argument to this function, the argument must be a data structure with fields named as follows:
 |Fieldname | Shape | Units | Description |
@@ -89,7 +109,7 @@ For passing a set of inputs as an input argument to this function, the argument 
 
 *snlo_focus_func.m*
 
-See [example_script_focus.m](../example_script_focus.m) for example script.
+<p id="focus">See [example_script_focus.m](../example_script_focus.m) for example script.</p>
 
 Calculate the width and curvature of a Gaussian beam at a specified location. These values are needed for the input parameters of 2D-mix-SP, 2D-mix-LP, and OPG. 
 
@@ -107,7 +127,7 @@ For passing a set of inputs as an input argument to this function, the following
 
 *snlo_gvm_func.m*
 
-See [example_script_gvm.m](../example_script_gvm.m) for example script.
+<p id="gvm">See [example_script_gvm.m](../example_script_gvm.m) for example script.</p>
 
 GVM calculates group velocity (mis)match for noncollinear phase matching. The paper "Group-velocity-matched three-wave mixing in birefringent crystals" Optics Letters vol. 26, page 719 (2001) describes the method of group velocity matching in birefringent crystals implemented in this function. This paper is available online at http://www.as-photonics.com/Publications.html. The calculations are based on the d-tensor and Sellmeier equations displayed in Qmix.
 
@@ -126,7 +146,7 @@ For passing a set of inputs as an input argument to this function, the following
 
 *snlo_ncpm_func.m*
 
-See [example_script_ncpm.m](../example_script_ncpm.m) for example script.
+<p id="ncpm">See [example_script_ncpm.m](../example_script_ncpm.m) for example script.</p>
 
 NCPM (noncritical phase matching) helps you quickly search the list of crystals for one that can noncritically phase match your wavelengths. Noncricitcal phase match refers to collinear phase matching with no birefringent walk off. It is desirable for efficient mixing of weak, tightly focused beams, and for maintaining the widest acceptance angle for all three beams. For uniaxial crystals the propagation direction is normal to the optic axis. For biaxial crystals the propagation direction is along one of the principal axes, X, Y, or Z.
 
@@ -144,7 +164,7 @@ For passing a set of inputs as an input argument to this function, the following
 
 *snlo_opoangles_func.m*
 
-See [example_script_opoangles.m](../example_script_opoangles.m) for example script.
+<p id="opoangles">See [example_script_opoangles.m](../example_script_opoangles.m) for example script.</p>
 
 Calculates red1 and red2 wavelengths in opo or opa as a function of propagation in birefringent crystals assuming the blue pump wavelength is fixed. For biaxial crystals, propagation is in one of the principal planes of the crystal so the Plane radio buttons are activated. Select the plane of interest. In biaxial crystals the angle is theta, measured from the Z axis for propagation in the XZ and YZ planes.  For propagation in the XY plane the angle is phi, measured from the X axis toward the Y axis. Calculations are based on the d-tensor and Sellmeier listed in Qmix.
 
@@ -162,9 +182,9 @@ For passing a set of inputs as an input argument to this function, the following
 
 ## PW-cav-LP
 
-*snlo_pw_cav_lp_func.m*
+*snlo_pw_cav_lp_func.m*</p>
 
-See [example_script_pw_cav_lp.m](../example_script_pw_cav_lp.m) for example script.
+<p id="pw_cav_lp">See [example_script_pw_cav_lp.m](../example_script_pw_cav_lp.m) for example script.</p>
 
 PW-cav-LP models plane-wave mixing in cavities.  Input irradiances are those of the central rays of lowest order Gaussian beams with diameters specified by the Beam diam. input values.  You can model an OPO, cavity resonant SHG or any other cavity mixing process by specifying the input beams and the reflectivity of the mirrors at those wavelengths.  The crystal mixing is similar to PW-mix-LP. The cavity configuration can be standing wave or ring.
 
@@ -198,7 +218,7 @@ For passing a set of inputs as an input argument to this function, the following
 
 *snlo_pw_mix_bb_func.m*
 
-See [example_script_pw_mix_bb.m](../example_script_pw_mix_bb.m) for example script.
+<p id="pw_mix_bb">See [example_script_pw_mix_bb.m](../example_script_pw_mix_bb.m) for example script.</p>
 
 PW-mix-BB computes three-wave mixing processes for plane waves with input irradiances equal to those of the central ray of lowest order Gaussian beams with energy and diameter specified on the input form. It ignores birefringent walkoff but includes group velocity effects. It is intended for modeling multi-longitudinal-mode pulses.  The number of modes populated in each model run is sufficient to cover the specified bandwidth for each beam. Quantum noise is automatically added to the red1 and red2 waves. The noise bandwidths of the red waves can be extended by specifying the bandwidth parameter. This inclusion of quantum noise is to approximate OPG modeling. However, to properly model OPG the spatial structure of the red beams should be noisy as well. In most other applications it will be invisible. The noise spectrum can be seen by setting d_eff to zero and setting the red energies or powers to zero, running and clicking
 'Spectra'.
@@ -229,7 +249,7 @@ For passing a set of inputs as an input argument to this function, the following
 
 *snlo_pw_mix_lp_func.m*
 
-See [example_script_pw_mix_lp.m](../example_script_pw_mix_lp.m) for example script.
+<p id="pw_mix_lp">See [example_script_pw_mix_lp.m](../example_script_pw_mix_lp.m) for example script.</p>
 
 PW-mix-LP computes three-wave mixing process for long-pulse plane- waves. The input irradiances are those of the central rays of spatial lowest-order Gaussian beams with diameters and energies specified in the input form.  This function ignores birefringent and group velocity walkoff.  It is intended for very quick evaluation of a proposed mixing process. For help in setting input values, right- click on the input edit box. Help text appears in the lower text box.
 
@@ -258,7 +278,7 @@ The input values that have 3 elements are in order of red1, red2, and blue waves
 
 *snlo_pw_mix_sp_func.m*
 
-See [example_script_pw_mix_sp.m](../example_script_pw_mix_sp.m) for example script.
+<p id="pw_mix_sp">See [example_script_pw_mix_sp.m](../example_script_pw_mix_sp.m) for example script.</p>
 
 PW-mix-SP computes three-wave mixing process for plane waves with irradiances equal to those of the central rays of spatial lowest order Gaussian beams with beam diameters and energies specified in the input form.  It ignores birefringent walkoff but includes group velocity effects, so it is useful for modeling very short pulses. cw light is not allowed in this function.  Pulses are Gaussian or Supergaussian in time at the input face. The three input pulses can have different durations and delays. For help in setting input values, right-click on the input edit box. Help text appears in the lower text box.
 
@@ -295,7 +315,7 @@ For passing a set of inputs as an input argument to this function, the following
 
 *snlo_pw_opo_bb_func.m*
 
-See [example_script_pw_opo_bb.m](../example_script_pw_opo_bb.m) for example script.
+<p id="pw_opo_bb">See [example_script_pw_opo_bb.m](../example_script_pw_opo_bb.m) for example script.</p>
 
 PW-OPO-BB models broad-bandwidth, nanosecond, plane-wave (actually the central ray of a spatial Gaussian) OPO's.  It is similar to PW-cav-LP except it allows for differing group velocities for the three waves and broad bandwidths.  The mathematical methods are described in paper "Numerical models of broad bandwidth nanosecond optical parametric oscillators" JOSA B vol. 16 p. 609 (1999), available at http://www.as-photonics.com/Publications.html This function permits studies of unseeded OPO's and the transition to seeding. It also models double resonance effects and pumping by multi-mode lasers. I suggest you narrow the range of input parameters using the much faster function PW-cav-LP before you run this function because it is demanding of computer resources and user patience. For help in setting input values, right-click on the input edit box. Help text appears in the lower text box.
 
@@ -332,7 +352,7 @@ For passing a set of inputs as an input argument to this function, the following
 
 *snlo_pw_opo_sp_func.m*
 
-See [example_script_pw_opo_sp.m](../example_script_pw_opo_sp.m) for example script.
+<p id="pw_opo_sp">See [example_script_pw_opo_sp.m](../example_script_pw_opo_sp.m) for example script.</p>
 
 PW-OPO-SP models a singly-resonant, plane-wave, synchronously-pumped OPO.  The irradiance of the plane pump wave is set equal to the central ray of a lowest-order spatial Gaussian whose beam diameter is specified in the input form under 'Beam diameter'.  This function includes group velocity and group delay dispersion but not higher order dispersion. The OPO cavity is a ring, with only the red1 wave resonated. 
 
@@ -370,7 +390,7 @@ For inputs with 3 element vectors, first element is for red1 wave, second is for
 
 *snlo_qpm_func.m*
 
-See [example_script_qpm.m](../example_script_qpm.m) for example script.
+<p id="qpm">See [example_script_qpm.m](../example_script_qpm.m) for example script.</p>
 
 QPM calculates properties of quasiphasematched materials including the poling, or domain reversal, period (always specified at room temperature), the temperature bandwidth, the frequency bandwidth, the group velocities, the group delay dispersions.  In addition the tuning of phase matched red1 and red2 wavelengths due to blue (pump) tuning or crystal temperature tuning can be computed using the Pump Tune and Temp Tune buttons. The Sellmeier equations are those referenced in Qmix when a crystal is selected. The temperature range and acceptance bandwidths are calculated as described in Qmix help.
 
@@ -391,7 +411,7 @@ For passing a set of inputs as an input argument to this function, the following
 
 *snlo_thermal_func.m*
 
-*No example script prepared yet*
+<p id="thermal">*No example script prepared yet*</p>
 
 Simple 3D steady-state thermal solver. Cuboid volume temperature, volume heating. Input and output faces are insulated. The side faces can each be perfectly insulated or perfectly cooled with temperature of 0.
 Uses spectral methods, cosine and sine transforms.
@@ -401,7 +421,7 @@ Uses spectral methods, cosine and sine transforms.
 
 *snlo_2d_cav_lp_func.m*
 
-See [example_script_2d_cav_lp.m](../example_script_2d_cav_lp.m) for example script.
+<p id="2d_cav_lp">See [example_script_2d_cav_lp.m](../example_script_2d_cav_lp.m) for example script.</p>
 
 Diffractive, long-pulse intracavity mixing. 2D-cav-LP is similar to PW-cav-LP except it handles the full spatial profiles so it can realistically model beams with Gaussian or Supergaussian spatial profiles. It includes diffraction, birefringent walkoff, displaced beams, etc. for pulsed or cw light. The light is assumed to be monochromatic and the pulses are assumed to be long enough that group velocity effects are unimportant. The temporal shape of the pulse can be altered by including the super Gaussian index as an optional second argument in the duration box, separating the two arguments with a space; this second argument should be between 1 and 20, where a value of 1 is the typical Gaussian shape, and larger values are more flat-topped. For help in setting input values, right-click on the input edit box. Help text appears in the lower text box.
 
@@ -444,7 +464,7 @@ For passing a set of inputs as an input argument to this function, the argument 
 
 *snlo_2d_mix_lp_func.m*
 
-See [example_script_2d_mix_lp.m](../example_script_2d_mix_lp.m), [example_script_2d_mix_lp_cw.m](../example_script_2d_mix_lp_cw.m), [example_script_2d_mix_lp_shg_and_thg_generation.m](../example_script_2d_mix_lp_shg_and_thg_generation.m), and [example_script_2d_mix_lp_vary_deltak.m](../example_script_2d_mix_lp_vary_deltak.m) for example scripts.
+<p id="2d_mix_lp">See [example_script_2d_mix_lp.m](../example_script_2d_mix_lp.m), [example_script_2d_mix_lp_cw.m](../example_script_2d_mix_lp_cw.m), [example_script_2d_mix_lp_shg_and_thg_generation.m](../example_script_2d_mix_lp_shg_and_thg_generation.m), and [example_script_2d_mix_lp_vary_deltak.m](../example_script_2d_mix_lp_vary_deltak.m) for example scripts.</p>
 
 Long-pulse, diffractive mixing. 2D-mix-LP is similar to PW-mix-LP except it handles the full spatial profiles so it can realistically model circular or elliptical beams with Gaussian or Supergaussian transverse profiles.  It includes diffraction, birefringent walkoff, displaced beams, etc. for gaussian or super-guassian pulses or cw light. The light is assumed to be monochromatic and the pulses are assumed to be long enough that group velocity effects are unimportant. Maxwell's equations are integrated using split-step methods to give true diffractive calculations. For help in setting input values, right-click on the input edit box. Help text appears in the lower text box.
 
@@ -486,7 +506,7 @@ For passing a set of inputs as an input argument to this function, the argument 
 
 *snlo_2d_mix_sp_func.m*
 
-See [example_script_2d_mix_sp_vary_deltak.m](../example_script_2d_mix_sp_vary_deltak.m), [example_script_2d_mix_sp_custom_pulse_profile.m](../example_script_2d_mix_sp_custom_pulse_profile.m) for example scripts.
+<p id="2d_mix_sp">See [example_script_2d_mix_sp_vary_deltak.m](../example_script_2d_mix_sp_vary_deltak.m), [example_script_2d_mix_sp_custom_pulse_profile.m](../example_script_2d_mix_sp_custom_pulse_profile.m) for example scripts.</p>
 
 Short-pulse, diffractive mixing. 2D-mix-SP models single-pass mixing with diffraction, birefringent walkoff, group velocity walk off, and group velocity dispersion. The calculation is based on integrating Maxwell's equations using split-step FFT methods to give accurate diffractive and dispersive simulations.
 
@@ -528,7 +548,7 @@ Short-pulse, diffractive mixing. 2D-mix-SP models single-pass mixing with diffra
 
 *snlo_opg_func*
 
-See [example_script_opg.m](../example_script_opg.m) for example script.
+<p id="opg">See [example_script_opg.m](../example_script_opg.m) for example script.</p>
 
 OPG models single-pass mixing with diffraction, birefringent walkoff, group velocity walk off, and group velocity dispersion with simulated quantum noise in both red waves. The quantum noise is automatically computed based on the inputs. Optional red seed light can be added to the noise by specifying red pulse energies and pulse durations.
 
