@@ -208,4 +208,4 @@ ph = plot(ax, red1_input_energy_list(1,:)*1e6, output_red1_energies*1e6,'r-',...
     red1_input_energy_list(1,:)*1e6, output_blue_energies*1e6,'g-');
 xlabel(ax,'Input red1 pulse energy [{\mu}J]');      % label x-axis 
 ylabel(ax,'Output energies [{\mu}J]');              % label y-axis 
-legend(ax, fprintf('%.1f nm',lambda(1)*1e9), fprintf('%.1f nm',lambda(3)*1e9));
+legend(ax, sprintf('%.1f nm',lambda(1)*1e9), sprintf('%.1f nm',lambda(3)*1e9));
