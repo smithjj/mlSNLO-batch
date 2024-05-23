@@ -15,6 +15,13 @@
 % dispersion. SNLO normally calculates a suitable time grid taking these
 % into account. We include this calculation below ("Standard SNLO time grid
 % calculation") but you are free to change it.
+% 
+% To use a custom pulse profile, 2D-mix-sp must be provided with the time vector (in
+% seconds) upon which the values of power and phase are defined as a field named
+% 'mix_2d_sp_timevector' in the inputs data structure. Also required are the powers and
+% phases which are stored in the data structure mix_2d_sp_pulse_profiles with fieldnames
+% red1.power, red1.phase, red2.power, red2.phase, blue.power, and blue.phase. See line
+% 200.
 %
 % When you pass a custom pulse profile to 2D-mix-SP their magnitudes will
 % be normalized to contain the pulse energy specified. You just specify a
@@ -30,7 +37,6 @@
 % 'calculate_curves' variable to false.
 calculate_curves = true;
 if calculate_curves
-    process_before_plot = false;
     %% Generate all the inputs
     % In this example we will loop on a set of Delta k values.
     delta_k_list = linspace(-0.1,0.1,11); % make a vector of phase mismatches, spanning -.25 to .25 per mm with 15 elements.
@@ -48,6 +54,8 @@ if calculate_curves
     % to model that, we'll split the red wave into two equal components
     % (which must be identical).
     
+    clear inputs
+
     inputs.mix_2d_sp_wavelengths = [1064,1064,532];     % wavelengths (in nm) for each wave
     inputs.mix_2d_sp_ref_inds = [1.654,1.654,1.654];    % refractive indices for each wave
     inputs.mix_2d_sp_gvi = [1.674,1.674,1.774];         % group velocity indices for each wave
@@ -65,7 +73,6 @@ if calculate_curves
     inputs.mix_2d_sp_pulseenergy = [2e-6,2e-6,0];       % input pulse energies (in J) for each wave
     inputs.mix_2d_sp_pulse_durations = [5,5,5;1,1,1].'; % input pulse durations  (in fwhm ps), with optional (super) gaussian coefficient for each wave. One wave per column.
     inputs.mix_2d_sp_pulse_delays = [-2.5,-2.5,0];      % pulse delay for each red wave relative to the blue pulse (in ps). The third value by definition is 0 but we'll include three values for the sake of code readability.
-%     inputs.mix_2d_sp_pulse_chirps = [1e-2,1e-2,0; 0,0,0; 0,0,0].'; % First-, second-, and third-order chirp for each wave (in THz/ps, THz/ps^2, and THz/ps^3). One wave per row.
     inputs.mix_2d_sp_pulse_chirps = [0,0,0; 0,0,0; 0,0,0].'; % First-, second-, and third-order chirp for each wave (in THz/ps, THz/ps^2, and THz/ps^3). One wave per row.
     inputs.mix_2d_sp_beam_diameters = [0.885,0.885,0.885;0.885,0.885,0.885].'; % input beam diameter (in fwhm mm), specified in walkoff direction, and perpendicular to walkoff direction for each wave. One wave per column.
     inputs.mix_2d_sp_supergaussian_coeff = [1,1,1];     % spatial super gaussian coefficients for each wave
@@ -75,12 +82,11 @@ if calculate_curves
     inputs.mix_2d_sp_nt= 128;                           % number of time points to model
     inputs.mix_2d_sp_nxny = [96,64];                    % number of spatial grid points in the walkoff direction, and perpendicular to walkoff direction
     inputs.mix_2d_sp_crystal_length = 17.5;             % length of nonlinear crystal (in mm)
-    inputs.mix_2d_sp_lx_ly = [4.25,3];                   % size of spatial grid (in mm) in walkoff direction, and perpendicular to walkoff direction
+    inputs.mix_2d_sp_lx_ly = [4.25,3];                  % size of spatial grid (in mm) in walkoff direction, and perpendicular to walkoff direction
     inputs.mix_2d_sp_deff = 2.01;                       % crystal nonlinear coefficient (in pm/V)
     inputs.mix_2d_sp_deltak = 0;                        % phase mismatch (in rad/mm) (In this example we'll reset this value on each call to the 2D-mix-SP function)
-    inputs.mix_2d_sp_nz = 64;                           % number of (z) integration steps through the crystal
+    inputs.mix_2d_sp_nz = 50;                           % number of (z) integration steps through the crystal
     inputs.mix_2d_sp_dist_to_image = 0;                 % Distance from the crystal exit face to image plane (in mm) of the output beam profile displayed during the run and by the post-run fluence and movie buttons.
-    
     
            
     %% Standard SNLO time grid calculation
@@ -180,15 +186,23 @@ if calculate_curves
         (1/3 * pulse_chirps(3,2)*(t_vec-pulse_delays(3)).^3) + ...
         (1/4 * pulse_chirps(3,3)*(t_vec-pulse_delays(3)).^4 )));
 
-    
-    % concatenate the power profile of each wave into pulse_powers
-    pulse_powers = cat(2, red1_pulse_power_vec, red2_pulse_power_vec, blue_pulse_power_vec);
-    % concatenate the phase profile of each wave into pulse_phases
-    pulse_phases = cat(2, red1_pulse_phase_vec, red2_pulse_phase_vec, blue_pulse_phase_vec);
-
+    % Custom pulses to 2d-mix-sp requires a vector of points in time the powers &
+    % phases are defined, provided in the inputs data structure with fieldname
+    % 'mix_2d_sp_timevector'.
     inputs.mix_2d_sp_timevector = t_vec;
-    inputs.mix_2d_sp_pulse_profiles = pulse_powers.*pulse_phases;
-    
+
+    % Custom pulses also require the pulse profiles to be specified in the inputs data
+    % structure with fieldname 'mix_2d_sp_pulse_profiles' which itself is a data structure
+    % that contains the values for the red1, red2, and blue waves (with fieldnames that
+    % match those labels)
+
+    inputs.mix_2d_sp_pulse_profiles.red1.power = red1_pulse_power_vec;
+    inputs.mix_2d_sp_pulse_profiles.red1.phase = red1_pulse_phase_vec;
+    inputs.mix_2d_sp_pulse_profiles.red2.power = red2_pulse_power_vec;
+    inputs.mix_2d_sp_pulse_profiles.red2.phase = red2_pulse_phase_vec;
+    inputs.mix_2d_sp_pulse_profiles.blue.power = blue_pulse_power_vec;
+    inputs.mix_2d_sp_pulse_profiles.blue.phase = blue_pulse_phase_vec;
+
     red1_energies = zeros(size(delta_k_list)); % pre-allocate a vector for red1 output energies as fcn of phase mismatch
     red2_energies = zeros(size(delta_k_list)); % pre-allocate a vector for red2 output energies as fcn of phase mismatch
     blue_energies = zeros(size(delta_k_list)); % pre-allocate a vector for blue output energies as fcn of phase mismatch
@@ -213,18 +227,8 @@ if calculate_curves
         blue_energies(K) = trapz(output{K}.power(:,1),output{K}.power(:,4))*1e3; % calculate blue energy by integrating the pulse power in time using the trapezoidal method, multiply by 1000 to get into millijoules
         fprintf(1,'Finished %i of %i runs (Delta k = %.3g /mm). Output energies %.4g, %.4g, %.4g uJ.\n', K, length(delta_k_list), delta_k_list(K), red1_energies(K)*1e3, red2_energies(K)*1e3, blue_energies(K)*1e3);
     end
-else
-    process_before_plot =  true;
 end
 
-if process_before_plot
-%% process output from the cell array of model outputs which were populated where we call the model above
-    for K = 1:length(delta_k_list) % loop over the phase mismatch vector
-        red1_energies(K) = trapz(output{K}.power(:,1),output{K}.power(:,2))*1e3; % calculate red1 energy by integrating the pulse power in time using the trapezoidal method, multiply by 1000 to get into millijoules
-        red2_energies(K) = trapz(output{K}.power(:,1),output{K}.power(:,3))*1e3; % calculate red2 energy by integrating the pulse power in time using the trapezoidal method, multiply by 1000 to get into millijoules
-        blue_energies(K) = trapz(output{K}.power(:,1),output{K}.power(:,4))*1e3; % calculate blue energy by integrating the pulse power in time using the trapezoidal method, multiply by 1000 to get into millijoules
-    end
-end
 
 %% plot processed output
 fh = figure; % make new outut figure
