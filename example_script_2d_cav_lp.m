@@ -36,7 +36,7 @@ if calculate_curves
     inputs.cav_2d_lp_beam_diameters  = [0.13787,0.13787,0.15];  % input beam diameters (in FWHM mm)
     inputs.cav_2d_lp_spatial_supergaussian = [1,1,1];           % spatial input beam super gaussian coefficient (integer 1-10)
     inputs.cav_2d_lp_walkoff_angles = [0,0,0];                  % spatial walkoff angles (in milliradians)
-    inputs.cav_2d_lp_beam_offset = [0,0];                       % spatial input beam offset in the walkoff direction relative to blue beam center(in mm)
+    inputs.cav_2d_lp_beam_offset = [0,0,0];                     % spatial input beam offset in the walkoff direction relative to spatial grid (in mm)
     inputs.cav_2d_lp_beam_roc = [50,50,50];                     % input beam radii of curvature (in mm in air) for [red1,red2,blue]
     inputs.cav_2d_lp_left_refl_m = [0.95,0.9,0.1];              % left mirror power reflectivity coefficient (0-1)
     inputs.cav_2d_lp_right_refl_m = [0.95,0.9,0.9];             % right mirror power reflectivity coefficient (0-1)
