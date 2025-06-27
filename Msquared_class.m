@@ -92,15 +92,16 @@ classdef Msquared_class
             delta_k_x       = 2*pi/dx/Nx;
             delta_k_y       = 2*pi/dy/Ny;
             if mod(Nx, 2)
-            	kx_vec 		= ((0:(Nx-1))-(Nx-1)*0.5)*delta_k_x;
+                kx_vec 		= ((0:(Nx-1))-(Nx-1)*0.5)*delta_k_x;
             else
-            	kx_vec 		= ((0:(Nx-1))-Nx*0.5)*delta_k_x;
+                kx_vec 		= ((0:(Nx-1))-Nx*0.5)*delta_k_x;
             end
-			if mod(Ny, 2)
-            	ky_vec 		= ((0:(Ny-1))-(Ny-1)*0.5)*delta_k_y;
+            if mod(Ny, 2)
+                ky_vec 		= ((0:(Ny-1))-(Ny-1)*0.5)*delta_k_y;
             else
-            	ky_vec 		= ((0:(Ny-1))-Ny*0.5)*delta_k_y;
+                ky_vec 		= ((0:(Ny-1))-Ny*0.5)*delta_k_y;
             end
+
             [kymat, kxmat] 	= meshgrid(ky_vec, kx_vec);
             % [kymat, kxmat]  = meshgrid(((0:(Ny-1))-Ny*0.5)*delta_k_y, ((0:(Nx-1))-Nx*0.5)*delta_k_x);
 
@@ -127,25 +128,25 @@ classdef Msquared_class
             Ry              = zeros(N_removals,1);
 
             for P = 1:N_removals
-                E_kxkyt         = fftshift(fftshift( fft(fft(Exyt, [], 1), [], 2), 1), 2);
-                U(P)            = sum(abs(Exyt   ).^2, 'all'); % Denominator for wx/wy calculation (proportional to the energy, just left off dx*dy*dt*0.5*epsilon_0*c factor)
-                Uk(P)           = sum(abs(E_kxkyt).^2, 'all');
+                E_kxkyt             = fftshift(fftshift( fft(fft(Exyt, [], 1), [], 2), 1), 2);
+                U(P)                = sum(abs(Exyt   ).^2, 'all'); % Denominator for wx/wy calculation (proportional to the energy, just left off dx*dy*dt*0.5*epsilon_0*c factor)
+                Uk(P)               = sum(abs(E_kxkyt).^2, 'all');
 
                 % calculate fluences (with arbitrary units)
-                Fxy             = sum(abs(Exyt   ).^2, 3);  % proportional to the fluences in W/m^2, just missing factor of dt*0.5*epsilon_0*c)
-                Fkxky           = sum(abs(E_kxkyt).^2, 3);
+                Fxy                 = sum(abs(Exyt   ).^2, 3);  % proportional to the fluences in W/m^2, just missing factor of dt*0.5*epsilon_0*c)
+                Fkxky               = sum(abs(E_kxkyt).^2, 3);
 
                 % fluence-based xBar, yBar, kxBar, kyBar (centroids in xy-space and kxky-space) - see Equations 7.112 and 7.113
-                xBar_fl(P)         = sum(xmat.*Fxy, 'all') ./ U(P);
-                yBar_fl(P)         = sum(ymat.*Fxy, 'all') ./ U(P);
-                kxBar_fl(P)        = sum(kxmat.*Fkxky, 'all') ./ Uk(P);
-                kyBar_fl(P)        = sum(kymat.*Fkxky, 'all') ./ Uk(P);
+                xBar_fl(P)          = sum(xmat.*Fxy, 'all') ./ U(P);
+                yBar_fl(P)          = sum(ymat.*Fxy, 'all') ./ U(P);
+                kxBar_fl(P)         = sum(kxmat.*Fkxky, 'all') ./ Uk(P);
+                kyBar_fl(P)         = sum(kymat.*Fkxky, 'all') ./ Uk(P);
 
                 % Second moment widths in xy space and kxky space - see Equations 7.115 and 7.116
                 wxsquared_fl(P)     = 4*sum( (xmat-xBar_fl(P)  ).^2 .* Fxy,   "all" )./U(P);     % scalar; should be unchanged when the phase corrections to remove curvature are added
                 wysquared_fl(P)     = 4*sum( (ymat-yBar_fl(P)  ).^2 .* Fxy,   "all" )./U(P);     % scalar; should be unchanged when the phase corrections to remove curvature are added
                 wkxsquared_fl(P)    = 4*sum( (kxmat-kxBar_fl(P)).^2 .* Fkxky, "all" )./Uk(P);    % scalar; 
-                wkysquared_fl(P)   = 4*sum( (kymat-kyBar_fl(P)).^2 .* Fkxky, "all" )./Uk(P);    % scalar
+                wkysquared_fl(P)    = 4*sum( (kymat-kyBar_fl(P)).^2 .* Fkxky, "all" )./Uk(P);    % scalar
 
                 % R, A, M-squared, w0squared, and z0 in x direction
 
@@ -164,9 +165,9 @@ classdef Msquared_class
                 % R, A, M-squared, w0squared, and z0 in y direction - repeat steps above, just swap to operating on the 2nd array dimension
                 dE_dy               = (circshift(Exyt,[0,-1,0]) - circshift(Exyt,[0,1,0]))/(2*dy);  % (3d array)
                 dE_dy(:,[1,end],:)  = 0;
-                E_dE_dy_star    = Exyt.*conj(dE_dy);                                            % 3d
-                Ay(P)           = 1i/k0 * sum(sum( (ymat-yBar_fl(P)).*sum(E_dE_dy_star - conj(E_dE_dy_star),3) )) ./ U(P); % scalar
-                Ry(P)           = wysquared_fl(P) ./ (2*Ay(P));                                 % generalized radius of curvature, scalar
+                E_dE_dy_star        = Exyt.*conj(dE_dy);                                            % 3d
+                Ay(P)               = 1i/k0 * sum(sum( (ymat-yBar_fl(P)).*sum(E_dE_dy_star - conj(E_dE_dy_star),3) )) ./ U(P); % scalar
+                Ry(P)               = wysquared_fl(P) ./ (2*Ay(P));                                 % generalized radius of curvature, scalar
 
                 if P ~= N_removals
                     % Generate phase arrays to remove curvature
@@ -278,7 +279,7 @@ classdef Msquared_class
                 kyvec 		= ((0:(Ny-1))-Ny*0.5)*dky;
             end
 
-                
+
             [kymat,kxmat]   = meshgrid(kyvec, kxvec);
 
                 if obj.power_threshold ~= 0
@@ -327,9 +328,9 @@ classdef Msquared_class
             Exyz_flat           = zeros(Nx, Ny, N3);
 
             for K = 1:N3 % Loop through third dimension (maybe time, or maybe z)
-                    Exy = Exy3(:,:,K);
-                    Ixy = abs(Exy).^2;
-                    Ikxky   = abs( fftshift(fft2( Exy ))).^2;
+                Exy                 = Exy3(:,:,K);
+                Ixy                 = abs(Exy).^2;
+                Ikxky               = abs( fftshift(fft2( Exy ))).^2;
                 xBar(K)             = sum( xmat.*Ixy, "all" ) ./ sum(Ixy, "all");                                           % Centroid in x - see Equation 7.101
                 yBar(K)             = sum( ymat.*Ixy, "all" ) ./ sum(Ixy, "all");                                           % Centroid in y - see Equation 7.101
                 wx(K)               = sqrt( 4 * sum((xmat-xBar(K)).^2.*Ixy, "all") ./ sum(Ixy, "all") );                    % Second moment width in x - see Equation 7.100
@@ -341,51 +342,51 @@ classdef Msquared_class
 
                 % 'Remove curvature' three times, total curvature is harmonic sum,
                 % with a big value with a couple of smaller correction terms.
-                    for P = 1:3
-                    % This is for Equation 7.108 - the first derivative of E with respect to x. Used in calculating A_x (used to define radius of curvature in x). 
+                for P = 1:3
+                    % This is for Equation 7.108 - the first derivative of E with respect to x. Used in calculating A_x (used to define radius of curvature in x).
                     % Derivative is using central differences.
-                        dE_dx           = (circshift(Exy,[-1,0]) - circshift(Exy,[1,0])) / (2*dx);
+                    dE_dx           = (circshift(Exy,[-1,0]) - circshift(Exy,[1,0])) / (2*dx);
                     % throw out the derivative at the end points because the circshift
                     % command will rotate to find the difference of the points on
                     % opposite ends, which is nonsense, and there should be
                     % essentially no light at the end points anyway.
-                        dE_dx([1,end],:)= 0;
-                        E_dE_dx_star    = Exy.*conj(dE_dx);
-                    Ax              = 1i/k0 .* sum((xmat - xBar(K)) .* (E_dE_dx_star - conj(E_dE_dx_star)), "all") ./ sum(Ixy, "all");  % Equation 7.108
-                    Rx              = wx(K).^2 ./ (2.*Ax);                                                                              % Equation 7.107                
+                    dE_dx([1,end],:)= 0;
+                    E_dE_dx_star    = Exy.*conj(dE_dx);
+                    Ax                  = 1i/k0 .* sum((xmat - xBar(K)) .* (E_dE_dx_star - conj(E_dE_dx_star)), "all") ./ sum(Ixy, "all");  % Equation 7.108
+                    Rx                  = wx(K).^2 ./ (2.*Ax);                                                                              % Equation 7.107
 
                     % Repeat for y direction
-                        dE_dy           = (circshift(Exy,[0,-1]) - circshift(Exy,[0,1])) / (2*dy);
-                        dE_dy(:,[1,end])= 0;
-                        E_dE_dy_star    = Exy.*conj(dE_dy);
-                        Ay              = 1i/k0 .*  sum((ymat - yBar(K)) .* (E_dE_dy_star - conj(E_dE_dy_star)), "all") ./ sum(Ixy, "all");
-                        Ry              = wy(K).^2 ./ (2.*Ay);
+                    dE_dy           = (circshift(Exy,[0,-1]) - circshift(Exy,[0,1])) / (2*dy);
+                    dE_dy(:,[1,end])= 0;
+                    E_dE_dy_star    = Exy.*conj(dE_dy);
+                    Ay              = 1i/k0 .*  sum((ymat - yBar(K)) .* (E_dE_dy_star - conj(E_dE_dy_star)), "all") ./ sum(Ixy, "all");
+                    Ry              = wy(K).^2 ./ (2.*Ay);
 
-                        Rxmat(K,P)        = Rx;
-                        Rymat(K,P)        = Ry;
+                    Rxmat(K,P)      = Rx;
+                    Rymat(K,P)      = Ry;
 
                     % Generate the array of spherical phase front and apply opposite sign to electric field array
-                        xcurv           = (xmat - xBar(K)).^2 ./ (2*Rx)*k0;
-                        ycurv           = (ymat - yBar(K)).^2 ./ (2*Ry)*k0;
-                        phase_xcurv     = exp(-1i.*xcurv);
-                        phase_ycurv     = exp(-1i.*ycurv);
+                    xcurv           = (xmat - xBar(K)).^2 ./ (2*Rx)*k0;
+                    ycurv           = (ymat - yBar(K)).^2 ./ (2*Ry)*k0;
+                    phase_xcurv     = exp(-1i.*xcurv);
+                    phase_ycurv     = exp(-1i.*ycurv);
                     Exy             = Exy.*phase_xcurv.*phase_ycurv; % Remove the curvature
                 end % end repeated removal of curvature
 
                 % Harmonic sum of R which we'll use to calculate the beam size at focus
-                    Rx_corrected(K) = 1./ (1/Rxmat(K,1) + 1/Rxmat(K,2) + 1/Rxmat(K,3));
-                    Ry_corrected(K) = 1./ (1/Rymat(K,1) + 1/Rymat(K,2) + 1/Rymat(K,3));
+                Rx_corrected(K)     = 1./ (1/Rxmat(K,1) + 1/Rxmat(K,2) + 1/Rxmat(K,3));
+                Ry_corrected(K)     = 1./ (1/Rymat(K,1) + 1/Rymat(K,2) + 1/Rymat(K,3));
 
                 % Flattend electric field
-                    Exyz_flat(:,:,K) = Exy;
+                Exyz_flat(:,:,K)    = Exy;
 
                 % Beam size at focal waist - Equation 7.110
-                    wx0squared(K)  = wx(K).^2 - wx(K).^4.*k0^2 ./ (wkx_original(K).^2 .* Rx_corrected(K).^2);
-                    wy0squared(K)  = wy(K).^2 - wy(K).^4.*k0^2 ./ (wky_original(K).^2 .* Ry_corrected(K).^2);
+                wx0squared(K)       = wx(K).^2 - wx(K).^4.*k0^2 ./ (wkx_original(K).^2 .* Rx_corrected(K).^2);
+                wy0squared(K)       = wy(K).^2 - wy(K).^4.*k0^2 ./ (wky_original(K).^2 .* Ry_corrected(K).^2);
 
                 % Beam quality - Equation 7.111
-                    M2_x(K)        = sqrt(wx0squared(K)).*wkx_original(K)/2;
-                    M2_y(K)        = sqrt(wy0squared(K)).*wky_original(K)/2;
+                M2_x(K)             = sqrt(wx0squared(K)).*wkx_original(K)/2;
+                M2_y(K)             = sqrt(wy0squared(K)).*wky_original(K)/2;
             end % End loop through 3rd dimension of field
 
                 if truncated
@@ -437,7 +438,7 @@ classdef Msquared_class
                 obj.results.wky         = wky_original;
                 obj.results.flattened_Exyz = Exyz_flat;
 
-            results = obj.results;
+                results                 = obj.results;
 
         end % end calculate method
 

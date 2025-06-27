@@ -1,4 +1,5 @@
 classdef propagate_freespace_class
+    
     % Definition file for class which propagates a two- or three-dimensional electric
     % field in free space. See properties and methods.
     properties
@@ -18,7 +19,7 @@ classdef propagate_freespace_class
         % dimension and changes in the second.
         ygridmat (:,:) double {mustBeReal, mustBeFinite} = repmat(linspace(-1,1,64)  *1e-3, [64, 1]);
 
-        % Wavelength (in nanometers), scalar.
+        % Wavelength (in meters), scalar.
         wavelength (1,1) double {mustBeReal, mustBeFinite, mustBePositive} = 1000e-9;
 
     end
@@ -70,12 +71,12 @@ classdef propagate_freespace_class
             N = demag;
 
             phasexy = (repmat(phasex.',[1,Ny])+repmat(phasey,[Nx,1]));
-            
+
             focal_length = dist_to_propagate./(N-1);
             if N == 1 && any(dist_to_propagate == 0)
                 focal_length(isnan(focal_length)) = inf;
             end
-            
+
             % Radius of curvature
             lens_roc = 2*focal_length;
 
@@ -133,7 +134,7 @@ classdef propagate_freespace_class
                 Nxsq_vec = Nxvec.^2;
                 phasex  = repmat(pi*(Nx*dx).^(-2).*(obj.wavelength),[1,Nx]).*Nxsq_vec;
             else % # pts is even value; easy-peasy:
-            phasex  = repmat(pi*(Nx*dx).^(-2).*(obj.wavelength),[1,Nx]).*circshift(((1:Nx)-0.5*Nx).^2,[0,-(0.5*Nx-1)]);
+                phasex  = repmat(pi*(Nx*dx).^(-2).*(obj.wavelength),[1,Nx]).*circshift(((1:Nx)-0.5*Nx).^2,[0,-(0.5*Nx-1)]);
             end
 
             if mod(Ny,2)
@@ -142,7 +143,7 @@ classdef propagate_freespace_class
                 Nysq_vec = Nyvec.^2;
                 phasey  = repmat(pi*(Ny*dy).^(-2).*(obj.wavelength),[1,Ny]).*Nysq_vec;
             else
-            phasey  = repmat(pi*(Ny*dy).^(-2).*(obj.wavelength),[1,Ny]).*circshift(((1:Ny)-0.5*Ny).^2,[0,-(0.5*Ny-1)]);
+                phasey  = repmat(pi*(Ny*dy).^(-2).*(obj.wavelength),[1,Ny]).*circshift(((1:Ny)-0.5*Ny).^2,[0,-(0.5*Ny-1)]);
             end
 
             phasexy = (repmat(phasex.',[1,Ny])+repmat(phasey,[Nx,1]));
@@ -176,7 +177,6 @@ classdef propagate_freespace_class
                 [ygm, xgm] = meshgrid(obj.ygridmat, obj.xgridmat);
 
                 if size(obj.input_field,3) ~= 1 % Nt > 1
-
                     if (size(xgm,1) ~= size(obj.input_field,1)) && (size(xgm,1) ~= size(obj.input_field,2))
                         obj.input_field = permute(obj.input_field,[2,1,3]);
                     elseif (size(xgm,1) ~= size(obj.input_field,1)) || (size(xgm,2) ~= size(obj.input_field,2))
